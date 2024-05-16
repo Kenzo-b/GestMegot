@@ -1,0 +1,72 @@
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\GestMegots.exe
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\GestMegots.deps.json
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\GestMegots.runtimeconfig.json
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\GestMegots.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\GestMegots.pdb
+C:\Users\Admin\source\repos\GestMegots\GestMegots\obj\Debug\net6.0-windows\GestMegots.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\GestMegots\GestMegots\obj\Debug\net6.0-windows\GestMegots.csproj.GenerateResource.cache
+C:\Users\Admin\source\repos\GestMegots\GestMegots\obj\Debug\net6.0-windows\GestMegots.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\GestMegots\GestMegots\obj\Debug\net6.0-windows\GestMegots.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\GestMegots\GestMegots\obj\Debug\net6.0-windows\GestMegots.AssemblyInfo.cs
+C:\Users\Admin\source\repos\GestMegots\GestMegots\obj\Debug\net6.0-windows\GestMegots.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\GestMegots\GestMegots\obj\Debug\net6.0-windows\GestMegots.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\obj\Debug\net6.0-windows\refint\GestMegots.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\obj\Debug\net6.0-windows\GestMegots.pdb
+C:\Users\Admin\source\repos\GestMegots\GestMegots\obj\Debug\net6.0-windows\GestMegots.genruntimeconfig.cache
+C:\Users\Admin\source\repos\GestMegots\GestMegots\obj\Debug\net6.0-windows\ref\GestMegots.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\obj\Debug\net6.0-windows\GestMegots.Properties.Resources.resources
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\BouncyCastle.Cryptography.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\Google.Protobuf.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\K4os.Compression.LZ4.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\K4os.Compression.LZ4.Streams.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\K4os.Hash.xxHash.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\MySql.Data.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\System.IO.Pipelines.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\System.Text.Encodings.Web.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\System.Text.Json.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\ZstdSharp.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\runtimes\win-x64\native\comerr64.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\runtimes\win-x64\native\gssapi64.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\runtimes\win-x64\native\k5sprt64.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\runtimes\win-x64\native\krb5_64.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\runtimes\win-x64\native\krbcc64.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\bin\Debug\net6.0-windows\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\Admin\source\repos\GestMegots\GestMegots\obj\Debug\net6.0-windows\GestMegots.csproj.CopyComplete
+C:\Users\Admin\source\repos\GestMegots\GestMegots\obj\Debug\net6.0-windows\GestMegots.fmHotspot.resources
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\GestMegots.exe
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\GestMegots.deps.json
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\GestMegots.runtimeconfig.json
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\GestMegots.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\GestMegots.pdb
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\BouncyCastle.Cryptography.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\Google.Protobuf.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\K4os.Compression.LZ4.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\K4os.Compression.LZ4.Streams.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\K4os.Hash.xxHash.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\MySql.Data.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\System.IO.Pipelines.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\System.Text.Encodings.Web.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\System.Text.Json.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\ZstdSharp.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\runtimes\win-x64\native\comerr64.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\runtimes\win-x64\native\gssapi64.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\runtimes\win-x64\native\k5sprt64.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\runtimes\win-x64\native\krb5_64.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\runtimes\win-x64\native\krbcc64.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\bin\Debug\net6.0-windows\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\obj\Debug\net6.0-windows\GestMegots.csproj.AssemblyReference.cache
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\obj\Debug\net6.0-windows\GestMegots.Properties.Resources.resources
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\obj\Debug\net6.0-windows\GestMegots.csproj.GenerateResource.cache
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\obj\Debug\net6.0-windows\GestMegots.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\obj\Debug\net6.0-windows\GestMegots.AssemblyInfoInputs.cache
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\obj\Debug\net6.0-windows\GestMegots.AssemblyInfo.cs
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\obj\Debug\net6.0-windows\GestMegots.csproj.CoreCompileInputs.cache
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\obj\Debug\net6.0-windows\GestMegots.csproj.CopyComplete
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\obj\Debug\net6.0-windows\GestMegots.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\obj\Debug\net6.0-windows\refint\GestMegots.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\obj\Debug\net6.0-windows\GestMegots.pdb
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\obj\Debug\net6.0-windows\GestMegots.genruntimeconfig.cache
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\obj\Debug\net6.0-windows\ref\GestMegots.dll
+C:\Users\Kenzo\Documents\BTS\DEV\C#\TP\WinFormApp\GestMegot LA suite\GestMegots_codesource\GestMegots\obj\Debug\net6.0-windows\GestMegots.Formulaires.FmHotspot.resources
