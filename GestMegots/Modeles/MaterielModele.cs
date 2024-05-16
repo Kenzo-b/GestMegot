@@ -44,7 +44,7 @@ namespace GestMegots.Modeles
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM materiel WHERE reference = @reference";
-            cmd.Parameters.Add("@reference", MySqlDbType.Int32).Value = id;
+            cmd.Parameters.AddWithValue("@reference", id);
             MySqlDataReader lecteur = cmd.ExecuteReader();
             lecteur.Read();
             Materiel unMateriel = ReaderToMat(lecteur);
@@ -57,12 +57,12 @@ namespace GestMegots.Modeles
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "INSERT INTO materiel(couleurs, dateInstallation, adresse, coordoGPS, fkType, op) VALUE (@couleurs, @dateInstallation, @adresse, @coordoGPS, @fkType, @op)";
-            cmd.Parameters.Add("@couleurs", MySqlDbType.VarString).Value = unMat.Couleurs;
-            cmd.Parameters.Add("@dateInstallation", MySqlDbType.DateTime).Value = unMat.DateInstal;
-            cmd.Parameters.Add("@adresse", MySqlDbType.VarString).Value = unMat.Adresse;
-            cmd.Parameters.Add("@coordoGPS", MySqlDbType.VarString).Value = unMat.CoordoGps;
-            cmd.Parameters.Add("@fkType", MySqlDbType.Int32).Value = unMat.LeType.IdType;
-            cmd.Parameters.Add("@op", MySqlDbType.Bit).Value = unMat.Op;
+            cmd.Parameters.AddWithValue("@couleurs", unMat.Couleurs);
+            cmd.Parameters.AddWithValue("@dateInstallation", unMat.DateInstal);
+            cmd.Parameters.AddWithValue("@adresse", unMat.Adresse);
+            cmd.Parameters.AddWithValue("@coordoGPS", unMat.CoordoGps);
+            cmd.Parameters.AddWithValue("@fkType", unMat.LeType.IdType);
+            cmd.Parameters.AddWithValue("@op", unMat.Op);
             cmd.ExecuteNonQuery();
             connex.Close();
         }
@@ -72,7 +72,7 @@ namespace GestMegots.Modeles
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "DELETE FROM materiel WHERE reference = @reference";
-            cmd.Parameters.Add("@reference", MySqlDbType.Int32);
+            cmd.Parameters.AddWithValue("@reference", unMat.Reference);
             cmd.ExecuteNonQuery();
             connex.Close();
         }
@@ -82,13 +82,13 @@ namespace GestMegots.Modeles
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "UPDATE materiel SET couleurs = @couleurs, dateInstallation = @dateInstallation, adresse = @adresse, coordoGPS = @coordoGPS, fkType = @fkType, op = @op WHERE reference = @reference";
-            cmd.Parameters.Add("@couleurs", MySqlDbType.VarString).Value = unMat.Couleurs;
-            cmd.Parameters.Add("@dateInstallation", MySqlDbType.DateTime).Value = unMat.DateInstal;
-            cmd.Parameters.Add("@adresse", MySqlDbType.VarString).Value = unMat.Adresse;
-            cmd.Parameters.Add("@coordoGPS", MySqlDbType.VarString).Value = unMat.CoordoGps;
-            cmd.Parameters.Add("@fkType", MySqlDbType.Int32).Value = unMat.LeType.IdType;
-            cmd.Parameters.Add("@op", MySqlDbType.Bit).Value = unMat.Op;
-            cmd.Parameters.Add("@reference", MySqlDbType.Int32).Value = unMat.Reference;
+            cmd.Parameters.AddWithValue("@couleurs", unMat.Couleurs);
+            cmd.Parameters.AddWithValue("@dateInstallation", unMat.DateInstal);
+            cmd.Parameters.AddWithValue("@adresse", unMat.Adresse);
+            cmd.Parameters.AddWithValue("@coordoGPS", unMat.CoordoGps);
+            cmd.Parameters.AddWithValue("@fkType", unMat.LeType.IdType);
+            cmd.Parameters.AddWithValue("@op", unMat.Op);
+            cmd.Parameters.AddWithValue("@reference", unMat.Reference);
             cmd.ExecuteNonQuery();
             connex.Close();
         }

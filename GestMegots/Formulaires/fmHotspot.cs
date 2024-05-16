@@ -46,14 +46,9 @@ namespace GestMegots.Formulaires
             cb_terrasse.Checked = int.Parse(dataGridView1.CurrentRow.Cells[4].Value.ToString()) == 1;
             
             //Cherche la chaine de caracteres dans la combobox correspondant � ce qui est s�lectionn� dans le datagridview
-            int i =cb_secteur.FindStringExact(dataGridView1.CurrentRow.Cells[5].Value.ToString());
-            cb_secteur.SelectedIndex = i;
-
-            i = cb_categorie.FindStringExact(dataGridView1.CurrentRow.Cells[6].Value.ToString());
-            cb_categorie.SelectedIndex = i;
-
-            i = cb_materiel.FindStringExact(dataGridView1.CurrentRow.Cells[7].Value.ToString());
-            cb_materiel.SelectedIndex = i;
+            cb_secteur.SelectedIndex = cb_secteur.FindStringExact(dataGridView1.CurrentRow.Cells[5].Value.ToString());
+            cb_categorie.SelectedIndex = cb_categorie.FindStringExact(dataGridView1.CurrentRow.Cells[6].Value.ToString());
+            cb_materiel.SelectedIndex = cb_materiel.FindStringExact(dataGridView1.CurrentRow.Cells[7].Value.ToString());
         }
 
         private void pictureBox2_Click_1(object sender, EventArgs e)

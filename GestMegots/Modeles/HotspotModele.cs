@@ -47,7 +47,7 @@ namespace GestMegots.Modeles
             MySqlConnection connexHs = Connection.Ouvrir();
             MySqlCommand cmd = connexHs.CreateCommand();
             cmd.CommandText = "SELECT * FROM HOTSPOT WHERE idHS = @idHS";
-            cmd.Parameters.Add("@idHS", MySqlDbType.Int32).Value = id;
+            cmd.Parameters.AddWithValue("@idHS", id);
             MySqlDataReader lecteur = cmd.ExecuteReader();
             lecteur.Read();
 
@@ -63,18 +63,16 @@ namespace GestMegots.Modeles
             MySqlConnection connexHs = Connection.Ouvrir();
             MySqlCommand cmd = connexHs.CreateCommand();
             //INSERT INTO `hotspot` (`idHS`, `coordoGPS`, `nom`, `adresse`, `terrasse`, `fkSecteur`, `fkCategorie`, `fkMateriel`) VALUES (NULL, '123456;123456', 'Couleur Café', 'rue de la gare', '1', '2', '1', NULL);
-            cmd.CommandText = "INSERT INTO hotspot( `coordoGPS`, `nom`, `adresse`, `terrasse`, `fkSecteur`, `fkCategorie`, 'fkMateriel') VALUE  (@coordoGPS, @nom, @adresse, @terrasse, @fkSecteur, @fkCategorie, @fkMateriel)";
-            cmd.Parameters.Add("@coordoGPS", MySqlDbType.VarString).Value = unHs.CoordoGps;
-            cmd.Parameters.Add("@nom", MySqlDbType.VarString).Value = unHs.Nom;
-            cmd.Parameters.Add("@adresse", MySqlDbType.VarString).Value = unHs.Adresse;
-            cmd.Parameters.Add("@terrasse", MySqlDbType.Bit).Value = unHs.Terrasse;
-            cmd.Parameters.Add("@fkSecteur", MySqlDbType.Int32).Value = unHs.LeSecteur.Id;
-            cmd.Parameters.Add("@fkCategorie", MySqlDbType.Int32).Value = unHs.LaCategorie.Id;
-            cmd.Parameters.Add("@fkMateriel", MySqlDbType.Int32).Value = unHs.LeMateriel.Reference;
+            cmd.CommandText = "INSERT INTO hotspot( coordoGPS, nom, adresse, terrasse, fkSecteur, fkCategorie, fkMateriel) VALUE  (@coordoGPS, @nom, @adresse, @terrasse, @fkSecteur, @fkCategorie, @fkMateriel)";
+            cmd.Parameters.AddWithValue("@coordoGPS", unHs.CoordoGps);
+            cmd.Parameters.AddWithValue("@nom", unHs.Nom);
+            cmd.Parameters.AddWithValue("@adresse", unHs.Adresse);
+            cmd.Parameters.AddWithValue("@terrasse", unHs.Terrasse);
+            cmd.Parameters.AddWithValue("@fkSecteur", unHs.LeSecteur.Id);
+            cmd.Parameters.AddWithValue("@fkCategorie", unHs.LaCategorie.Id);
+            cmd.Parameters.AddWithValue("@fkMateriel", int.Parse(unHs.LeMateriel.Reference.ToString()));
 
-            int nb = cmd.ExecuteNonQuery();
-
-
+            cmd.ExecuteNonQuery();
         }
         public static void ModifierHotspot(Hotspot unHs)
         {
@@ -82,17 +80,16 @@ namespace GestMegots.Modeles
             MySqlConnection connexHs = Connection.Ouvrir();
             MySqlCommand cmd = connexHs.CreateCommand();
             //UPDATE `hotspot` SET `coordoGPS` = '1234' WHERE `hotspot`.`idHS` = 8;
-            cmd.CommandText = "UPDATE `hotspot` SET `coordoGPS` = @coordo, `nom`=@nom, `adresse`=@adresse, `terrasse`=@terrasse, `fkSecteur`=@secteur, `fkCategorie`=@categorie, fkMateriel = @fkMateriel WHERE `idHS` = @idHS  ";
-            cmd.Parameters.Add("@coordo", MySqlDbType.VarChar).Value = unHs.CoordoGps;
-            cmd.Parameters.Add("@nom", MySqlDbType.VarChar).Value = unHs.Nom;
-            cmd.Parameters.Add("@adresse", MySqlDbType.VarChar).Value = unHs.Adresse;
-            cmd.Parameters.Add("@terrasse", MySqlDbType.Bit).Value = unHs.Terrasse;
-            cmd.Parameters.Add("@secteur", MySqlDbType.Int32).Value = unHs.LeSecteur.Id;
-            cmd.Parameters.Add("@categorie", MySqlDbType.Int32).Value = unHs.LaCategorie.Id;
-            cmd.Parameters.Add("@fkMateriel", MySqlDbType.Int32).Value = unHs.LeMateriel.Reference.ToString();
-            cmd.Parameters.Add("@idHS", MySqlDbType.Int32).Value = unHs.IdHs;
-
-            int nb = cmd.ExecuteNonQuery();
+            cmd.CommandText = "UPDATE `hotspot` SET `coordoGPS` = @coordoGPS, `nom`=@nom, `adresse`=@adresse, `terrasse`=@terrasse, `fkSecteur`=@fkSecteur, `fkCategorie`=@fkCategorie, fkMateriel = @fkMateriel WHERE `idHS` = @idHS  ";
+            cmd.Parameters.AddWithValue("@coordoGPS", unHs.CoordoGps);
+            cmd.Parameters.AddWithValue("@nom", unHs.Nom);
+            cmd.Parameters.AddWithValue("@adresse", unHs.Adresse);
+            cmd.Parameters.AddWithValue("@terrasse", unHs.Terrasse);
+            cmd.Parameters.AddWithValue("@fkSecteur", unHs.LeSecteur.Id);
+            cmd.Parameters.AddWithValue("@fkCategorie", unHs.LaCategorie.Id);
+            cmd.Parameters.AddWithValue("@fkMateriel", unHs.LeMateriel.Reference);
+            cmd.Parameters.AddWithValue("@idHS", unHs.IdHs);
+            cmd.ExecuteNonQuery();
             connexHs.Close();
 
         }
@@ -101,9 +98,8 @@ namespace GestMegots.Modeles
             MySqlConnection connexHs = Connection.Ouvrir();
             MySqlCommand cmd = connexHs.CreateCommand();
             cmd.CommandText = "DELETE FROM `hotspot`  WHERE `hotspot`.`idHS` = @idHS  ";
-            cmd.Parameters.Add("@idHS", MySqlDbType.Int32).Value = unHs.IdHs;
-
-            int nb = cmd.ExecuteNonQuery();
+            cmd.Parameters.AddWithValue("@idHS", unHs.IdHs);
+            cmd.ExecuteNonQuery();
             connexHs.Close();
 
         }
