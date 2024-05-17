@@ -23,13 +23,14 @@ namespace GestMegots.Formulaires
         public Hotspot FormToHotspot()
         {
             return new Hotspot.Builder()
+                .WithIdHS(int.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString()))
                 .WithCoordoGPS(tb_GPS.Text)
                 .WithNom(tb_nom.Text)
                 .WithAdresse(tb_adresse.Text)
                 .WithTerrasse(cb_terrasse.Checked ? 1 : 0)
                 .WithLeSecteur(SecteurModele.GetSecteurById(int.Parse(cb_secteur.SelectedValue.ToString())))
                 .WithLaCategorie(CategorieModele.GetCategorieById(int.Parse(cb_categorie.SelectedValue.ToString())))
-                .WithLeMateriel(MaterielModele.GetMatByid(int.Parse(cb_materiel.SelectedIndex.ToString())))
+                .WithLeMateriel(MaterielModele.GetMatByid(int.Parse(cb_materiel.SelectedValue.ToString())))
                 .Build();
         }
 
@@ -75,6 +76,7 @@ namespace GestMegots.Formulaires
             HotspotModele.SupprimerHotspot(new Hotspot.Builder()
                 .WithIdHS(int.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString()))
                 .Build());
+            this.dataGridView1.DataSource = HotspotModele.TousLesHotspots();
         }
     }
 }
