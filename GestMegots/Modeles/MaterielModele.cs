@@ -12,7 +12,7 @@ namespace GestMegots.Modeles
     {
         public static Materiel ReaderToMat(MySqlDataReader lecteur)
         {
-            Materiel unMat = new Materiel.Builder()
+            return new Materiel.Builder()
                 .WithReference(int.Parse(lecteur[0].ToString()))
                 .WithCouleur(lecteur[1].ToString())
                 .WithDateInstal(lecteur.GetDateTime("dateInstallation"))
@@ -21,7 +21,6 @@ namespace GestMegots.Modeles
                 .WithLeType(TypeModele.GetTypeMaterielById(int.Parse(lecteur[5].ToString())))
                 .WithOp(int.Parse(lecteur[6].ToString()))
                 .build();
-            return unMat;
         }
 
         public static List<Materiel> TousLesMateriel()

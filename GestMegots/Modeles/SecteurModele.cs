@@ -40,7 +40,7 @@ namespace GestMegots.Modeles
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM SECTEUR where idSecteur = @IdSecteur";
-            cmd.Parameters.Add("@IdSecteur", MySqlDbType.Int32).Value = id;
+            cmd.Parameters.AddWithValue("@libelle", id);
             MySqlDataReader lecteur = cmd.ExecuteReader();
             lecteur.Read();
 
@@ -55,27 +55,28 @@ namespace GestMegots.Modeles
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "INSERT INTO secteur(libelle) VALUE (@libelle)";
-            cmd.Parameters.Add("@libelle", MySqlDbType.Int32).Value = unSect.Name;
+            cmd.Parameters.AddWithValue("@libelle", unSect.Name);
             cmd.ExecuteNonQuery();
             connex.Close();
 
         }
-        public static void ModifierHotspot(Secteur unSect)
+        public static void ModifierSecteur(Secteur unSect)
         {
 
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
-            cmd.CommandText = "INSERT INTO secteur(libelle) VALUE (@libelle)";
-            cmd.Parameters.Add("@libelle", MySqlDbType.Int32).Value = unSect.Name;
+            cmd.CommandText = "UPDATE secteur SET libelle = @libelle WHERE idSecteur = @idSecteur";
+            cmd.Parameters.AddWithValue("@libelle", unSect.Name);
+            cmd.Parameters.AddWithValue("@idSecteur", unSect.Id);
             cmd.ExecuteNonQuery();
             connex.Close();
         }
-        public static void SupprimerHotspot(Secteur unSect)
+        public static void SupprimerSecteur(Secteur unSect)
         {
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "DELETE FROM secteur WHERE idSecteur = @idSecteur";
-            cmd.Parameters.Add("@idSecteur", MySqlDbType.Int32 ).Value = unSect.Id;
+            cmd.Parameters.AddWithValue("@idSecteur", unSect.Id);
             cmd.ExecuteNonQuery();
             connex.Close();
         }

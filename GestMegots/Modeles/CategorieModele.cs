@@ -40,7 +40,7 @@ namespace GestMegots.Modeles
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM Categorie where idCategorie = @IdCategorie";
-            cmd.Parameters.Add("@IdCategorie", MySqlDbType.Int32).Value = id;
+            cmd.Parameters.AddWithValue("@IdCategorie", id);
             MySqlDataReader lecteur = cmd.ExecuteReader();
             
             lecteur.Read();

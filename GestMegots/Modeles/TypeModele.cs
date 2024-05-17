@@ -12,17 +12,15 @@ namespace GestMegots.Modeles
     {
         public static TypeMateriel ReaderToType(MySqlDataReader lecteur)
         {
-            TypeMateriel unType = new TypeMateriel.Builder()
+            return new TypeMateriel.Builder()
                 .WithIdType(int.Parse(lecteur[0].ToString()))
                 .WithLibelle(lecteur[1].ToString())
                 .WithContenance(double.Parse(lecteur[2].ToString()))
                 .WithSacIntegre(int.Parse(lecteur[3].ToString()))
                 .build();
-                
-            return unType;
         }
         
-        public static List<TypeMateriel> TousLesTypes()
+        public static List<TypeMateriel> ToutLesTypes()
         {
             List<TypeMateriel> lesTypes = new List<TypeMateriel>();
             MySqlConnection connex = Connection.Ouvrir();
@@ -42,7 +40,7 @@ namespace GestMegots.Modeles
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM Type WHERE idType = @idType";
-            cmd.Parameters.Add("@idType", MySqlDbType.Int32).Value = id;
+            cmd.Parameters.AddWithValue("@idType", id);
             MySqlDataReader lecteur = cmd.ExecuteReader();
             lecteur.Read();
             TypeMateriel unType = ReaderToType(lecteur);
@@ -55,10 +53,10 @@ namespace GestMegots.Modeles
 
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
-            cmd.CommandText = "INSERT INTO type(libelle, contenance, type.sacIntegre) VALUE (@libelle, @contenance, @sacIntegrer)";
-            cmd.Parameters.Add("@libelle", MySqlDbType.VarString).Value = typeMateriel.Libelle;
-            cmd.Parameters.Add("@contenance", MySqlDbType.Double).Value = typeMateriel.Contenance;
-            cmd.Parameters.Add("@sacIntegrer", MySqlDbType.Bit).Value = typeMateriel.SacIntegre;
+            cmd.CommandText = "INSERT INTO type(libelle, contenance, sacIntegre) VALUE (@libelle, @contenance, @sacIntegrer)";
+            cmd.Parameters.AddWithValue("@libelle", typeMateriel.Libelle);
+            cmd.Parameters.AddWithValue("@contenance", typeMateriel.Contenance);
+            cmd.Parameters.AddWithValue("@sacIntegrer", typeMateriel.SacIntegre);
             cmd.ExecuteNonQuery();
             connex.Close();
         }
@@ -68,7 +66,7 @@ namespace GestMegots.Modeles
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "DELETE FROM type WHERE idType = @idType";
-            cmd.Parameters.Add("@idType", MySqlDbType.Int32).Value = typeMateriel.IdType;
+            cmd.Parameters.AddWithValue("@idType", typeMateriel.IdType);
             cmd.ExecuteNonQuery();
             connex.Close();
         }
@@ -78,10 +76,10 @@ namespace GestMegots.Modeles
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "UPDATE type SET libelle = @libelle, contenance = @contenance, sacIntegre = @sacIntegre WHERE idType = @idType";
-            cmd.Parameters.Add("@libelle", MySqlDbType.VarString).Value = typeMateriel.Libelle;
-            cmd.Parameters.Add("@contenance", MySqlDbType.Double).Value = typeMateriel.Contenance;
-            cmd.Parameters.Add("@sacIntegre", MySqlDbType.Bit).Value = typeMateriel.SacIntegre;
-            cmd.Parameters.Add("@idType", MySqlDbType.Int32).Value = typeMateriel.IdType;
+            cmd.Parameters.AddWithValue("@libelle", typeMateriel.Libelle);
+            cmd.Parameters.AddWithValue("@contenance", typeMateriel.Contenance);
+            cmd.Parameters.AddWithValue("@sacIntegrer", typeMateriel.SacIntegre);
+            cmd.Parameters.AddWithValue("@idType", typeMateriel.IdType);
             cmd.ExecuteNonQuery();
             connex.Close(); 
         }
