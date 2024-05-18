@@ -48,8 +48,6 @@ namespace GestMegots.Modeles
 
             connex.Close();
             return uneCat;
-
         }
-
     }
 }

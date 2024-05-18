@@ -80,7 +80,7 @@ namespace GestMegots.Modeles
             MySqlConnection connexHs = Connection.Ouvrir();
             MySqlCommand cmd = connexHs.CreateCommand();
             //UPDATE `hotspot` SET `coordoGPS` = '1234' WHERE `hotspot`.`idHS` = 8;
-            cmd.CommandText = "UPDATE `hotspot` SET `coordoGPS` = @coordoGPS, `nom`=@nom, `adresse`=@adresse, `terrasse`=@terrasse, `fkSecteur`=@fkSecteur, `fkCategorie`=@fkCategorie, fkMateriel = @fkMateriel WHERE `idHS` = @idHS  ";
+            cmd.CommandText = "UPDATE `hotspot` SET `coordoGPS` = @coordoGPS, `nom`=@nom, `adresse`=@adresse, `terrasse`=@terrasse, `fkSecteur`=@fkSecteur, `fkCategorie`=@fkCategorie, `fkMateriel` = @fkMateriel WHERE `idHS` = @idHS  ";
             cmd.Parameters.AddWithValue("@coordoGPS", unHs.CoordoGps);
             cmd.Parameters.AddWithValue("@nom", unHs.Nom);
             cmd.Parameters.AddWithValue("@adresse", unHs.Adresse);

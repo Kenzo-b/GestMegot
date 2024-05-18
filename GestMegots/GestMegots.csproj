@@ -25,6 +25,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Formulaires\FmMateriel.resx">
+      <DependentUpon>FmMateriel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

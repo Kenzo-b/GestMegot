@@ -61,5 +61,10 @@
             Contenance = builder.Contenance;
             SacIntegre = builder.SacIntegre;
         }
+
+        public override string ToString()
+        {
+            return libelle;
+        }
     }
 }

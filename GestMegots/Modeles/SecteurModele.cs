@@ -39,8 +39,8 @@ namespace GestMegots.Modeles
         {
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
-            cmd.CommandText = "SELECT * FROM SECTEUR where idSecteur = @IdSecteur";
-            cmd.Parameters.AddWithValue("@libelle", id);
+            cmd.CommandText = "SELECT * FROM SECTEUR where idSecteur = @idSecteur";
+            cmd.Parameters.AddWithValue("@idSecteur", id);
             MySqlDataReader lecteur = cmd.ExecuteReader();
             lecteur.Read();
 
