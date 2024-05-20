@@ -327,6 +327,7 @@
             bt_hotspot.TabIndex = 0;
             bt_hotspot.Text = "Hotspots";
             bt_hotspot.UseVisualStyleBackColor = false;
+            bt_hotspot.Enabled = false;
             // 
             // btnMateriel
             // 
@@ -358,6 +359,7 @@
             btnCollectes.TabIndex = 2;
             btnCollectes.Text = "Collectes";
             btnCollectes.UseVisualStyleBackColor = false;
+            btnCollectes.Click += btnCollecteClick;
             // 
             // label1
             // 

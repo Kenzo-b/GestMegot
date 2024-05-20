@@ -57,6 +57,13 @@ namespace GestMegots.Formulaires
             this.Hide();
         }
 
+        private void btnCollecteClick(object sender, EventArgs e)
+        {
+            FmCollecte f = new FmCollecte();
+            f.Show();
+            this.Hide();
+        }
+
         private void button4_Click_1(object sender, EventArgs e)
         {
             HotspotModele.AjoutHotspot(FormToHotspot());

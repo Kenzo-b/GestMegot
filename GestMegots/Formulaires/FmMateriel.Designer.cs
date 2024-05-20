@@ -288,6 +288,7 @@
             button1.TabIndex = 1;
             button1.Text = "Matériels";
             button1.UseVisualStyleBackColor = false;
+            button1.Enabled = false;
             // 
             // button2
             // 
@@ -303,6 +304,7 @@
             button2.TabIndex = 2;
             button2.Text = "Collectes";
             button2.UseVisualStyleBackColor = false;
+            button2.Click += btnCollecteClick;
             // 
             // label1
             // 
