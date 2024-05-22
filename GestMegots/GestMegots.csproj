@@ -21,6 +21,9 @@
     <Compile Update="Formulaires\FmCollecte.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Formulaires\FmUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
