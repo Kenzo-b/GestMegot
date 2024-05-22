@@ -34,6 +34,8 @@ partial class FmCollecte
         panel1 = new Panel();
         pictureBox2 = new PictureBox();
         panel2 = new Panel();
+        NudNbMegot = new NumericUpDown();
+        lbNbMegot = new Label();
         cb_mat = new ComboBox();
         bt_update = new Button();
         bt_dell = new Button();
@@ -44,16 +46,15 @@ partial class FmCollecte
         bt_hotspot = new Button();
         button1 = new Button();
         button2 = new Button();
+        bt_User = new Button();
         label1 = new Label();
         pictureBox1 = new PictureBox();
-        lbNbMegot = new Label();
-        NudNbMegot = new NumericUpDown();
         panel1.SuspendLayout();
         ((ISupportInitialize)pictureBox2).BeginInit();
         panel2.SuspendLayout();
+        ((ISupportInitialize)NudNbMegot).BeginInit();
         ((ISupportInitialize)dataGridView1).BeginInit();
         ((ISupportInitialize)pictureBox1).BeginInit();
-        ((ISupportInitialize)NudNbMegot).BeginInit();
         SuspendLayout();
         // 
         // panel1
@@ -92,6 +93,24 @@ partial class FmCollecte
         panel2.Name = "panel2";
         panel2.Size = new Size(841, 185);
         panel2.TabIndex = 9;
+        // 
+        // NudNbMegot
+        // 
+        NudNbMegot.BorderStyle = BorderStyle.None;
+        NudNbMegot.Location = new Point(341, 82);
+        NudNbMegot.Name = "NudNbMegot";
+        NudNbMegot.Size = new Size(150, 19);
+        NudNbMegot.TabIndex = 30;
+        // 
+        // lbNbMegot
+        // 
+        lbNbMegot.AutoSize = true;
+        lbNbMegot.ForeColor = Color.DarkOliveGreen;
+        lbNbMegot.Location = new Point(210, 84);
+        lbNbMegot.Name = "lbNbMegot";
+        lbNbMegot.Size = new Size(108, 15);
+        lbNbMegot.TabIndex = 29;
+        lbNbMegot.Text = "nombre de mégots";
         // 
         // cb_mat
         // 
@@ -177,9 +196,9 @@ partial class FmCollecte
         label2.ForeColor = Color.DarkGreen;
         label2.Location = new Point(305, 31);
         label2.Name = "label2";
-        label2.Size = new Size(223, 30);
+        label2.Size = new Size(211, 30);
         label2.TabIndex = 0;
-        label2.Text = "Gestion des Matériels";
+        label2.Text = "Gestion des Collecte";
         // 
         // bt_hotspot
         // 
@@ -246,23 +265,21 @@ partial class FmCollecte
         pictureBox1.TabIndex = 5;
         pictureBox1.TabStop = false;
         // 
-        // lbNbMegot
+        // bt_User
         // 
-        lbNbMegot.AutoSize = true;
-        lbNbMegot.ForeColor = Color.DarkOliveGreen;
-        lbNbMegot.Location = new Point(210, 84);
-        lbNbMegot.Name = "lbNbMegot";
-        lbNbMegot.Size = new Size(108, 15);
-        lbNbMegot.TabIndex = 29;
-        lbNbMegot.Text = "nombre de mégots";
-        // 
-        // NudNbMegot
-        // 
-        NudNbMegot.BorderStyle = BorderStyle.None;
-        NudNbMegot.Location = new Point(341, 82);
-        NudNbMegot.Name = "NudNbMegot";
-        NudNbMegot.Size = new Size(150, 19);
-        NudNbMegot.TabIndex = 30;
+        bt_User.BackColor = Color.LemonChiffon;
+        bt_User.FlatAppearance.BorderSize = 0;
+        bt_User.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
+        bt_User.FlatStyle = FlatStyle.Flat;
+        bt_User.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+        bt_User.ForeColor = Color.DarkOliveGreen;
+        bt_User.Location = new Point(44, 571);
+        bt_User.Name = "bt_User";
+        bt_User.Size = new Size(174, 64);
+        bt_User.TabIndex = 8;
+        bt_User.Text = "Utilisateur";
+        bt_User.UseVisualStyleBackColor = false;
+        bt_User.Click += bt_User_Click;
         // 
         // FmCollecte
         // 
@@ -285,9 +302,9 @@ partial class FmCollecte
         ((ISupportInitialize)pictureBox2).EndInit();
         panel2.ResumeLayout(false);
         panel2.PerformLayout();
+        ((ISupportInitialize)NudNbMegot).EndInit();
         ((ISupportInitialize)dataGridView1).EndInit();
         ((ISupportInitialize)pictureBox1).EndInit();
-        ((ISupportInitialize)NudNbMegot).EndInit();
         ResumeLayout(false);
         PerformLayout();
     }
@@ -306,6 +323,7 @@ partial class FmCollecte
     private Button bt_update;
     private Button bt_dell;
     private Button button4;
+    private Button bt_User;
     private PictureBox pictureBox2;
     private ComboBox cb_mat;
     private Label lbMat;

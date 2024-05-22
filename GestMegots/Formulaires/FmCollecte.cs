@@ -27,7 +27,7 @@ public partial class FmCollecte : Form
         NudNbMegot.Value = Convert.ToDecimal(dataGridView1.CurrentRow.Cells[1].Value.ToString());
     }
 
-    private void reload()
+    private void ReloadGridView()
     {
         dataGridView1.DataSource = CollecteModele.ToutesLesCollecte();
     }
@@ -43,10 +43,17 @@ public partial class FmCollecte : Form
         f.Show();
         this.Hide();
     }
-    
+
     private void btnMaterielClick(object sender, EventArgs e)
     {
         FmMateriel f = new FmMateriel();
+        f.Show();
+        this.Hide();
+    }
+    
+    private void bt_User_Click(object sender, EventArgs e)
+    {
+        FmUser f = new FmUser();
         f.Show();
         this.Hide();
     }
@@ -65,18 +72,18 @@ public partial class FmCollecte : Form
         Collecte laCollecte = FormToCollect();
         laCollecte.DateCollecte = DateTime.Now;
         CollecteModele.AjouterCollect(laCollecte);
-        reload();
+        ReloadGridView();
     }
 
     private void button6_Click(object sender, EventArgs e)
     {
         CollecteModele.ModifierCollect(FormToCollect());
-        reload();
+        ReloadGridView();
     }
 
     private void bt_dell_Click(object sender, EventArgs e)
     {
         CollecteModele.SuppCollecte(FormToCollect());
-        reload();
+        ReloadGridView();
     }
 }

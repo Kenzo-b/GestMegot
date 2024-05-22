@@ -34,6 +34,12 @@ namespace GestMegots.Formulaires
                 .Build();
         }
 
+        private void ReloadGridView()
+        {
+            dataGridView1.DataSource = HotspotModele.TousLesHotspots();
+        }
+
+
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             tb_GPS.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
@@ -63,23 +69,30 @@ namespace GestMegots.Formulaires
             f.Show();
             this.Hide();
         }
+        
+        private void bt_User_Click(object sender, EventArgs e)
+        {
+            FmUser f = new FmUser();
+            f.Show();
+            this.Hide();
+        }
 
         private void button4_Click_1(object sender, EventArgs e)
         {
             HotspotModele.AjoutHotspot(FormToHotspot());
-            this.dataGridView1.DataSource = HotspotModele.TousLesHotspots();
+            ReloadGridView();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             HotspotModele.ModifierHotspot(FormToHotspot());
-            this.dataGridView1.DataSource = HotspotModele.TousLesHotspots();
+            ReloadGridView();
         }
 
         private void bt_dell_Click(object sender, EventArgs e)
         {
             HotspotModele.SupprimerHotspot(FormToHotspot());
-            this.dataGridView1.DataSource = HotspotModele.TousLesHotspots();
+            ReloadGridView();
         }
     }
 }

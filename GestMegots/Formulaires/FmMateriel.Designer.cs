@@ -49,6 +49,7 @@
             bt_hotspot = new Button();
             button1 = new Button();
             button2 = new Button();
+            bt_User = new Button();
             label1 = new Label();
             pictureBox1 = new PictureBox();
             tb_GPS = new TextBox();
@@ -332,6 +333,22 @@
             tb_GPS.Size = new Size(164, 16);
             tb_GPS.TabIndex = 27;
             // 
+            // bt_User
+            // 
+            bt_User.BackColor = Color.LemonChiffon;
+            bt_User.FlatAppearance.BorderSize = 0;
+            bt_User.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
+            bt_User.FlatStyle = FlatStyle.Flat;
+            bt_User.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            bt_User.ForeColor = Color.DarkOliveGreen;
+            bt_User.Location = new Point(44, 571);
+            bt_User.Name = "bt_User";
+            bt_User.Size = new Size(174, 64);
+            bt_User.TabIndex = 8;
+            bt_User.Text = "Utilisateur";
+            bt_User.UseVisualStyleBackColor = false;
+            bt_User.Click += bt_User_Click;
+            // 
             // FmMateriel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -373,6 +390,7 @@
         private Button bt_update;
         private Button bt_dell;
         private Button button4;
+        private Button bt_User;
         private Label label6;
         private Label label5;
         private Label label4;

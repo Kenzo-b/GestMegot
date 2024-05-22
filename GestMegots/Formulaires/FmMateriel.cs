@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using GestMegots.Entitees;
+﻿using GestMegots.Entitees;
 using GestMegots.Modeles;
 
 namespace GestMegots.Formulaires
@@ -32,6 +23,11 @@ namespace GestMegots.Formulaires
             cb_op.Checked = int.Parse(dataGridView1.CurrentRow.Cells[6].Value.ToString()) == 1;
         }
 
+        private void ReloadGridView()
+        {
+            dataGridView1.DataSource = MaterielModele.TousLesMateriel();
+        }
+
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -47,6 +43,13 @@ namespace GestMegots.Formulaires
         private void btnCollecteClick(object sender, EventArgs e)
         {
             FmCollecte f = new FmCollecte();
+            f.Show();
+            this.Hide();
+        }
+        
+        private void bt_User_Click(object sender, EventArgs e)
+        {
+            FmUser f = new FmUser();
             f.Show();
             this.Hide();
         }
@@ -68,20 +71,20 @@ namespace GestMegots.Formulaires
             Materiel leMat = FormToMat();
             leMat.DateInstal = DateTime.Now;
             MaterielModele.AjouterMateriel(leMat);
-            this.dataGridView1.DataSource = MaterielModele.TousLesMateriel();
+            ReloadGridView();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             
             MaterielModele.ChangerMateriel(FormToMat());
-            this.dataGridView1.DataSource = MaterielModele.TousLesMateriel();
+            ReloadGridView();
         }
 
         private void bt_dell_Click(object sender, EventArgs e)
         {
             MaterielModele.SupprimerMateriel(FormToMat());
-            this.dataGridView1.DataSource = MaterielModele.TousLesMateriel();
+            ReloadGridView();
         }
     }
 }

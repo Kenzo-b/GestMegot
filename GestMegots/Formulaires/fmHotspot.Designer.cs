@@ -56,6 +56,7 @@
             btnCollectes = new Button();
             label1 = new Label();
             pictureBox1 = new PictureBox();
+            bt_User = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel2.SuspendLayout();
@@ -316,6 +317,7 @@
             // bt_hotspot
             // 
             bt_hotspot.BackColor = Color.LemonChiffon;
+            bt_hotspot.Enabled = false;
             bt_hotspot.FlatAppearance.BorderSize = 0;
             bt_hotspot.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
             bt_hotspot.FlatStyle = FlatStyle.Flat;
@@ -327,7 +329,6 @@
             bt_hotspot.TabIndex = 0;
             bt_hotspot.Text = "Hotspots";
             bt_hotspot.UseVisualStyleBackColor = false;
-            bt_hotspot.Enabled = false;
             // 
             // btnMateriel
             // 
@@ -379,12 +380,29 @@
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
+            // bt_User
+            // 
+            bt_User.BackColor = Color.LemonChiffon;
+            bt_User.FlatAppearance.BorderSize = 0;
+            bt_User.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
+            bt_User.FlatStyle = FlatStyle.Flat;
+            bt_User.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            bt_User.ForeColor = Color.DarkOliveGreen;
+            bt_User.Location = new Point(44, 571);
+            bt_User.Name = "bt_User";
+            bt_User.Size = new Size(174, 64);
+            bt_User.TabIndex = 8;
+            bt_User.Text = "Utilisateur";
+            bt_User.UseVisualStyleBackColor = false;
+            bt_User.Click += bt_User_Click;
+            // 
             // FmHotspot
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkOliveGreen;
             ClientSize = new Size(1183, 740);
+            Controls.Add(bt_User);
             Controls.Add(pictureBox1);
             Controls.Add(label1);
             Controls.Add(btnCollectes);
@@ -435,5 +453,6 @@
         private TextBox tb_nom;
         private TextBox tb_GPS;
         private PictureBox pictureBox2;
+        private Button bt_User;
     }
 }
