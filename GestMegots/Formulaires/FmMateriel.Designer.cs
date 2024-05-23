@@ -360,6 +360,7 @@
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(bt_hotspot);
+            Controls.Add(bt_User);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FmMateriel";

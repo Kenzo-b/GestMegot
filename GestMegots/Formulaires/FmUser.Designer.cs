@@ -244,7 +244,6 @@
             // bt_hotspot
             // 
             bt_hotspot.BackColor = Color.LemonChiffon;
-            bt_hotspot.Enabled = false;
             bt_hotspot.FlatAppearance.BorderSize = 0;
             bt_hotspot.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
             bt_hotspot.FlatStyle = FlatStyle.Flat;
