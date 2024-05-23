@@ -62,14 +62,20 @@ public partial class FmUser : Form
 
     private void button4_Click_1(object sender, EventArgs e)
     {
-        UserModel.AjouterUser(FormToUser());
+        User user = FormToUser();
+        user.Passwd = Hashing.ToSha256(user.Passwd);
+        UserModel.AjouterUser(user);
         ReloadGridView();
     }
 
     private void button6_Click(object sender, EventArgs e)
     {
-
-        UserModel.ChangerUser(FormToUser());
+        User user = FormToUser();
+        if (user.Passwd != UserModel.GetUserById(user.Id).Passwd)
+        {
+            user.Passwd = Hashing.ToSha256(user.Passwd);
+        }
+        UserModel.ChangerUser(user);
         ReloadGridView();
     }
 
