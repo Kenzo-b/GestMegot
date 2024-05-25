@@ -27,6 +27,11 @@ public partial class FmUser : Form
             .build();
     }
 
+    private bool IsEmpty()
+    {
+        return tb_passwd.Text == string.Empty || tb_pseudo.Text == string.Empty;
+    }
+
     private void ReloadGridView()
     {
         dataGridView1.DataSource = UserModel.ToutLesUsers();
@@ -62,21 +67,35 @@ public partial class FmUser : Form
 
     private void button4_Click_1(object sender, EventArgs e)
     {
-        User user = FormToUser();
-        user.Passwd = Hashing.ToSha256(user.Passwd);
-        UserModel.AjouterUser(user);
-        ReloadGridView();
+        if (!IsEmpty())
+        {
+            User user = FormToUser();
+            user.Passwd = Hashing.ToSha256(user.Passwd);
+            UserModel.AjouterUser(user);
+            ReloadGridView();
+        }
+        else
+        {
+            MessageBox.Show("veuillez completer les champs vide");
+        }
     }
 
     private void button6_Click(object sender, EventArgs e)
     {
-        User user = FormToUser();
-        if (user.Passwd != UserModel.GetUserById(user.Id).Passwd)
+        if (!IsEmpty())
         {
-            user.Passwd = Hashing.ToSha256(user.Passwd);
+            User user = FormToUser();
+            if (user.Passwd != UserModel.GetUserById(user.Id).Passwd)
+            {
+                user.Passwd = Hashing.ToSha256(user.Passwd);
+            }
+            UserModel.ChangerUser(user);
+            ReloadGridView();
         }
-        UserModel.ChangerUser(user);
-        ReloadGridView();
+        else
+        {
+            MessageBox.Show("veuillez completer les champs vide");
+        }
     }
 
     private void bt_dell_Click(object sender, EventArgs e)

@@ -23,6 +23,11 @@ namespace GestMegots.Formulaires
             cb_op.Checked = int.Parse(dataGridView1.CurrentRow.Cells[6].Value.ToString()) == 1;
         }
 
+        private bool IsEmpty()
+        {
+            return tb_GPS.Text == string.Empty || tb_adresse.Text == string.Empty || tb_couleur.Text == string.Empty;
+        }
+
         private void ReloadGridView()
         {
             dataGridView1.DataSource = MaterielModele.TousLesMateriel();
@@ -68,17 +73,30 @@ namespace GestMegots.Formulaires
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            Materiel leMat = FormToMat();
-            leMat.DateInstal = DateTime.Now;
-            MaterielModele.AjouterMateriel(leMat);
-            ReloadGridView();
+            if (!IsEmpty())
+            {
+                Materiel leMat = FormToMat();
+                leMat.DateInstal = DateTime.Now;
+                MaterielModele.AjouterMateriel(leMat);
+                ReloadGridView();  
+            }
+            else
+            {
+                MessageBox.Show("veuillez completer les champs vide");
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            
-            MaterielModele.ChangerMateriel(FormToMat());
-            ReloadGridView();
+            if (!IsEmpty())
+            {
+                MaterielModele.ChangerMateriel(FormToMat());
+                ReloadGridView(); 
+            }
+            else
+            {
+                MessageBox.Show("veuillez completer les champs vide");
+            }
         }
 
         private void bt_dell_Click(object sender, EventArgs e)
