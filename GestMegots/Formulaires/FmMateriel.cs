@@ -1,5 +1,6 @@
 ﻿using GestMegots.Entitees;
 using GestMegots.Modeles;
+using System.Text.RegularExpressions;
 
 namespace GestMegots.Formulaires
 {
@@ -21,6 +22,14 @@ namespace GestMegots.Formulaires
             tb_GPS.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
             cb_type.SelectedIndex = cb_type.FindStringExact(dataGridView1.CurrentRow.Cells[5].Value.ToString());
             cb_op.Checked = int.Parse(dataGridView1.CurrentRow.Cells[6].Value.ToString()) == 1;
+        }
+        
+        private bool IsValidGps()
+        {
+            string pattern =
+                "^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$";
+            Match m = Regex.Match(tb_GPS.Text, pattern);
+            return m.Success;
         }
 
         private bool IsEmpty()
@@ -73,7 +82,7 @@ namespace GestMegots.Formulaires
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            if (!IsEmpty())
+            if (!IsEmpty() && IsValidGps())
             {
                 Materiel leMat = FormToMat();
                 leMat.DateInstal = DateTime.Now;
@@ -82,20 +91,20 @@ namespace GestMegots.Formulaires
             }
             else
             {
-                MessageBox.Show("veuillez completer les champs vide");
+                MessageBox.Show("champs vide ou valeur incorrecte");
             }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (!IsEmpty())
+            if (!IsEmpty() && IsValidGps())
             {
                 MaterielModele.ChangerMateriel(FormToMat());
                 ReloadGridView(); 
             }
             else
             {
-                MessageBox.Show("veuillez completer les champs vide");
+                MessageBox.Show("champs vide ou valeur incorrecte");            
             }
         }
 

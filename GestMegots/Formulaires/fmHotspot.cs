@@ -1,5 +1,6 @@
 using GestMegots.Entitees;
 using GestMegots.Modeles;
+using System.Text.RegularExpressions;
 
 namespace GestMegots.Formulaires
 {
@@ -32,6 +33,19 @@ namespace GestMegots.Formulaires
                 .WithLaCategorie(CategorieModele.GetCategorieById(int.Parse(cb_categorie.SelectedValue.ToString())))
                 .WithLeMateriel(MaterielModele.GetMatByid(int.Parse(cb_materiel.SelectedValue.ToString())))
                 .Build();
+        }
+        
+        private bool IsValidGps()
+        {
+            string pattern =
+                "^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$";
+            Match m = Regex.Match(tb_GPS.Text, pattern);
+            return m.Success;
+        }
+
+        private bool IsEmpty()
+        {
+            return tb_adresse.Text == string.Empty || tb_GPS.Text == string.Empty || tb_nom.Text == string.Empty;
         }
 
         private void ReloadGridView()
@@ -79,14 +93,28 @@ namespace GestMegots.Formulaires
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            HotspotModele.AjoutHotspot(FormToHotspot());
-            ReloadGridView();
+            if (!IsEmpty() && IsValidGps())
+            {
+                HotspotModele.AjoutHotspot(FormToHotspot());
+                ReloadGridView();
+            }
+            else
+            {
+                MessageBox.Show("champs vide ou valeur incorrecte");
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            HotspotModele.ModifierHotspot(FormToHotspot());
-            ReloadGridView();
+            if (!IsEmpty() && IsValidGps())
+            {
+                HotspotModele.ModifierHotspot(FormToHotspot());
+                ReloadGridView();
+            }
+            else
+            {
+                MessageBox.Show("champs vide ou valeur incorrecte");
+            }
         }
 
         private void bt_dell_Click(object sender, EventArgs e)
