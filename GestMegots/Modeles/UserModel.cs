@@ -18,17 +18,17 @@ public class UserModel
     
     public static List<User> ToutLesUsers()
     {
-        List<User> lesServ = new List<User>();
+        List<User> lesUsers = new List<User>();
         MySqlConnection connex = Connection.Ouvrir();
         MySqlCommand cmd = connex.CreateCommand();
         cmd.CommandText = "SELECT * FROM user";
         MySqlDataReader lecteur = cmd.ExecuteReader();
         while(lecteur.Read())
         {
-            lesServ.Add(ReaderToUser(lecteur));
+            lesUsers.Add(ReaderToUser(lecteur));
         }
         connex.Close();
-        return lesServ;
+        return lesUsers;
     }
     
     public static User GetUserById(int id)
@@ -39,9 +39,20 @@ public class UserModel
         cmd.Parameters.AddWithValue("@id", id);
         MySqlDataReader lecteur = cmd.ExecuteReader();
         lecteur.Read();
-        User unServ = ReaderToUser(lecteur);
+        User unUser = ReaderToUser(lecteur);
         connex.Close();
-        return unServ;
+        return unUser;
+    }
+
+    public static User GetUserByPseudo(string pseudo)
+    {
+        MySqlConnection connex = Connection.Ouvrir();
+        MySqlCommand cmd = connex.CreateCommand();
+        cmd.CommandText = "SELECT * FROM user WHERE pseudo = @pseudo";
+        cmd.Parameters.AddWithValue("@pseudo", pseudo);
+        MySqlDataReader lecteur = cmd.ExecuteReader();
+        lecteur.Read();
+        return ReaderToUser(lecteur);
     }
     
     public static void AjouterUser(User user)
