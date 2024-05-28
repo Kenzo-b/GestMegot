@@ -1,4 +1,6 @@
-﻿using GestMegots.Entitees;
+﻿using System.Diagnostics;
+using GestMegots.Class;
+using GestMegots.Entitees;
 using GestMegots.Modeles;
 
 namespace GestMegots.Formulaires;
@@ -39,23 +41,17 @@ public partial class FmCollecte : Form
 
     private void bt_hotspot_Click(object sender, EventArgs e)
     {
-        FmHotspot f = new FmHotspot();
-        f.Show();
-        this.Hide();
+        SwitchFm.To(SwitchFm.Forms.FmHotspot);
     }
 
     private void btnMaterielClick(object sender, EventArgs e)
     {
-        FmMateriel f = new FmMateriel();
-        f.Show();
-        this.Hide();
+        SwitchFm.To(SwitchFm.Forms.FmMateriel);
     }
     
     private void bt_User_Click(object sender, EventArgs e)
     {
-        FmUser f = new FmUser();
-        f.Show();
-        this.Hide();
+        SwitchFm.To(SwitchFm.Forms.FmUser);
     }
 
     private Collecte FormToCollect()

@@ -1,4 +1,5 @@
-﻿using GestMegots.Entitees;
+﻿using GestMegots.Class;
+using GestMegots.Entitees;
 using GestMegots.Modeles;
 
 namespace GestMegots.Formulaires;
@@ -50,19 +51,20 @@ public partial class FmUser : Form
     {
         Application.Exit();
     }
-
-    private void btnMaterielClick(object sender, EventArgs e)
+    
+    private void bt_hotspot_Click(object sender, EventArgs e)
     {
-        FmMateriel f = new FmMateriel();
-        f.Show();
-        this.Hide();
+        SwitchFm.To(SwitchFm.Forms.FmHotspot);
     }
 
-    private void btnCollecteClick(object sender, EventArgs e)
+    private void BtnMaterielClick(object sender, EventArgs e)
     {
-        FmCollecte f = new FmCollecte();
-        f.Show();
-        this.Hide();
+        SwitchFm.To(SwitchFm.Forms.FmMateriel);
+    }
+
+    private void BtnCollecteClick(object sender, EventArgs e)
+    {
+        SwitchFm.To(SwitchFm.Forms.FmCollecte);
     }
 
     private void button4_Click_1(object sender, EventArgs e)

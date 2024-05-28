@@ -344,7 +344,7 @@
             btnMateriel.TabIndex = 1;
             btnMateriel.Text = "Matériels";
             btnMateriel.UseVisualStyleBackColor = false;
-            btnMateriel.Click += btnMaterielClick;
+            btnMateriel.Click += BtnMaterielClick;
             // 
             // btnCollectes
             // 
@@ -360,7 +360,7 @@
             btnCollectes.TabIndex = 2;
             btnCollectes.Text = "Collectes";
             btnCollectes.UseVisualStyleBackColor = false;
-            btnCollectes.Click += btnCollecteClick;
+            btnCollectes.Click += BtnCollecteClick;
             // 
             // label1
             // 

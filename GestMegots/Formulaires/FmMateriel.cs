@@ -1,6 +1,7 @@
 ﻿using GestMegots.Entitees;
 using GestMegots.Modeles;
 using System.Text.RegularExpressions;
+using GestMegots.Class;
 
 namespace GestMegots.Formulaires
 {
@@ -49,23 +50,17 @@ namespace GestMegots.Formulaires
 
         private void bt_hotspot_Click(object sender, EventArgs e)
         {
-            FmHotspot f = new FmHotspot();
-            f.Show();
-            this.Hide();
+            SwitchFm.To(SwitchFm.Forms.FmHotspot);
         }
         
-        private void btnCollecteClick(object sender, EventArgs e)
+        private void BtnCollecteClick(object sender, EventArgs e)
         {
-            FmCollecte f = new FmCollecte();
-            f.Show();
-            this.Hide();
+            SwitchFm.To(SwitchFm.Forms.FmCollecte);
         }
         
         private void bt_User_Click(object sender, EventArgs e)
         {
-            FmUser f = new FmUser();
-            f.Show();
-            this.Hide();
+            SwitchFm.To(SwitchFm.Forms.FmUser);
         }
 
         private Materiel FormToMat()

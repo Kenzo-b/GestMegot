@@ -255,6 +255,7 @@
             bt_hotspot.TabIndex = 0;
             bt_hotspot.Text = "Hotspots";
             bt_hotspot.UseVisualStyleBackColor = false;
+            bt_hotspot.Click += bt_hotspot_Click;
             // 
             // btnMateriel
             // 
@@ -270,7 +271,7 @@
             btnMateriel.TabIndex = 1;
             btnMateriel.Text = "Matériels";
             btnMateriel.UseVisualStyleBackColor = false;
-            btnMateriel.Click += btnMaterielClick;
+            btnMateriel.Click += BtnMaterielClick;
             // 
             // btnCollectes
             // 
@@ -286,7 +287,7 @@
             btnCollectes.TabIndex = 2;
             btnCollectes.Text = "Collectes";
             btnCollectes.UseVisualStyleBackColor = false;
-            btnCollectes.Click += btnCollecteClick;
+            btnCollectes.Click += BtnCollecteClick;
             // 
             // label1
             // 

@@ -305,7 +305,7 @@
             button2.TabIndex = 2;
             button2.Text = "Collectes";
             button2.UseVisualStyleBackColor = false;
-            button2.Click += btnCollecteClick;
+            button2.Click += BtnCollecteClick;
             // 
             // label1
             // 
