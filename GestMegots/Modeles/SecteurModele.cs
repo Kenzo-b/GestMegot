@@ -1,16 +1,28 @@
 ﻿using GestMegots.Entitees;
 using MySql.Data.MySqlClient;
-using Mysqlx.Crud;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GestMegots.Modeles
 {
     internal class SecteurModele
     {
+        private static MySqlCommand AddParameters(MySqlCommand cmd, Secteur unSect)
+        {
+            foreach (var param in SecteurParameters(unSect).Where(param => cmd.CommandText.Contains(param.Key)))
+            {
+                cmd.Parameters.AddWithValue(param.Key, param.Value);
+            }
+            return cmd;
+        }
+        
+        private static Dictionary<string, object> SecteurParameters(Secteur unSect)
+        {
+            return new Dictionary<string, object>
+            {
+                { "@idSecteur", unSect.Id },
+                { "@libelle", unSect.Name }
+            };
+        }
+        
         public static Secteur ReaderToSecteur(MySqlDataReader lecteur)
         {
             return new Secteur.Builder()
@@ -21,9 +33,8 @@ namespace GestMegots.Modeles
         
         public static List<Secteur> TousLesSecteurs()
         {
-
             List<Secteur> lesSect = new List<Secteur>();
-            MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM SECTEUR order by libelle";
             MySqlDataReader lecteur = cmd.ExecuteReader();    
@@ -31,54 +42,45 @@ namespace GestMegots.Modeles
             {
                 lesSect.Add(ReaderToSecteur(lecteur));
             }
-            connex.Close();
             return lesSect;
 
         }
         public static Secteur GetSecteurById(int id)
         {
-            MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM SECTEUR where idSecteur = @idSecteur";
-            cmd.Parameters.AddWithValue("@idSecteur", id);
+            cmd = AddParameters(cmd, new Secteur.Builder().WithId(id).Build());
             MySqlDataReader lecteur = cmd.ExecuteReader();
             lecteur.Read();
-
-            Secteur unSec = ReaderToSecteur(lecteur);
-
-            connex.Close();
-            return unSec;
+            return ReaderToSecteur(lecteur);
         }
 
         public static void AjoutSecteur(Secteur unSect)
         {
-            MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "INSERT INTO secteur(libelle) VALUE (@libelle)";
-            cmd.Parameters.AddWithValue("@libelle", unSect.Name);
+            cmd = AddParameters(cmd, unSect);
             cmd.ExecuteNonQuery();
-            connex.Close();
-
         }
+        
         public static void ModifierSecteur(Secteur unSect)
         {
 
-            MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "UPDATE secteur SET libelle = @libelle WHERE idSecteur = @idSecteur";
-            cmd.Parameters.AddWithValue("@libelle", unSect.Name);
-            cmd.Parameters.AddWithValue("@idSecteur", unSect.Id);
+            cmd = AddParameters(cmd, unSect);
             cmd.ExecuteNonQuery();
-            connex.Close();
         }
         public static void SupprimerSecteur(Secteur unSect)
         {
-            MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "DELETE FROM secteur WHERE idSecteur = @idSecteur";
-            cmd.Parameters.AddWithValue("@idSecteur", unSect.Id);
+            cmd = AddParameters(cmd, unSect);
             cmd.ExecuteNonQuery();
-            connex.Close();
         }
     }
 }

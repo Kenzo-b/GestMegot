@@ -1,16 +1,31 @@
 ﻿using GestMegots.Entitees;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GestMegots.Modeles
 {
     internal class TypeModele
     {
-        public static TypeMateriel ReaderToType(MySqlDataReader lecteur)
+        private static MySqlCommand AddParameter(MySqlCommand cmd, TypeMateriel unType)
+        {
+            foreach (var param in TypeParameter(unType).Where(param => cmd.CommandText.Contains(param.Key)))
+            {
+                cmd.Parameters.AddWithValue(param.Key, param.Value);
+            }
+            return cmd;
+        }
+        
+        private static Dictionary<string, object> TypeParameter(TypeMateriel unType)
+        {
+            return new Dictionary<string, object>
+            {
+                { "@idType", unType.IdType },
+                { "@libelle", unType.Libelle },
+                { "@contenance", unType.Contenance },
+                { "@sacIntegrer", unType.SacIntegre }
+            };
+        }
+        
+        private static TypeMateriel ReaderToType(MySqlDataReader lecteur)
         {
             return new TypeMateriel.Builder()
                 .WithIdType(int.Parse(lecteur[0].ToString()))
@@ -23,7 +38,7 @@ namespace GestMegots.Modeles
         public static List<TypeMateriel> ToutLesTypes()
         {
             List<TypeMateriel> lesTypes = new List<TypeMateriel>();
-            MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM Type";
             MySqlDataReader lecteur = cmd.ExecuteReader();
@@ -31,57 +46,45 @@ namespace GestMegots.Modeles
             {
                 lesTypes.Add(ReaderToType(lecteur));
             }
-            connex.Close();
             return lesTypes;
         }
 
         public static TypeMateriel GetTypeMaterielById(int id)
         {
-            MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM Type WHERE idType = @idType";
-            cmd.Parameters.AddWithValue("@idType", id);
+            cmd = AddParameter(cmd, new TypeMateriel.Builder().WithIdType(id).build());
             MySqlDataReader lecteur = cmd.ExecuteReader();
             lecteur.Read();
-            TypeMateriel unType = ReaderToType(lecteur);
-            connex.Close();
-            return unType;
+            return ReaderToType(lecteur);
         }
 
         public static void AjouterType(TypeMateriel typeMateriel)
         {
-
-            MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "INSERT INTO type(libelle, contenance, sacIntegre) VALUE (@libelle, @contenance, @sacIntegrer)";
-            cmd.Parameters.AddWithValue("@libelle", typeMateriel.Libelle);
-            cmd.Parameters.AddWithValue("@contenance", typeMateriel.Contenance);
-            cmd.Parameters.AddWithValue("@sacIntegrer", typeMateriel.SacIntegre);
+            cmd = AddParameter(cmd, typeMateriel);
             cmd.ExecuteNonQuery();
-            connex.Close();
         }
 
         public static void SupprimerType(TypeMateriel typeMateriel)
         {
-            MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "DELETE FROM type WHERE idType = @idType";
-            cmd.Parameters.AddWithValue("@idType", typeMateriel.IdType);
+            cmd = AddParameter(cmd, typeMateriel);
             cmd.ExecuteNonQuery();
-            connex.Close();
         }
 
         public static void ChangerType(TypeMateriel typeMateriel)
         {
-            MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "UPDATE type SET libelle = @libelle, contenance = @contenance, sacIntegre = @sacIntegre WHERE idType = @idType";
-            cmd.Parameters.AddWithValue("@libelle", typeMateriel.Libelle);
-            cmd.Parameters.AddWithValue("@contenance", typeMateriel.Contenance);
-            cmd.Parameters.AddWithValue("@sacIntegrer", typeMateriel.SacIntegre);
-            cmd.Parameters.AddWithValue("@idType", typeMateriel.IdType);
+            cmd = AddParameter(cmd, typeMateriel);
             cmd.ExecuteNonQuery();
-            connex.Close(); 
         }
     }
 }

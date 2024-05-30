@@ -10,6 +10,7 @@ namespace GestMegots.Modeles
 {
     internal class CategorieModele
     {
+        
         public static Categorie ReaderToCategorie(MySqlDataReader lecteur)
         { 
             return new Categorie.Builder()

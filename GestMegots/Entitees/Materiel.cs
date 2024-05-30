@@ -36,7 +36,7 @@ namespace GestMegots.Entitees
             public DateTime DateInstal { get => dateInstal; set => dateInstal = value; }
             public string Adresse { get => adresse; set => adresse = value; }
             public string CoordoGps { get => coordoGps; set => coordoGps = value; }
-            public TypeMateriel? LeType { get => leType; set => leType = value; }
+            public TypeMateriel LeType { get => leType; set => leType = value; }
             public int Op { get => op; set => op = value; }
 
 

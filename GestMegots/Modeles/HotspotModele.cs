@@ -5,12 +5,30 @@ namespace GestMegots.Modeles
 {
     public static class HotspotModele
     {
-        /// <summary>
-        /// Take a MySqlDataReader that read to Return an Hotspot object with the data get from the reader
-        /// </summary>
-        /// <param name="lecteur">The reader</param>
-        /// <returns name="">Hotspot object</returns>
-        public static Hotspot ReaderToHotspot(MySqlDataReader lecteur)
+        private static MySqlCommand AddParameters(MySqlCommand cmd, Hotspot unHs)
+        {
+            foreach (var param in HotspotParameter(unHs).Where(param => cmd.CommandText.Contains(param.Key) ))
+            {
+                cmd.Parameters.AddWithValue(param.Key, param.Value);
+            }
+            return cmd;
+        }
+        
+        private static Dictionary<string, object> HotspotParameter(Hotspot unHs)
+        {
+            return new Dictionary<string, object>
+            {
+                { "@coordoGPS", unHs.CoordoGps },
+                { "@nom", unHs.Nom },
+                { "@adresse", unHs.Adresse },
+                { "@terrasse", unHs.Terrasse },
+                { "@fkSecteur", unHs.LeSecteur?.Id },
+                { "@fkCategorie", unHs.LaCategorie?.Id },
+                { "@fkMateriel", unHs.LeMateriel?.Reference }
+            };
+        }
+        
+        private static Hotspot ReaderToHotspot(MySqlDataReader lecteur)
         {
             Hotspot unHs = new Hotspot.Builder()    
                 .WithIdHS(int.Parse(lecteur[0].ToString()))

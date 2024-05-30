@@ -3,9 +3,30 @@ using MySql.Data.MySqlClient;
 
 namespace GestMegots.Modeles
 {
-    public class CollecteModele
+    public static class CollecteModele
     {
-        public static Collecte ReaderToCollecte(MySqlDataReader lecteur)
+        private static MySqlCommand AddParameters(MySqlCommand cmd, Collecte uneCollecte)
+        {
+            foreach (var param in CollecteParameter(uneCollecte).Where(param => cmd.CommandText.Contains(param.Key)))
+            {
+                cmd.Parameters.AddWithValue(param.Key, param.Value);
+            }
+            return cmd;
+        }
+        
+        public static Dictionary<string, object> CollecteParameter(Collecte uneCollecte)
+        {
+            var objects = new Dictionary<string, object>()
+            {
+                { "@id", uneCollecte.Id },
+                { "@nb_megot", uneCollecte.NbMegot },
+                { "@fk_materiel", uneCollecte.Mat?.Reference },
+                { "@date_collecte", uneCollecte.DateCollecte }
+            };
+            return objects;
+        }
+        
+        private static Collecte ReaderToCollecte(MySqlDataReader lecteur)
         {
             return new Collecte.Builder()
                 .WithId(int.Parse(lecteur[0].ToString()))
@@ -37,7 +58,7 @@ namespace GestMegots.Modeles
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM collecte WHERE id = @id";
-            cmd.Parameters.AddWithValue("@id", id);
+            cmd = AddParameters(cmd, new Collecte.Builder().WithId(id).build());
             MySqlDataReader lecteur = cmd.ExecuteReader();
             lecteur.Read();
             Collecte UneCollecte = ReaderToCollecte(lecteur);
@@ -50,9 +71,7 @@ namespace GestMegots.Modeles
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "INSERT INTO collecte(nb_megot, fk_materiel, date_collecte) VALUE (@nb_megot, @fk_materiel, @date_collecte)";
-            cmd.Parameters.AddWithValue("@nb_megot", collecte.NbMegot);
-            cmd.Parameters.AddWithValue("@fk_materiel", collecte.Mat.Reference);
-            cmd.Parameters.AddWithValue("@date_collecte", collecte.DateCollecte);
+            cmd = AddParameters(cmd, collecte);
             cmd.ExecuteNonQuery();
             connex.Close();
         }
@@ -62,10 +81,7 @@ namespace GestMegots.Modeles
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "UPDATE collecte set nb_megot = @nb_megot, fk_materiel = @fk_materiel, date_collecte = @date_collecte WHERE id = @id";
-            cmd.Parameters.AddWithValue("@nb_megot", collecte.NbMegot);
-            cmd.Parameters.AddWithValue("@fk_materiel", collecte.Mat);
-            cmd.Parameters.AddWithValue("@date_collecte", collecte.DateCollecte);
-            cmd.Parameters.AddWithValue("@id", collecte.Id);
+            cmd = AddParameters(cmd, collecte);
             cmd.ExecuteNonQuery();
             connex.Close();
         }
@@ -75,7 +91,7 @@ namespace GestMegots.Modeles
             MySqlConnection connex = Connection.Ouvrir();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "DELETE FROM collecte WHERE id = @id";
-            cmd.Parameters.AddWithValue("@id", collecte.Id);
+            cmd = AddParameters(cmd, collecte);
             cmd.ExecuteNonQuery();
             connex.Close();
         }

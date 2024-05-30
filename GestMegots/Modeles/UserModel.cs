@@ -5,7 +5,28 @@ namespace GestMegots.Modeles;
 
 public class UserModel
 {
-    public static User ReaderToUser(MySqlDataReader lecteur)
+    private static MySqlCommand AddParameter(MySqlCommand cmd, User user)
+    {
+        foreach (var param in UserParameters(user).Where(param => cmd.CommandText.Contains(param.Key)))
+        {
+            cmd.Parameters.AddWithValue(param.Key, param.Value);
+        }
+        return cmd;
+    }
+    
+    private static Dictionary<string, object> UserParameters(User user)
+    {
+        return new Dictionary<string, object>
+        {
+            {"@id", user.Id},
+            {"@pseudo", user.Pseudo},
+            {"@passwd", user.Passwd},
+            {"@fk_service", user.Service?.Id },
+            {"@hab_level", user.Habilitation }
+        };
+    }
+    
+    private static User ReaderToUser(MySqlDataReader lecteur)
     {
         return new User.Builder()
             .WithId(int.Parse(lecteur[0].ToString()))
@@ -19,7 +40,7 @@ public class UserModel
     public static List<User> ToutLesUsers()
     {
         List<User> lesUsers = new List<User>();
-        MySqlConnection connex = Connection.Ouvrir();
+        using MySqlConnection connex = Connection.Ouvrir();
         MySqlCommand cmd = connex.CreateCommand();
         cmd.CommandText = "SELECT * FROM user";
         MySqlDataReader lecteur = cmd.ExecuteReader();
@@ -27,21 +48,18 @@ public class UserModel
         {
             lesUsers.Add(ReaderToUser(lecteur));
         }
-        connex.Close();
         return lesUsers;
     }
     
     public static User GetUserById(int id)
     {
-        MySqlConnection connex = Connection.Ouvrir();
+        using MySqlConnection connex = Connection.Ouvrir();
         MySqlCommand cmd = connex.CreateCommand();
         cmd.CommandText = "SELECT * FROM user WHERE id = @id";
-        cmd.Parameters.AddWithValue("@id", id);
+        cmd = AddParameter(cmd, new User.Builder().WithId(id).build());
         MySqlDataReader lecteur = cmd.ExecuteReader();
         lecteur.Read();
-        User unUser = ReaderToUser(lecteur);
-        connex.Close();
-        return unUser;
+        return ReaderToUser(lecteur);
     }
 
     public static User GetUserByPseudo(string pseudo)
@@ -58,38 +76,28 @@ public class UserModel
     public static void AjouterUser(User user)
     {
 
-        MySqlConnection connex = Connection.Ouvrir();
+        using MySqlConnection connex = Connection.Ouvrir();
         MySqlCommand cmd = connex.CreateCommand();
         cmd.CommandText = "INSERT INTO user(pseudo, passwd, fk_service, hab_level) VALUE (@pseudo, @passwd, @fk_service, @hab_level)";
-        cmd.Parameters.AddWithValue("@pseudo", user.Pseudo);
-        cmd.Parameters.AddWithValue("@passwd", user.Passwd);
-        cmd.Parameters.AddWithValue("@fk_service", user.Service.Id);
-        cmd.Parameters.AddWithValue("@hab_level", user.Habilitation);
+        cmd = AddParameter(cmd, user);
         cmd.ExecuteNonQuery();
-        connex.Close();
     }
     
     public static void SupprimerUser(User user)
     {
-        MySqlConnection connex = Connection.Ouvrir();
+        using MySqlConnection connex = Connection.Ouvrir();
         MySqlCommand cmd = connex.CreateCommand();
         cmd.CommandText = "DELETE FROM user WHERE id = @id";
-        cmd.Parameters.AddWithValue("@id", user.Id);
+        cmd = AddParameter(cmd, user);
         cmd.ExecuteNonQuery();
-        connex.Close();
     }
     
     public static void ChangerUser(User user)
     {
-        MySqlConnection connex = Connection.Ouvrir();
+        using MySqlConnection connex = Connection.Ouvrir();
         MySqlCommand cmd = connex.CreateCommand();
         cmd.CommandText = "UPDATE User SET pseudo = @pseudo, passwd = @passwd, fk_service = @fk_service, hab_level = @hab_level WHERE id = @id";
-        cmd.Parameters.AddWithValue("@pseudo", user.Pseudo);
-        cmd.Parameters.AddWithValue("@passwd", user.Passwd);
-        cmd.Parameters.AddWithValue("@fk_service", user.Service.Id);
-        cmd.Parameters.AddWithValue("@hab_level", user.Habilitation);
-        cmd.Parameters.AddWithValue("@id", user.Id);
+        cmd = AddParameter(cmd, user);
         cmd.ExecuteNonQuery();
-        connex.Close(); 
     }
 }
