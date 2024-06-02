@@ -16,7 +16,7 @@ public class ServiceModele
     public static List<Service> ToutLesServices()
     {
         List<Service> lesServ = new List<Service>();
-        using MySqlConnection connex = Connection.Ouvrir();
+        using MySqlConnection connex = Connection.Open();
         MySqlCommand cmd = connex.CreateCommand();
         cmd.CommandText = "SELECT * FROM service";
         MySqlDataReader Lecteur = cmd.ExecuteReader();
@@ -29,7 +29,7 @@ public class ServiceModele
     
     public static Service GetServiceById(int id)
     {
-        using MySqlConnection connex = Connection.Ouvrir();
+        using MySqlConnection connex = Connection.Open();
         MySqlCommand cmd = connex.CreateCommand();
         cmd.CommandText = "SELECT * FROM service WHERE id = @id";
         cmd.Parameters.AddWithValue("@id", id);

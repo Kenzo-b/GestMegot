@@ -38,7 +38,7 @@ namespace GestMegots.Modeles
         public static List<TypeMateriel> ToutLesTypes()
         {
             List<TypeMateriel> lesTypes = new List<TypeMateriel>();
-            using MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM Type";
             MySqlDataReader lecteur = cmd.ExecuteReader();
@@ -51,7 +51,7 @@ namespace GestMegots.Modeles
 
         public static TypeMateriel GetTypeMaterielById(int id)
         {
-            using MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM Type WHERE idType = @idType";
             cmd = AddParameter(cmd, new TypeMateriel.Builder().WithIdType(id).build());
@@ -62,7 +62,7 @@ namespace GestMegots.Modeles
 
         public static void AjouterType(TypeMateriel typeMateriel)
         {
-            using MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "INSERT INTO type(libelle, contenance, sacIntegre) VALUE (@libelle, @contenance, @sacIntegrer)";
             cmd = AddParameter(cmd, typeMateriel);
@@ -71,7 +71,7 @@ namespace GestMegots.Modeles
 
         public static void SupprimerType(TypeMateriel typeMateriel)
         {
-            using MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "DELETE FROM type WHERE idType = @idType";
             cmd = AddParameter(cmd, typeMateriel);
@@ -80,7 +80,7 @@ namespace GestMegots.Modeles
 
         public static void ChangerType(TypeMateriel typeMateriel)
         {
-            using MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "UPDATE type SET libelle = @libelle, contenance = @contenance, sacIntegre = @sacIntegre WHERE idType = @idType";
             cmd = AddParameter(cmd, typeMateriel);

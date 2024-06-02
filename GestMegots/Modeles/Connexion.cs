@@ -1,32 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-
+﻿using MySql.Data.MySqlClient;
 
 namespace GestMegots.Modeles
 {
     public static class Connection
     {
-        private const string SERVER = "localhost";
-        private const string PORT = "3306";
-        private const string DATABASE = "gest_megot";
-        private const string UID = "root";
-
-
-        public static MySqlConnection Ouvrir() 
+        private const string Server = "localhost";
+        private const string Port = "3306";
+        private const string Database = "gest_megot";
+        private const string Uid = "root";
+        
+        public static MySqlConnection Open() 
         { 
-            string connectInfo = $"server={SERVER};" +
-                                 $"port={PORT};" +
-                                 $"database={DATABASE};" +
-                                 $"uid={UID}";
+            const string connectInfo = $"server={Server};" +
+                                       $"port={Port};" +
+                                       $"database={Database};" +
+                                       $"uid={Uid}";
 
             MySqlConnection connect = new MySqlConnection(connectInfo);
             connect.Open();
             return connect;
         }
-
     }
 }

@@ -40,7 +40,7 @@ public class UserModel
     public static List<User> ToutLesUsers()
     {
         List<User> lesUsers = new List<User>();
-        using MySqlConnection connex = Connection.Ouvrir();
+        using MySqlConnection connex = Connection.Open();
         MySqlCommand cmd = connex.CreateCommand();
         cmd.CommandText = "SELECT * FROM user";
         MySqlDataReader lecteur = cmd.ExecuteReader();
@@ -53,7 +53,7 @@ public class UserModel
     
     public static User GetUserById(int id)
     {
-        using MySqlConnection connex = Connection.Ouvrir();
+        using MySqlConnection connex = Connection.Open();
         MySqlCommand cmd = connex.CreateCommand();
         cmd.CommandText = "SELECT * FROM user WHERE id = @id";
         cmd = AddParameter(cmd, new User.Builder().WithId(id).build());
@@ -64,7 +64,7 @@ public class UserModel
 
     public static User GetUserByPseudo(string pseudo)
     {
-        MySqlConnection connex = Connection.Ouvrir();
+        MySqlConnection connex = Connection.Open();
         MySqlCommand cmd = connex.CreateCommand();
         cmd.CommandText = "SELECT * FROM user WHERE pseudo = @pseudo";
         cmd.Parameters.AddWithValue("@pseudo", pseudo);
@@ -76,7 +76,7 @@ public class UserModel
     public static void AjouterUser(User user)
     {
 
-        using MySqlConnection connex = Connection.Ouvrir();
+        using MySqlConnection connex = Connection.Open();
         MySqlCommand cmd = connex.CreateCommand();
         cmd.CommandText = "INSERT INTO user(pseudo, passwd, fk_service, hab_level) VALUE (@pseudo, @passwd, @fk_service, @hab_level)";
         cmd = AddParameter(cmd, user);
@@ -85,7 +85,7 @@ public class UserModel
     
     public static void SupprimerUser(User user)
     {
-        using MySqlConnection connex = Connection.Ouvrir();
+        using MySqlConnection connex = Connection.Open();
         MySqlCommand cmd = connex.CreateCommand();
         cmd.CommandText = "DELETE FROM user WHERE id = @id";
         cmd = AddParameter(cmd, user);
@@ -94,7 +94,7 @@ public class UserModel
     
     public static void ChangerUser(User user)
     {
-        using MySqlConnection connex = Connection.Ouvrir();
+        using MySqlConnection connex = Connection.Open();
         MySqlCommand cmd = connex.CreateCommand();
         cmd.CommandText = "UPDATE User SET pseudo = @pseudo, passwd = @passwd, fk_service = @fk_service, hab_level = @hab_level WHERE id = @id";
         cmd = AddParameter(cmd, user);

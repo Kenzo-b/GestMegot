@@ -44,7 +44,7 @@ namespace GestMegots.Modeles
         public static List<Materiel> TousLesMateriel()
         {
             List<Materiel> lesMateriels = new List<Materiel>();
-            using MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM materiel";
             MySqlDataReader lecteur = cmd.ExecuteReader();
@@ -57,7 +57,7 @@ namespace GestMegots.Modeles
 
         public static Materiel GetMatByid(int id)
         {
-            using MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM materiel WHERE reference = @reference";
             cmd = AddParameters(cmd, new Materiel.Builder().WithReference(id).build());
@@ -68,7 +68,7 @@ namespace GestMegots.Modeles
 
         public static void AjouterMateriel(Materiel unMat)
         {
-            using MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "INSERT INTO materiel(couleurs, dateInstallation, adresse, coordoGPS, fkType, op) VALUE (@couleurs, @dateInstallation, @adresse, @coordoGPS, @fkType, @op)";
             cmd = AddParameters(cmd, unMat);
@@ -77,7 +77,7 @@ namespace GestMegots.Modeles
         
         public static void SupprimerMateriel(Materiel unMat)
         {
-            using MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "DELETE FROM materiel WHERE reference = @reference";
             cmd = AddParameters(cmd, unMat);
@@ -86,7 +86,7 @@ namespace GestMegots.Modeles
         
         public static void ChangerMateriel(Materiel unMat)
         {
-            MySqlConnection connex = Connection.Ouvrir();
+            MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "UPDATE materiel SET couleurs = @couleurs, dateInstallation = @dateInstallation, adresse = @adresse, coordoGPS = @coordoGPS, fkType = @fkType, op = @op WHERE reference = @reference";
             cmd = AddParameters(cmd, unMat);

@@ -23,7 +23,7 @@ namespace GestMegots.Modeles
         public static List<Categorie> ToutesLesCategories()
         {
             List<Categorie> lesCat = new List<Categorie>();
-            MySqlConnection connex = Connection.Ouvrir();
+            MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM CATEGORIE order by libelle";
             MySqlDataReader lecteur = cmd.ExecuteReader();
@@ -38,7 +38,7 @@ namespace GestMegots.Modeles
         }
         public static Categorie GetCategorieById(int id)
         {
-            MySqlConnection connex = Connection.Ouvrir();
+            MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM Categorie where idCategorie = @IdCategorie";
             cmd.Parameters.AddWithValue("@IdCategorie", id);

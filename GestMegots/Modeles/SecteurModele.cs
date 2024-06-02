@@ -34,7 +34,7 @@ namespace GestMegots.Modeles
         public static List<Secteur> TousLesSecteurs()
         {
             List<Secteur> lesSect = new List<Secteur>();
-            using MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM SECTEUR order by libelle";
             MySqlDataReader lecteur = cmd.ExecuteReader();    
@@ -47,7 +47,7 @@ namespace GestMegots.Modeles
         }
         public static Secteur GetSecteurById(int id)
         {
-            using MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM SECTEUR where idSecteur = @idSecteur";
             cmd = AddParameters(cmd, new Secteur.Builder().WithId(id).Build());
@@ -58,7 +58,7 @@ namespace GestMegots.Modeles
 
         public static void AjoutSecteur(Secteur unSect)
         {
-            using MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "INSERT INTO secteur(libelle) VALUE (@libelle)";
             cmd = AddParameters(cmd, unSect);
@@ -68,7 +68,7 @@ namespace GestMegots.Modeles
         public static void ModifierSecteur(Secteur unSect)
         {
 
-            using MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "UPDATE secteur SET libelle = @libelle WHERE idSecteur = @idSecteur";
             cmd = AddParameters(cmd, unSect);
@@ -76,7 +76,7 @@ namespace GestMegots.Modeles
         }
         public static void SupprimerSecteur(Secteur unSect)
         {
-            using MySqlConnection connex = Connection.Ouvrir();
+            using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "DELETE FROM secteur WHERE idSecteur = @idSecteur";
             cmd = AddParameters(cmd, unSect);

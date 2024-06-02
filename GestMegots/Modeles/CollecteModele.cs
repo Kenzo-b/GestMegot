@@ -39,7 +39,7 @@ namespace GestMegots.Modeles
         public static List<Collecte> ToutesLesCollecte()
         {
             List<Collecte> lesCollectes = new List<Collecte>();
-            MySqlConnection connex = Connection.Ouvrir();
+            MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM collecte";
             MySqlDataReader lecteur = cmd.ExecuteReader();
@@ -55,7 +55,7 @@ namespace GestMegots.Modeles
 
         public static Collecte GetCollecteByid(int id)
         {
-            MySqlConnection connex = Connection.Ouvrir();
+            MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM collecte WHERE id = @id";
             cmd = AddParameters(cmd, new Collecte.Builder().WithId(id).build());
@@ -68,7 +68,7 @@ namespace GestMegots.Modeles
         
         public static void AjouterCollect(Collecte collecte)
         {
-            MySqlConnection connex = Connection.Ouvrir();
+            MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "INSERT INTO collecte(nb_megot, fk_materiel, date_collecte) VALUE (@nb_megot, @fk_materiel, @date_collecte)";
             cmd = AddParameters(cmd, collecte);
@@ -78,7 +78,7 @@ namespace GestMegots.Modeles
 
         public static void ModifierCollect(Collecte collecte)
         {
-            MySqlConnection connex = Connection.Ouvrir();
+            MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "UPDATE collecte set nb_megot = @nb_megot, fk_materiel = @fk_materiel, date_collecte = @date_collecte WHERE id = @id";
             cmd = AddParameters(cmd, collecte);
@@ -88,7 +88,7 @@ namespace GestMegots.Modeles
 
         public static void SuppCollecte(Collecte collecte)
         {
-            MySqlConnection connex = Connection.Ouvrir();
+            MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "DELETE FROM collecte WHERE id = @id";
             cmd = AddParameters(cmd, collecte);
