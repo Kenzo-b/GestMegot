@@ -44,6 +44,8 @@
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
+            lbLogout = new Label();
+            lbLogedUser = new Label();
             dataGridView1 = new DataGridView();
             label2 = new Label();
             bt_hotspot = new Button();
@@ -267,7 +269,7 @@
             bt_hotspot.FlatStyle = FlatStyle.Flat;
             bt_hotspot.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             bt_hotspot.ForeColor = Color.DarkOliveGreen;
-            bt_hotspot.Location = new Point(44, 281);
+            bt_hotspot.Location = new Point(44, 230);
             bt_hotspot.Name = "bt_hotspot";
             bt_hotspot.Size = new Size(174, 64);
             bt_hotspot.TabIndex = 0;
@@ -283,7 +285,7 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = Color.DarkOliveGreen;
-            button1.Location = new Point(44, 375);
+            button1.Location = new Point(44, 315);
             button1.Name = "button1";
             button1.Size = new Size(174, 64);
             button1.TabIndex = 1;
@@ -299,7 +301,7 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             button2.ForeColor = Color.DarkOliveGreen;
-            button2.Location = new Point(44, 476);
+            button2.Location = new Point(44, 400);
             button2.Name = "button2";
             button2.Size = new Size(174, 64);
             button2.TabIndex = 2;
@@ -341,13 +343,36 @@
             bt_User.FlatStyle = FlatStyle.Flat;
             bt_User.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             bt_User.ForeColor = Color.DarkOliveGreen;
-            bt_User.Location = new Point(44, 571);
+            bt_User.Location = new Point(44, 485);
             bt_User.Name = "bt_User";
             bt_User.Size = new Size(174, 64);
             bt_User.TabIndex = 8;
             bt_User.Text = "Utilisateur";
             bt_User.UseVisualStyleBackColor = false;
             bt_User.Click += bt_User_Click;
+            // 
+            // lbLogout
+            // 
+            lbLogout.AutoSize = true;
+            lbLogout.ForeColor = Color.LemonChiffon;
+            lbLogout.Location = new Point(82, 646);
+            lbLogout.Name = "lbLogout";
+            lbLogout.Size = new Size(87, 15);
+            lbLogout.TabIndex = 9;
+            lbLogout.Text = "se déconnecter";
+            lbLogout.MouseEnter += (object sender, EventArgs e) => lbLogout.ForeColor = Color.DarkGreen;
+            lbLogout.MouseLeave += (object sender, EventArgs e) => lbLogout.ForeColor = Color.LemonChiffon;
+            lbLogout.Click += lbLogout_Click;
+            // 
+            // lbLogedUser
+            // 
+            lbLogedUser.AutoSize = true;
+            lbLogedUser.ForeColor = Color.LemonChiffon;
+            lbLogedUser.Location = new Point(82, 617);
+            lbLogedUser.Name = "lbLogedUser";
+            lbLogedUser.Size = new Size(128, 15);
+            lbLogedUser.TabIndex = 10;
+            lbLogedUser.Text = "";
             // 
             // FmMateriel
             // 
@@ -362,6 +387,8 @@
             Controls.Add(bt_hotspot);
             Controls.Add(bt_User);
             Controls.Add(panel1);
+            Controls.Add(lbLogedUser);
+            Controls.Add(lbLogout);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FmMateriel";
             StartPosition = FormStartPosition.CenterScreen;
@@ -396,6 +423,8 @@
         private Label label5;
         private Label label4;
         private Label label3;
+        private Label lbLogout;
+        private Label lbLogedUser;
         private CheckBox cb_op;
         private TextBox tb_adresse;
         private TextBox tb_couleur;

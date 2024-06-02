@@ -10,6 +10,7 @@ namespace GestMegots.Formulaires
         public FmMateriel()
         {
             InitializeComponent();
+            lbLogedUser.Text = $"user: {Session.Pseudo}";
             dataGridView1.DataSource = MaterielModele.TousLesMateriel();
             this.cb_type.DataSource = TypeModele.ToutLesTypes();
             this.cb_type.DisplayMember = "Libelle";
@@ -107,6 +108,12 @@ namespace GestMegots.Formulaires
         {
             MaterielModele.SupprimerMateriel(FormToMat());
             ReloadGridView();
+        }
+        
+        private void lbLogout_Click(object sender, EventArgs e)
+        {
+            Session.UnsetSession();
+            SwitchFm.To(SwitchFm.Forms.FmLogin);
         }
     }
 }

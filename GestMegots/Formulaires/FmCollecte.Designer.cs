@@ -48,6 +48,8 @@ partial class FmCollecte
         button2 = new Button();
         bt_User = new Button();
         label1 = new Label();
+        lbLogout = new Label();
+        lbLogedUser = new Label();
         pictureBox1 = new PictureBox();
         panel1.SuspendLayout();
         ((ISupportInitialize)pictureBox2).BeginInit();
@@ -208,7 +210,7 @@ partial class FmCollecte
         bt_hotspot.FlatStyle = FlatStyle.Flat;
         bt_hotspot.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
         bt_hotspot.ForeColor = Color.DarkOliveGreen;
-        bt_hotspot.Location = new Point(44, 281);
+        bt_hotspot.Location = new Point(44, 230);
         bt_hotspot.Name = "bt_hotspot";
         bt_hotspot.Size = new Size(174, 64);
         bt_hotspot.TabIndex = 0;
@@ -224,7 +226,7 @@ partial class FmCollecte
         button1.FlatStyle = FlatStyle.Flat;
         button1.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
         button1.ForeColor = Color.DarkOliveGreen;
-        button1.Location = new Point(44, 375);
+        button1.Location = new Point(44, 315);
         button1.Name = "button1";
         button1.Size = new Size(174, 64);
         button1.TabIndex = 1;
@@ -241,7 +243,7 @@ partial class FmCollecte
         button2.FlatStyle = FlatStyle.Flat;
         button2.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
         button2.ForeColor = Color.DarkOliveGreen;
-        button2.Location = new Point(44, 476);
+        button2.Location = new Point(44, 400);
         button2.Name = "button2";
         button2.Size = new Size(174, 64);
         button2.TabIndex = 2;
@@ -273,13 +275,36 @@ partial class FmCollecte
         bt_User.FlatStyle = FlatStyle.Flat;
         bt_User.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
         bt_User.ForeColor = Color.DarkOliveGreen;
-        bt_User.Location = new Point(44, 571);
+        bt_User.Location = new Point(44, 485);
         bt_User.Name = "bt_User";
         bt_User.Size = new Size(174, 64);
         bt_User.TabIndex = 8;
         bt_User.Text = "Utilisateur";
         bt_User.UseVisualStyleBackColor = false;
         bt_User.Click += bt_User_Click;
+        // 
+        // lbLogout
+        // 
+        lbLogout.AutoSize = true;
+        lbLogout.ForeColor = Color.LemonChiffon;
+        lbLogout.Location = new Point(82, 646);
+        lbLogout.Name = "lbLogout";
+        lbLogout.Size = new Size(87, 15);
+        lbLogout.TabIndex = 9;
+        lbLogout.Text = "se déconnecter";
+        lbLogout.MouseEnter += (object sender, EventArgs e) => lbLogout.ForeColor = Color.DarkGreen;
+        lbLogout.MouseLeave += (object sender, EventArgs e) => lbLogout.ForeColor = Color.LemonChiffon;
+        lbLogout.Click += lbLogout_Click;
+        // 
+        // lbLogedUser
+        // 
+        lbLogedUser.AutoSize = true;
+        lbLogedUser.ForeColor = Color.LemonChiffon;
+        lbLogedUser.Location = new Point(82, 617);
+        lbLogedUser.Name = "lbLogedUser";
+        lbLogedUser.Size = new Size(128, 15);
+        lbLogedUser.TabIndex = 10;
+        lbLogedUser.Text = "";
         // 
         // FmCollecte
         // 
@@ -294,6 +319,8 @@ partial class FmCollecte
         Controls.Add(bt_hotspot);
         Controls.Add(bt_User);
         Controls.Add(panel1);
+        Controls.Add(lbLogout);
+        Controls.Add(lbLogedUser);
         FormBorderStyle = FormBorderStyle.None;
         Name = "FmCollecte";
         StartPosition = FormStartPosition.CenterScreen;
@@ -311,7 +338,6 @@ partial class FmCollecte
     }
 
     #endregion
-
     private Panel panel1;
     private Button bt_hotspot;
     private Button button1;
@@ -327,6 +353,8 @@ partial class FmCollecte
     private Button bt_User;
     private PictureBox pictureBox2;
     private ComboBox cb_mat;
+    private Label lbLogout;
+    private Label lbLogedUser;
     private Label lbMat;
     private Label lbNbMegot;
     private NumericUpDown NudNbMegot;

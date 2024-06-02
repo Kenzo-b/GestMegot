@@ -57,6 +57,8 @@
             label1 = new Label();
             pictureBox1 = new PictureBox();
             bt_User = new Button();
+            lbLogout = new Label();
+            lbLogedUser = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel2.SuspendLayout();
@@ -323,7 +325,7 @@
             bt_hotspot.FlatStyle = FlatStyle.Flat;
             bt_hotspot.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             bt_hotspot.ForeColor = Color.DarkOliveGreen;
-            bt_hotspot.Location = new Point(44, 281);
+            bt_hotspot.Location = new Point(44, 230);
             bt_hotspot.Name = "bt_hotspot";
             bt_hotspot.Size = new Size(174, 64);
             bt_hotspot.TabIndex = 0;
@@ -338,7 +340,7 @@
             btnMateriel.FlatStyle = FlatStyle.Flat;
             btnMateriel.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             btnMateriel.ForeColor = Color.DarkOliveGreen;
-            btnMateriel.Location = new Point(44, 375);
+            btnMateriel.Location = new Point(44, 315);
             btnMateriel.Name = "btnMateriel";
             btnMateriel.Size = new Size(174, 64);
             btnMateriel.TabIndex = 1;
@@ -354,7 +356,7 @@
             btnCollectes.FlatStyle = FlatStyle.Flat;
             btnCollectes.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             btnCollectes.ForeColor = Color.DarkOliveGreen;
-            btnCollectes.Location = new Point(44, 476);
+            btnCollectes.Location = new Point(44, 400);
             btnCollectes.Name = "btnCollectes";
             btnCollectes.Size = new Size(174, 64);
             btnCollectes.TabIndex = 2;
@@ -388,7 +390,7 @@
             bt_User.FlatStyle = FlatStyle.Flat;
             bt_User.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             bt_User.ForeColor = Color.DarkOliveGreen;
-            bt_User.Location = new Point(44, 571);
+            bt_User.Location = new Point(44, 485);
             bt_User.Name = "bt_User";
             bt_User.Size = new Size(174, 64);
             bt_User.TabIndex = 8;
@@ -396,12 +398,37 @@
             bt_User.UseVisualStyleBackColor = false;
             bt_User.Click += bt_User_Click;
             // 
+            // lbLogout
+            // 
+            lbLogout.AutoSize = true;
+            lbLogout.ForeColor = Color.LemonChiffon;
+            lbLogout.Location = new Point(82, 646);
+            lbLogout.Name = "lbLogout";
+            lbLogout.Size = new Size(87, 15);
+            lbLogout.TabIndex = 9;
+            lbLogout.Text = "se déconnecter";
+            lbLogout.MouseEnter += (object sender, EventArgs e) => lbLogout.ForeColor = Color.DarkGreen;
+            lbLogout.MouseLeave += (object sender, EventArgs e) => lbLogout.ForeColor = Color.LemonChiffon;
+            lbLogout.Click += lbLogout_Click;
+            // 
+            // lbLogedUser
+            // 
+            lbLogedUser.AutoSize = true;
+            lbLogedUser.ForeColor = Color.LemonChiffon;
+            lbLogedUser.Location = new Point(82, 617);
+            lbLogedUser.Name = "lbLogedUser";
+            lbLogedUser.Size = new Size(128, 15);
+            lbLogedUser.TabIndex = 10;
+            lbLogedUser.Text = "";
+            // 
             // FmHotspot
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkOliveGreen;
             ClientSize = new Size(1183, 740);
+            Controls.Add(lbLogedUser);
+            Controls.Add(lbLogout);
             Controls.Add(bt_User);
             Controls.Add(pictureBox1);
             Controls.Add(label1);
@@ -454,5 +481,7 @@
         private TextBox tb_GPS;
         private PictureBox pictureBox2;
         private Button bt_User;
+        private Label lbLogout;
+        private Label lbLogedUser;
     }
 }

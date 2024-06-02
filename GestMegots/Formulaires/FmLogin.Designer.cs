@@ -41,6 +41,7 @@ partial class FmLogin
         lbMdp = new Label();
         label1 = new Label();
         pictureBox1 = new PictureBox();
+        btLogin = new Button();
         panel1.SuspendLayout();
         ((ISupportInitialize)pictureBox2).BeginInit();
         panel2.SuspendLayout();
@@ -70,6 +71,7 @@ partial class FmLogin
         // panel2
         // 
         panel2.BorderStyle = BorderStyle.FixedSingle;
+        panel2.Controls.Add(btLogin);
         panel2.Controls.Add(tb_Mdp);
         panel2.Controls.Add(tb_pseudo);
         panel2.Controls.Add(label2);
@@ -146,6 +148,19 @@ partial class FmLogin
         pictureBox1.TabIndex = 5;
         pictureBox1.TabStop = false;
         // 
+        // btLogin
+        // 
+        btLogin.BackColor = Color.DarkOliveGreen;
+        btLogin.FlatStyle = FlatStyle.Flat;
+        btLogin.ForeColor = Color.LemonChiffon;
+        btLogin.Location = new Point(324, 325);
+        btLogin.Name = "btLogin";
+        btLogin.Size = new Size(242, 30);
+        btLogin.TabIndex = 21;
+        btLogin.Text = "login";
+        btLogin.UseVisualStyleBackColor = false;
+        btLogin.Click += btLogin_Click;
+        // 
         // FmLogin
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
@@ -180,4 +195,5 @@ partial class FmLogin
     private Label lbPseudo;
     private TextBox tb_Mdp;
     private TextBox tb_pseudo;
+    private Button btLogin;
 }

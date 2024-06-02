@@ -10,6 +10,7 @@ public partial class FmCollecte : Form
     public FmCollecte()
     {
         InitializeComponent();
+        lbLogedUser.Text = $"user: {Session.Pseudo}";
         dataGridView1.DataSource = CollecteModele.ToutesLesCollecte();
         this.cb_mat.DataSource = MaterielModele.TousLesMateriel();
         this.cb_mat.DisplayMember = "reference";
@@ -81,5 +82,11 @@ public partial class FmCollecte : Form
     {
         CollecteModele.SuppCollecte(FormToCollect());
         ReloadGridView();
+    }
+
+    private void lbLogout_Click(object sender, EventArgs e)
+    {
+        Session.UnsetSession();
+        SwitchFm.To(SwitchFm.Forms.FmLogin);
     }
 }

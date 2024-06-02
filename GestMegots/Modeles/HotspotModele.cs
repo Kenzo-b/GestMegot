@@ -47,7 +47,7 @@ namespace GestMegots.Modeles
         {
             List<Hotspot> lesHp = new List<Hotspot>();
         
-            MySqlConnection connexHs = Connection.Ouvrir();
+            MySqlConnection connexHs = Connection.Open();
             MySqlCommand cmd = connexHs.CreateCommand();
             cmd.CommandText = "SELECT * FROM HOTSPOT";
             MySqlDataReader lecteur = cmd.ExecuteReader();
@@ -62,7 +62,7 @@ namespace GestMegots.Modeles
         }
         public static Hotspot GetHotspotById(int id)
         {
-            MySqlConnection connexHs = Connection.Ouvrir();
+            MySqlConnection connexHs = Connection.Open();
             MySqlCommand cmd = connexHs.CreateCommand();
             cmd.CommandText = "SELECT * FROM HOTSPOT WHERE idHS = @idHS";
             cmd.Parameters.AddWithValue("@idHS", id);
@@ -78,7 +78,7 @@ namespace GestMegots.Modeles
 
         public static void AjoutHotspot(Hotspot unHs)
         {
-            MySqlConnection connexHs = Connection.Ouvrir();
+            MySqlConnection connexHs = Connection.Open();
             MySqlCommand cmd = connexHs.CreateCommand();
             //INSERT INTO `hotspot` (`idHS`, `coordoGPS`, `nom`, `adresse`, `terrasse`, `fkSecteur`, `fkCategorie`, `fkMateriel`) VALUES (NULL, '123456;123456', 'Couleur Café', 'rue de la gare', '1', '2', '1', NULL);
             cmd.CommandText = "INSERT INTO hotspot( coordoGPS, nom, adresse, terrasse, fkSecteur, fkCategorie, fkMateriel) VALUE  (@coordoGPS, @nom, @adresse, @terrasse, @fkSecteur, @fkCategorie, @fkMateriel)";
@@ -95,7 +95,7 @@ namespace GestMegots.Modeles
         public static void ModifierHotspot(Hotspot unHs)
         {
 
-            MySqlConnection connexHs = Connection.Ouvrir();
+            MySqlConnection connexHs = Connection.Open();
             MySqlCommand cmd = connexHs.CreateCommand();
             //UPDATE `hotspot` SET `coordoGPS` = '1234' WHERE `hotspot`.`idHS` = 8;
             cmd.CommandText = "UPDATE `hotspot` SET `coordoGPS` = @coordoGPS, `nom`=@nom, `adresse`=@adresse, `terrasse`=@terrasse, `fkSecteur`=@fkSecteur, `fkCategorie`=@fkCategorie, `fkMateriel` = @fkMateriel WHERE `idHS` = @idHS  ";
@@ -113,7 +113,7 @@ namespace GestMegots.Modeles
         }
         public static void SupprimerHotspot(Hotspot unHs)
         {
-            MySqlConnection connexHs = Connection.Ouvrir();
+            MySqlConnection connexHs = Connection.Open();
             MySqlCommand cmd = connexHs.CreateCommand();
             cmd.CommandText = "DELETE FROM `hotspot`  WHERE `hotspot`.`idHS` = @idHS  ";
             cmd.Parameters.AddWithValue("@idHS", unHs.IdHs);

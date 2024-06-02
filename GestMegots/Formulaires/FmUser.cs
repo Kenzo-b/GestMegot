@@ -9,6 +9,7 @@ public partial class FmUser : Form
     public FmUser()
     {
         InitializeComponent();
+        lbLogedUser.Text = $"user: {Session.Pseudo}";
         dataGridView1.DataSource = UserModel.ToutLesUsers();
         cb_service.DataSource = ServiceModele.ToutLesServices();
         this.cb_service.DisplayMember = "nom";
@@ -104,5 +105,11 @@ public partial class FmUser : Form
     {
         UserModel.SupprimerUser(FormToUser());
         ReloadGridView();
+    }
+    
+    private void lbLogout_Click(object sender, EventArgs e)
+    {
+        Session.UnsetSession();
+        SwitchFm.To(SwitchFm.Forms.FmLogin);
     }
 }

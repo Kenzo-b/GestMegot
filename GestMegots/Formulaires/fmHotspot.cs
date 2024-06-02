@@ -10,6 +10,7 @@ namespace GestMegots.Formulaires
         public FmHotspot()
         {
             InitializeComponent();
+            this.lbLogedUser.Text = $"user: {Session.Pseudo}";
             this.dataGridView1.DataSource = HotspotModele.TousLesHotspots();
             this.cb_categorie.DataSource = CategorieModele.ToutesLesCategories();
             this.cb_categorie.DisplayMember = "name";
@@ -35,7 +36,7 @@ namespace GestMegots.Formulaires
                 .WithLeMateriel(MaterielModele.GetMatByid(int.Parse(cb_materiel.SelectedValue.ToString())))
                 .Build();
         }
-        
+
         private bool IsValidGps()
         {
             string pattern =
@@ -80,7 +81,7 @@ namespace GestMegots.Formulaires
         {
             SwitchFm.To(SwitchFm.Forms.FmCollecte);
         }
-        
+
         private void bt_User_Click(object sender, EventArgs e)
         {
             SwitchFm.To(SwitchFm.Forms.FmUser);
@@ -116,6 +117,12 @@ namespace GestMegots.Formulaires
         {
             HotspotModele.SupprimerHotspot(FormToHotspot());
             ReloadGridView();
+        }
+
+        private void lbLogout_Click(object sender, EventArgs e)
+        {
+            Session.UnsetSession();
+            SwitchFm.To(SwitchFm.Forms.FmLogin);
         }
     }
 }

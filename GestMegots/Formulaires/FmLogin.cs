@@ -1,4 +1,5 @@
-﻿using GestMegots.Class;
+﻿using System.Diagnostics;
+using GestMegots.Class;
 using GestMegots.Entitees;
 using GestMegots.Modeles;
 
@@ -16,32 +17,38 @@ public partial class FmLogin : Form
         Application.Exit();
     }
 
-    private User FormToUser()
-    {
-        return UserModel.GetUserByPseudo(tb_pseudo.Text);
-    }
-
-    private void loadForm()
+    private static void LoadForm()
     {
         switch (Session.SessionHab)
         {
             case 1:
+                SwitchFm.To(SwitchFm.Forms.FmCollecte);
+                break;
+            case 2:
+                SwitchFm.To(SwitchFm.Forms.FmHotspot);
+                break;
+            case 3:
+                SwitchFm.To(SwitchFm.Forms.FmUser);
                 break;
         }
     }
 
-    private void Loging()
+    private void Login()
     {
         User user = UserModel.GetUserByPseudo(tb_pseudo.Text);
-        if (user.Passwd == Hashing.ToSha256(tb_pseudo.Text))
+        if (user.Passwd == Hashing.ToSha256(tb_Mdp.Text))
         {
-            Session.SessionHab = user.Habilitation;
-            Session.LoggedIn = true;
+            Session.SetSession(user.Habilitation, true, user.Pseudo);
+            LoadForm();
         }
         else
         {
             MessageBox.Show("pseudo ou mot de passe invalide");
         }
     }
-    
+
+    private void btLogin_Click(object sender, EventArgs e)
+    {
+        Login();
+    }
 }
