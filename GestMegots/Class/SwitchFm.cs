@@ -9,7 +9,8 @@ public class SwitchFm
         FmHotspot,
         FmMateriel,
         FmCollecte,
-        FmUser
+        FmUser,
+        FmLogin
     }
     
     public static void To(Forms form)
