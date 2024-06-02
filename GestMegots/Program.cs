@@ -14,7 +14,7 @@ namespace GestMegots
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             //C'est ici que l'on définit le formulaire qui sera chargé au lancement de l'application
-            Application.Run(new FmHotspot());
+            Application.Run(new FmLogin());
         }
     }
 }
