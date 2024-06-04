@@ -1,30 +1,30 @@
 ﻿using GestMegots.Entitees;
 using MySql.Data.MySqlClient;
 
-namespace GestMegots.Modeles
+namespace GestMegots.Models
 {
     internal static class MaterielModele
     {
-        private static MySqlCommand AddParameters(MySqlCommand cmd, Materiel unMat)
+        private static MySqlCommand AddParameters(MySqlCommand cmd, Materiel materiel)
         {
-            foreach (var param in MaterialParameter(unMat).Where(param => cmd.CommandText.Contains(param.Key)))
+            foreach (var param in MaterialParameter(materiel).Where(param => cmd.CommandText.Contains(param.Key)))
             {
                 cmd.Parameters.AddWithValue(param.Key, param.Value);
             }
             return cmd;
         }
         
-        private static Dictionary<string,object> MaterialParameter(Materiel unMat)
+        private static Dictionary<string,object> MaterialParameter(Materiel materiel)
         {
             return new Dictionary<string, object>
             {
-                { "@couleurs", unMat.Couleurs },
-                { "@dateInstallation", unMat.DateInstal },
-                { "@adresse", unMat.Adresse },
-                { "@coordoGPS", unMat.CoordoGps },
-                { "@fkType", unMat.LeType?.IdType },
-                { "@op", unMat.Op },
-                { "@reference", unMat.Reference }
+                { "@couleurs", materiel.Couleurs },
+                { "@dateInstallation", materiel.DateInstal },
+                { "@adresse", materiel.Adresse },
+                { "@coordoGPS", materiel.CoordoGps },
+                { "@fkType", materiel.LeType?.IdType },
+                { "@op", materiel.Op },
+                { "@reference", materiel.Reference }
             };
         }
         
@@ -41,57 +41,56 @@ namespace GestMegots.Modeles
                 .build();
         }
 
-        public static List<Materiel> TousLesMateriel()
+        public static List<Materiel> AllMateriel()
         {
-            List<Materiel> lesMateriels = new List<Materiel>();
-            using MySqlConnection connex = Connection.Open();
-            MySqlCommand cmd = connex.CreateCommand();
+            List<Materiel> materiels = new List<Materiel>();
+            using MySqlConnection connect = Connection.Open();
+            MySqlCommand cmd = connect.CreateCommand();
             cmd.CommandText = "SELECT * FROM materiel";
-            MySqlDataReader lecteur = cmd.ExecuteReader();
-            while (lecteur.Read())
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
             {
-                lesMateriels.Add(ReaderToMat(lecteur));
+                materiels.Add(ReaderToMat(reader));
             }
-            return lesMateriels;
+            return materiels;
         }
 
-        public static Materiel GetMatByid(int id)
+        public static Materiel GetMatById(int id)
         {
-            using MySqlConnection connex = Connection.Open();
-            MySqlCommand cmd = connex.CreateCommand();
+            using MySqlConnection connect = Connection.Open();
+            MySqlCommand cmd = connect.CreateCommand();
             cmd.CommandText = "SELECT * FROM materiel WHERE reference = @reference";
             cmd = AddParameters(cmd, new Materiel.Builder().WithReference(id).build());
-            MySqlDataReader lecteur = cmd.ExecuteReader();
-            lecteur.Read();
-            return ReaderToMat(lecteur);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            return ReaderToMat(reader);
         }
 
-        public static void AjouterMateriel(Materiel unMat)
+        public static void AddMateriel(Materiel unMat)
         {
-            using MySqlConnection connex = Connection.Open();
-            MySqlCommand cmd = connex.CreateCommand();
+            using MySqlConnection connect = Connection.Open();
+            MySqlCommand cmd = connect.CreateCommand();
             cmd.CommandText = "INSERT INTO materiel(couleurs, dateInstallation, adresse, coordoGPS, fkType, op) VALUE (@couleurs, @dateInstallation, @adresse, @coordoGPS, @fkType, @op)";
             cmd = AddParameters(cmd, unMat);
             cmd.ExecuteNonQuery();
         }
         
-        public static void SupprimerMateriel(Materiel unMat)
+        public static void RemoveMateriel(Materiel unMat)
         {
-            using MySqlConnection connex = Connection.Open();
-            MySqlCommand cmd = connex.CreateCommand();
+            using MySqlConnection connect = Connection.Open();
+            MySqlCommand cmd = connect.CreateCommand();
             cmd.CommandText = "DELETE FROM materiel WHERE reference = @reference";
             cmd = AddParameters(cmd, unMat);
             cmd.ExecuteNonQuery();
         }
         
-        public static void ChangerMateriel(Materiel unMat)
+        public static void UpdateMateriel(Materiel unMat)
         {
-            MySqlConnection connex = Connection.Open();
-            MySqlCommand cmd = connex.CreateCommand();
+            using MySqlConnection connect = Connection.Open();
+            MySqlCommand cmd = connect.CreateCommand();
             cmd.CommandText = "UPDATE materiel SET couleurs = @couleurs, dateInstallation = @dateInstallation, adresse = @adresse, coordoGPS = @coordoGPS, fkType = @fkType, op = @op WHERE reference = @reference";
             cmd = AddParameters(cmd, unMat);
             cmd.ExecuteNonQuery();
-            connex.Close();
         }
     }
 }

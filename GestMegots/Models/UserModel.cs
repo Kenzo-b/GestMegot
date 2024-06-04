@@ -1,7 +1,7 @@
 ﻿using GestMegots.Entitees;
 using MySql.Data.MySqlClient;
 
-namespace GestMegots.Modeles;
+namespace GestMegots.Models;
 
 public class UserModel
 {
