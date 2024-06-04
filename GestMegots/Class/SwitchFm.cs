@@ -2,13 +2,13 @@
 
 namespace GestMegots.Class;
 
-public class SwitchFm
+public static class SwitchFm
 {
     public enum Forms
     {
         FmHotspot,
         FmMateriel,
-        FmCollecte,
+        FmCollect,
         FmUser,
         FmLogin
     }
@@ -16,10 +16,8 @@ public class SwitchFm
     public static void To(Forms form)
     {
         Form currentForm = Form.ActiveForm;
-        if (currentForm != null)
-        {
-            ((Form)Activator.CreateInstance(Type.GetType($"GestMegots.Formulaires.{form.ToString()}"))).Show();
-            currentForm.Hide();
-        }
+        if (currentForm == null) return;
+        ((Form)Activator.CreateInstance(Type.GetType($"GestMegots.Formulaires.{form.ToString()}"))).Show();
+        currentForm.Hide();
     }
 }
