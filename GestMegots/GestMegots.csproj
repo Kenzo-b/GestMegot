@@ -18,7 +18,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Formulaires\FmCollecte.cs">
+    <Compile Update="Formulaires\FmCollect.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Formulaires\FmUser.cs">
