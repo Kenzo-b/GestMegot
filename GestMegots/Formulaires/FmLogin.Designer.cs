@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using GestMegots.Class;
+using Org.BouncyCastle.Tls;
 
 namespace GestMegots.Formulaires;
 
@@ -57,6 +59,7 @@ partial class FmLogin
         panel1.Name = "panel1";
         panel1.Size = new Size(907, 740);
         panel1.TabIndex = 0;
+        panel1.MouseMove += OnMouseMove;
         // 
         // pictureBox2
         // 
@@ -86,6 +89,7 @@ partial class FmLogin
         // 
         tb_Mdp.BackColor = Color.White;
         tb_Mdp.BorderStyle = BorderStyle.None;
+        tb_Mdp.PasswordChar = '*';
         tb_Mdp.Location = new Point(324, 265);
         tb_Mdp.Name = "tb_Mdp";
         tb_Mdp.Size = new Size(242, 16);
@@ -166,6 +170,7 @@ partial class FmLogin
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.DarkOliveGreen;
+        MouseMove += OnMouseMove;
         ClientSize = new Size(1183, 740);
         Controls.Add(pictureBox1);
         Controls.Add(label1);

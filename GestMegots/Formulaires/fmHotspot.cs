@@ -1,7 +1,7 @@
 using GestMegots.Entitees;
-using GestMegots.Modeles;
 using System.Text.RegularExpressions;
 using GestMegots.Class;
+using GestMegots.Models;
 
 namespace GestMegots.Formulaires
 {
@@ -12,13 +12,13 @@ namespace GestMegots.Formulaires
             InitializeComponent();
             this.lbLogedUser.Text = $"user: {Session.Pseudo}";
             this.dataGridView1.DataSource = HotspotModele.TousLesHotspots();
-            this.cb_categorie.DataSource = CategorieModele.ToutesLesCategories();
+            this.cb_categorie.DataSource = CategoryModel.AllCategory();
             this.cb_categorie.DisplayMember = "name";
             this.cb_categorie.ValueMember = "id";
             this.cb_secteur.DataSource = SecteurModele.TousLesSecteurs();
             this.cb_secteur.DisplayMember = "name";
             this.cb_secteur.ValueMember = "id";
-            this.cb_materiel.DataSource = MaterielModele.TousLesMateriel();
+            this.cb_materiel.DataSource = MaterielModele.AllMateriel();
             this.cb_materiel.DisplayMember = "reference";
             this.cb_materiel.ValueMember = "reference";
         }
@@ -32,8 +32,8 @@ namespace GestMegots.Formulaires
                 .WithAdresse(tb_adresse.Text)
                 .WithTerrasse(cb_terrasse.Checked ? 1 : 0)
                 .WithLeSecteur(SecteurModele.GetSecteurById(int.Parse(cb_secteur.SelectedValue.ToString())))
-                .WithLaCategorie(CategorieModele.GetCategorieById(int.Parse(cb_categorie.SelectedValue.ToString())))
-                .WithLeMateriel(MaterielModele.GetMatByid(int.Parse(cb_materiel.SelectedValue.ToString())))
+                .WithLaCategorie(CategoryModel.GetCategoryById(int.Parse(cb_categorie.SelectedValue.ToString())))
+                .WithLeMateriel(MaterielModele.GetMatById(int.Parse(cb_materiel.SelectedValue.ToString())))
                 .Build();
         }
 
@@ -72,14 +72,14 @@ namespace GestMegots.Formulaires
             Application.Exit();
         }
 
-        private void BtnMaterielClick(object sender, EventArgs e)
+        private void BtMaterielClick(object sender, EventArgs e)
         {
             SwitchFm.To(SwitchFm.Forms.FmMateriel);
         }
 
-        private void BtnCollecteClick(object sender, EventArgs e)
+        private void BtCollectClick(object sender, EventArgs e)
         {
-            SwitchFm.To(SwitchFm.Forms.FmCollecte);
+            SwitchFm.To(SwitchFm.Forms.FmCollect);
         }
 
         private void bt_User_Click(object sender, EventArgs e)
@@ -104,18 +104,20 @@ namespace GestMegots.Formulaires
         {
             if (!IsEmpty() && IsValidGps())
             {
+                if (!BtnUtils.VerifyDecision()) return;
                 HotspotModele.ModifierHotspot(FormToHotspot());
                 ReloadGridView();
             }
             else
             {
-                MessageBox.Show("champs vide ou valeur incorrecte");
+                MessageBox.Show(@"champs vide ou valeur incorrecte");
             }
         }
 
         private void bt_dell_Click(object sender, EventArgs e)
         {
-            HotspotModele.SupprimerHotspot(FormToHotspot());
+            if (!BtnUtils.VerifyDecision()) return;
+            HotspotModele.RemoveHotspot(FormToHotspot());
             ReloadGridView();
         }
 

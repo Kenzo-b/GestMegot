@@ -1,4 +1,6 @@
-﻿namespace GestMegots.Formulaires
+﻿using GestMegots.Class;
+
+namespace GestMegots.Formulaires
 {
     partial class FmUser
     {
@@ -39,7 +41,7 @@
             tb_pseudo = new TextBox();
             bt_update = new Button();
             bt_dell = new Button();
-            btAjouter = new Button();
+            bt_add = new Button();
             lbService = new Label();
             lbPasswd = new Label();
             lbPseudo = new Label();
@@ -48,11 +50,11 @@
             dataGridView1 = new DataGridView();
             label2 = new Label();
             bt_hotspot = new Button();
-            btnMateriel = new Button();
-            btnCollectes = new Button();
+            bt_materiel = new Button();
+            bt_collect = new Button();
             label1 = new Label();
             pictureBox1 = new PictureBox();
-            bt_User = new Button();
+            bt_user = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel2.SuspendLayout();
@@ -72,6 +74,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(907, 740);
             panel1.TabIndex = 0;
+            panel1.MouseMove += OnMouseMove;
             // 
             // pictureBox2
             // 
@@ -93,7 +96,7 @@
             panel2.Controls.Add(tb_pseudo);
             panel2.Controls.Add(bt_update);
             panel2.Controls.Add(bt_dell);
-            panel2.Controls.Add(btAjouter);
+            panel2.Controls.Add(bt_add);
             panel2.Controls.Add(lbService);
             panel2.Controls.Add(lbPasswd);
             panel2.Controls.Add(lbPseudo);
@@ -108,6 +111,7 @@
             nud_habLevel.Name = "nud_habLevel";
             nud_habLevel.Size = new Size(150, 23);
             nud_habLevel.TabIndex = 28;
+            nud_habLevel.Controls[1].KeyPress += new KeyPressEventHandler((s, e) => e.Handled = true);
             // 
             // lb_habLevel
             // 
@@ -122,6 +126,7 @@
             // 
             cb_service.FlatStyle = FlatStyle.Flat;
             cb_service.FormattingEnabled = true;
+            cb_service.DropDownStyle = ComboBoxStyle.DropDownList;
             cb_service.Location = new Point(529, 15);
             cb_service.Name = "cb_service";
             cb_service.Size = new Size(150, 23);
@@ -171,18 +176,18 @@
             bt_dell.UseVisualStyleBackColor = false;
             bt_dell.Click += bt_dell_Click;
             // 
-            // btAjouter
+            // bt_add
             // 
-            btAjouter.BackColor = Color.DarkOliveGreen;
-            btAjouter.FlatStyle = FlatStyle.Flat;
-            btAjouter.ForeColor = Color.LemonChiffon;
-            btAjouter.Location = new Point(154, 150);
-            btAjouter.Name = "btAjouter";
-            btAjouter.Size = new Size(75, 30);
-            btAjouter.TabIndex = 19;
-            btAjouter.Text = "&Ajouter";
-            btAjouter.UseVisualStyleBackColor = false;
-            btAjouter.Click += button4_Click_1;
+            bt_add.BackColor = Color.DarkOliveGreen;
+            bt_add.FlatStyle = FlatStyle.Flat;
+            bt_add.ForeColor = Color.LemonChiffon;
+            bt_add.Location = new Point(154, 150);
+            bt_add.Name = "bt_add";
+            bt_add.Size = new Size(75, 30);
+            bt_add.TabIndex = 19;
+            bt_add.Text = "&Ajouter";
+            bt_add.UseVisualStyleBackColor = false;
+            bt_add.Click += button4_Click_1;
             // 
             // lbService
             // 
@@ -259,37 +264,37 @@
             bt_hotspot.UseVisualStyleBackColor = false;
             bt_hotspot.Click += bt_hotspot_Click;
             // 
-            // btnMateriel
+            // bt_materiel
             // 
-            btnMateriel.BackColor = Color.LemonChiffon;
-            btnMateriel.FlatAppearance.BorderSize = 0;
-            btnMateriel.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
-            btnMateriel.FlatStyle = FlatStyle.Flat;
-            btnMateriel.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            btnMateriel.ForeColor = Color.DarkOliveGreen;
-            btnMateriel.Location = new Point(44, 315);
-            btnMateriel.Name = "btnMateriel";
-            btnMateriel.Size = new Size(174, 64);
-            btnMateriel.TabIndex = 1;
-            btnMateriel.Text = "Matériels";
-            btnMateriel.UseVisualStyleBackColor = false;
-            btnMateriel.Click += BtnMaterielClick;
+            bt_materiel.BackColor = Color.LemonChiffon;
+            bt_materiel.FlatAppearance.BorderSize = 0;
+            bt_materiel.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
+            bt_materiel.FlatStyle = FlatStyle.Flat;
+            bt_materiel.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            bt_materiel.ForeColor = Color.DarkOliveGreen;
+            bt_materiel.Location = new Point(44, 315);
+            bt_materiel.Name = "bt_materiel";
+            bt_materiel.Size = new Size(174, 64);
+            bt_materiel.TabIndex = 1;
+            bt_materiel.Text = "Matériels";
+            bt_materiel.UseVisualStyleBackColor = false;
+            bt_materiel.Click += BtMaterielClick;
             // 
-            // btnCollectes
+            // bt_collect
             // 
-            btnCollectes.BackColor = Color.LemonChiffon;
-            btnCollectes.FlatAppearance.BorderSize = 0;
-            btnCollectes.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
-            btnCollectes.FlatStyle = FlatStyle.Flat;
-            btnCollectes.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCollectes.ForeColor = Color.DarkOliveGreen;
-            btnCollectes.Location = new Point(44, 400);
-            btnCollectes.Name = "btnCollectes";
-            btnCollectes.Size = new Size(174, 64);
-            btnCollectes.TabIndex = 2;
-            btnCollectes.Text = "Collectes";
-            btnCollectes.UseVisualStyleBackColor = false;
-            btnCollectes.Click += BtnCollecteClick;
+            bt_collect.BackColor = Color.LemonChiffon;
+            bt_collect.FlatAppearance.BorderSize = 0;
+            bt_collect.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
+            bt_collect.FlatStyle = FlatStyle.Flat;
+            bt_collect.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            bt_collect.ForeColor = Color.DarkOliveGreen;
+            bt_collect.Location = new Point(44, 400);
+            bt_collect.Name = "bt_collect";
+            bt_collect.Size = new Size(174, 64);
+            bt_collect.TabIndex = 2;
+            bt_collect.Text = "Collectes";
+            bt_collect.UseVisualStyleBackColor = false;
+            bt_collect.Click += BtCollectClick;
             // 
             // label1
             // 
@@ -309,21 +314,21 @@
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
-            // bt_User
+            // bt_user
             // 
-            bt_User.BackColor = Color.LemonChiffon;
-            bt_User.FlatAppearance.BorderSize = 0;
-            bt_User.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
-            bt_User.FlatStyle = FlatStyle.Flat;
-            bt_User.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            bt_User.ForeColor = Color.DarkOliveGreen;
-            bt_User.Location = new Point(44, 485);
-            bt_User.Name = "bt_User";
-            bt_User.Size = new Size(174, 64);
-            bt_User.TabIndex = 7;
-            bt_User.Text = "Utilisateur";
-            bt_User.UseVisualStyleBackColor = false;
-            bt_User.Enabled = false;
+            bt_user.BackColor = Color.LemonChiffon;
+            bt_user.FlatAppearance.BorderSize = 0;
+            bt_user.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
+            bt_user.FlatStyle = FlatStyle.Flat;
+            bt_user.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            bt_user.ForeColor = Color.DarkOliveGreen;
+            bt_user.Location = new Point(44, 485);
+            bt_user.Name = "bt_user";
+            bt_user.Size = new Size(174, 64);
+            bt_user.TabIndex = 7;
+            bt_user.Text = "Utilisateur";
+            bt_user.UseVisualStyleBackColor = false;
+            bt_user.Enabled = false;
             // 
             // lbLogout
             // 
@@ -354,15 +359,16 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkOliveGreen;
             ClientSize = new Size(1183, 740);
-            Controls.Add(bt_User);
+            Controls.Add(bt_user);
             Controls.Add(pictureBox1);
             Controls.Add(label1);
-            Controls.Add(btnCollectes);
-            Controls.Add(btnMateriel);
+            Controls.Add(bt_collect);
+            Controls.Add(bt_materiel);
             Controls.Add(bt_hotspot);
             Controls.Add(lbLogout);
             Controls.Add(lbLogedUser);
             Controls.Add(panel1);
+            this.Load += (object DatagramSender, EventArgs e) => BtnUtils.SetButtonVisibility(this);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FmUser";
             StartPosition = FormStartPosition.CenterScreen;
@@ -375,6 +381,7 @@
             ((System.ComponentModel.ISupportInitialize)nud_habLevel).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            MouseMove += OnMouseMove;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -383,8 +390,8 @@
 
         private Panel panel1;
         private Button bt_hotspot;
-        private Button btnMateriel;
-        private Button btnCollectes;
+        private Button bt_materiel;
+        private Button bt_collect;
         private Label label1;
         private Label label2;
         private PictureBox pictureBox1;
@@ -392,7 +399,7 @@
         private Panel panel2;
         private Button bt_update;
         private Button bt_dell;
-        private Button btAjouter;
+        private Button bt_add;
         private Label lbService;
         private Label lbPasswd;
         private Label lbPseudo;
@@ -404,6 +411,6 @@
         private PictureBox pictureBox2;
         private NumericUpDown nud_habLevel;
         private Label lb_habLevel;
-        private Button bt_User;
+        private Button bt_user;
     }
 }

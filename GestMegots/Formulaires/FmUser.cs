@@ -1,6 +1,8 @@
 ﻿using GestMegots.Class;
 using GestMegots.Entitees;
-using GestMegots.Modeles;
+using GestMegots.Models;
+using Org.BouncyCastle.Asn1.Cmp;
+using static GestMegots.Class.MoveFm;
 
 namespace GestMegots.Formulaires;
 
@@ -9,16 +11,16 @@ public partial class FmUser : Form
     public FmUser()
     {
         InitializeComponent();
-        lbLogedUser.Text = $"user: {Session.Pseudo}";
+        lbLogedUser.Text = @$"user: {Session.Pseudo}";
         dataGridView1.DataSource = UserModel.ToutLesUsers();
         cb_service.DataSource = ServiceModele.ToutLesServices();
-        this.cb_service.DisplayMember = "nom";
-        this.cb_service.ValueMember = "id";
+        cb_service.DisplayMember = "nom";
+        cb_service.ValueMember = "id";
         nud_habLevel.Minimum = 1;
         nud_habLevel.Maximum = 3;
     }
 
-    public User FormToUser()
+    private User FormToUser()
     {
         return new User.Builder()
             .WithId(int.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString()))
@@ -58,14 +60,14 @@ public partial class FmUser : Form
         SwitchFm.To(SwitchFm.Forms.FmHotspot);
     }
 
-    private void BtnMaterielClick(object sender, EventArgs e)
+    private void BtMaterielClick(object sender, EventArgs e)
     {
         SwitchFm.To(SwitchFm.Forms.FmMateriel);
     }
 
-    private void BtnCollecteClick(object sender, EventArgs e)
+    private void BtCollectClick(object sender, EventArgs e)
     {
-        SwitchFm.To(SwitchFm.Forms.FmCollecte);
+        SwitchFm.To(SwitchFm.Forms.FmCollect);
     }
 
     private void button4_Click_1(object sender, EventArgs e)
@@ -79,7 +81,7 @@ public partial class FmUser : Form
         }
         else
         {
-            MessageBox.Show("veuillez completer les champs vide");
+            MessageBox.Show(@"veuillez completer les champs vide");
         }
     }
 
@@ -92,17 +94,19 @@ public partial class FmUser : Form
             {
                 user.Passwd = Hashing.ToSha256(user.Passwd);
             }
+            if (!BtnUtils.VerifyDecision()) return;
             UserModel.ChangerUser(user);
             ReloadGridView();
         }
         else
         {
-            MessageBox.Show("veuillez completer les champs vide");
+            MessageBox.Show(@"veuillez completer les champs vide");
         }
     }
 
     private void bt_dell_Click(object sender, EventArgs e)
-    {
+    { 
+        if(!BtnUtils.VerifyDecision()) return;
         UserModel.SupprimerUser(FormToUser());
         ReloadGridView();
     }
@@ -111,5 +115,12 @@ public partial class FmUser : Form
     {
         Session.UnsetSession();
         SwitchFm.To(SwitchFm.Forms.FmLogin);
+    }
+    
+    private void OnMouseMove(object? sender, MouseEventArgs e)
+    {
+        if (e.Button != MouseButtons.Left) return;
+        ReleaseCapture();
+        SendMessage(Handle, WmNclbuttondown, HtCaption, 0);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace GestMegots.Formulaires
+﻿using GestMegots.Class;
+
+namespace GestMegots.Formulaires
 {
     partial class FmHotspot
     {
@@ -41,7 +43,7 @@
             tb_GPS = new TextBox();
             bt_update = new Button();
             bt_dell = new Button();
-            btAjouter = new Button();
+            bt_add = new Button();
             lbMat = new Label();
             lbCategorie = new Label();
             lbSecteur = new Label();
@@ -52,11 +54,11 @@
             dataGridView1 = new DataGridView();
             label2 = new Label();
             bt_hotspot = new Button();
-            btnMateriel = new Button();
-            btnCollectes = new Button();
+            bt_materiel = new Button();
+            bt_collect = new Button();
             label1 = new Label();
             pictureBox1 = new PictureBox();
-            bt_User = new Button();
+            bt_user = new Button();
             lbLogout = new Label();
             lbLogedUser = new Label();
             panel1.SuspendLayout();
@@ -100,7 +102,7 @@
             panel2.Controls.Add(tb_GPS);
             panel2.Controls.Add(bt_update);
             panel2.Controls.Add(bt_dell);
-            panel2.Controls.Add(btAjouter);
+            panel2.Controls.Add(bt_add);
             panel2.Controls.Add(lbMat);
             panel2.Controls.Add(lbCategorie);
             panel2.Controls.Add(lbSecteur);
@@ -117,6 +119,7 @@
             // 
             cb_materiel.FlatStyle = FlatStyle.Flat;
             cb_materiel.FormattingEnabled = true;
+            cb_materiel.DropDownStyle = ComboBoxStyle.DropDownList;
             cb_materiel.Location = new Point(529, 109);
             cb_materiel.Name = "cb_materiel";
             cb_materiel.Size = new Size(150, 23);
@@ -126,6 +129,7 @@
             // 
             cb_categorie.FlatStyle = FlatStyle.Flat;
             cb_categorie.FormattingEnabled = true;
+            cb_categorie.DropDownStyle = ComboBoxStyle.DropDownList;
             cb_categorie.Location = new Point(529, 76);
             cb_categorie.Name = "cb_categorie";
             cb_categorie.Size = new Size(150, 23);
@@ -135,6 +139,7 @@
             // 
             cb_secteur.FlatStyle = FlatStyle.Flat;
             cb_secteur.FormattingEnabled = true;
+            cb_secteur.DropDownStyle = ComboBoxStyle.DropDownList;
             cb_secteur.Location = new Point(529, 45);
             cb_secteur.Name = "cb_secteur";
             cb_secteur.Size = new Size(150, 23);
@@ -204,18 +209,18 @@
             bt_dell.UseVisualStyleBackColor = false;
             bt_dell.Click += bt_dell_Click;
             // 
-            // btAjouter
+            // bt_add
             // 
-            btAjouter.BackColor = Color.DarkOliveGreen;
-            btAjouter.FlatStyle = FlatStyle.Flat;
-            btAjouter.ForeColor = Color.LemonChiffon;
-            btAjouter.Location = new Point(154, 150);
-            btAjouter.Name = "btAjouter";
-            btAjouter.Size = new Size(75, 30);
-            btAjouter.TabIndex = 19;
-            btAjouter.Text = "&Ajouter";
-            btAjouter.UseVisualStyleBackColor = false;
-            btAjouter.Click += button4_Click_1;
+            bt_add.BackColor = Color.DarkOliveGreen;
+            bt_add.FlatStyle = FlatStyle.Flat;
+            bt_add.ForeColor = Color.LemonChiffon;
+            bt_add.Location = new Point(154, 150);
+            bt_add.Name = "bt_add";
+            bt_add.Size = new Size(75, 30);
+            bt_add.TabIndex = 19;
+            bt_add.Text = "&Ajouter";
+            bt_add.UseVisualStyleBackColor = false;
+            bt_add.Click += button4_Click_1;
             // 
             // lbMat
             // 
@@ -332,37 +337,37 @@
             bt_hotspot.Text = "Hotspots";
             bt_hotspot.UseVisualStyleBackColor = false;
             // 
-            // btnMateriel
+            // bt_materiel
             // 
-            btnMateriel.BackColor = Color.LemonChiffon;
-            btnMateriel.FlatAppearance.BorderSize = 0;
-            btnMateriel.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
-            btnMateriel.FlatStyle = FlatStyle.Flat;
-            btnMateriel.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            btnMateriel.ForeColor = Color.DarkOliveGreen;
-            btnMateriel.Location = new Point(44, 315);
-            btnMateriel.Name = "btnMateriel";
-            btnMateriel.Size = new Size(174, 64);
-            btnMateriel.TabIndex = 1;
-            btnMateriel.Text = "Matériels";
-            btnMateriel.UseVisualStyleBackColor = false;
-            btnMateriel.Click += BtnMaterielClick;
+            bt_materiel.BackColor = Color.LemonChiffon;
+            bt_materiel.FlatAppearance.BorderSize = 0;
+            bt_materiel.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
+            bt_materiel.FlatStyle = FlatStyle.Flat;
+            bt_materiel.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            bt_materiel.ForeColor = Color.DarkOliveGreen;
+            bt_materiel.Location = new Point(44, 315);
+            bt_materiel.Name = "bt_materiel";
+            bt_materiel.Size = new Size(174, 64);
+            bt_materiel.TabIndex = 1;
+            bt_materiel.Text = "Matériels";
+            bt_materiel.UseVisualStyleBackColor = false;
+            bt_materiel.Click += BtMaterielClick;
             // 
-            // btnCollectes
+            // bt_Collect
             // 
-            btnCollectes.BackColor = Color.LemonChiffon;
-            btnCollectes.FlatAppearance.BorderSize = 0;
-            btnCollectes.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
-            btnCollectes.FlatStyle = FlatStyle.Flat;
-            btnCollectes.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCollectes.ForeColor = Color.DarkOliveGreen;
-            btnCollectes.Location = new Point(44, 400);
-            btnCollectes.Name = "btnCollectes";
-            btnCollectes.Size = new Size(174, 64);
-            btnCollectes.TabIndex = 2;
-            btnCollectes.Text = "Collectes";
-            btnCollectes.UseVisualStyleBackColor = false;
-            btnCollectes.Click += BtnCollecteClick;
+            bt_collect.BackColor = Color.LemonChiffon;
+            bt_collect.FlatAppearance.BorderSize = 0;
+            bt_collect.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
+            bt_collect.FlatStyle = FlatStyle.Flat;
+            bt_collect.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            bt_collect.ForeColor = Color.DarkOliveGreen;
+            bt_collect.Location = new Point(44, 400);
+            bt_collect.Name = "bt_collect";
+            bt_collect.Size = new Size(174, 64);
+            bt_collect.TabIndex = 2;
+            bt_collect.Text = "Collectes";
+            bt_collect.UseVisualStyleBackColor = false;
+            bt_collect.Click += BtCollectClick;
             // 
             // label1
             // 
@@ -382,21 +387,21 @@
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
-            // bt_User
+            // bt_user
             // 
-            bt_User.BackColor = Color.LemonChiffon;
-            bt_User.FlatAppearance.BorderSize = 0;
-            bt_User.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
-            bt_User.FlatStyle = FlatStyle.Flat;
-            bt_User.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            bt_User.ForeColor = Color.DarkOliveGreen;
-            bt_User.Location = new Point(44, 485);
-            bt_User.Name = "bt_User";
-            bt_User.Size = new Size(174, 64);
-            bt_User.TabIndex = 8;
-            bt_User.Text = "Utilisateur";
-            bt_User.UseVisualStyleBackColor = false;
-            bt_User.Click += bt_User_Click;
+            bt_user.BackColor = Color.LemonChiffon;
+            bt_user.FlatAppearance.BorderSize = 0;
+            bt_user.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
+            bt_user.FlatStyle = FlatStyle.Flat;
+            bt_user.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            bt_user.ForeColor = Color.DarkOliveGreen;
+            bt_user.Location = new Point(44, 485);
+            bt_user.Name = "bt_user";
+            bt_user.Size = new Size(174, 64);
+            bt_user.TabIndex = 8;
+            bt_user.Text = "Utilisateur";
+            bt_user.UseVisualStyleBackColor = false;
+            bt_user.Click += bt_User_Click;
             // 
             // lbLogout
             // 
@@ -429,13 +434,14 @@
             ClientSize = new Size(1183, 740);
             Controls.Add(lbLogedUser);
             Controls.Add(lbLogout);
-            Controls.Add(bt_User);
+            Controls.Add(bt_user);
             Controls.Add(pictureBox1);
             Controls.Add(label1);
-            Controls.Add(btnCollectes);
-            Controls.Add(btnMateriel);
+            Controls.Add(bt_collect);
+            Controls.Add(bt_materiel);
             Controls.Add(bt_hotspot);
             Controls.Add(panel1);
+            this.Load += (object DatagramSender, EventArgs e) => BtnUtils.SetButtonVisibility(this);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FmHotspot";
             StartPosition = FormStartPosition.CenterScreen;
@@ -455,8 +461,8 @@
 
         private Panel panel1;
         private Button bt_hotspot;
-        private Button btnMateriel;
-        private Button btnCollectes;
+        private Button bt_materiel;
+        private Button bt_collect;
         private Label label1;
         private Label label2;
         private PictureBox pictureBox1;
@@ -464,7 +470,7 @@
         private Panel panel2;
         private Button bt_update;
         private Button bt_dell;
-        private Button btAjouter;
+        private Button bt_add;
         private Label lbMat;
         private Label lbCategorie;
         private Label lbSecteur;
@@ -480,7 +486,7 @@
         private TextBox tb_nom;
         private TextBox tb_GPS;
         private PictureBox pictureBox2;
-        private Button bt_User;
+        private Button bt_user;
         private Label lbLogout;
         private Label lbLogedUser;
     }

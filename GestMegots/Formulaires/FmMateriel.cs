@@ -1,7 +1,7 @@
 ﻿using GestMegots.Entitees;
-using GestMegots.Modeles;
 using System.Text.RegularExpressions;
 using GestMegots.Class;
+using GestMegots.Models;
 
 namespace GestMegots.Formulaires
 {
@@ -11,7 +11,7 @@ namespace GestMegots.Formulaires
         {
             InitializeComponent();
             lbLogedUser.Text = $"user: {Session.Pseudo}";
-            dataGridView1.DataSource = MaterielModele.TousLesMateriel();
+            dataGridView1.DataSource = MaterielModele.AllMateriel();
             this.cb_type.DataSource = TypeModele.ToutLesTypes();
             this.cb_type.DisplayMember = "Libelle";
             this.cb_type.ValueMember = "idType";
@@ -41,7 +41,7 @@ namespace GestMegots.Formulaires
 
         private void ReloadGridView()
         {
-            dataGridView1.DataSource = MaterielModele.TousLesMateriel();
+            dataGridView1.DataSource = MaterielModele.AllMateriel();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -56,7 +56,7 @@ namespace GestMegots.Formulaires
         
         private void BtnCollecteClick(object sender, EventArgs e)
         {
-            SwitchFm.To(SwitchFm.Forms.FmCollecte);
+            SwitchFm.To(SwitchFm.Forms.FmCollect);
         }
         
         private void bt_User_Click(object sender, EventArgs e)
@@ -76,13 +76,13 @@ namespace GestMegots.Formulaires
                 .WithOp(cb_op.Checked ? 1 : 0)
                 .build();
         }
-        private void button4_Click(object sender, EventArgs e)
+        private void BtAddClick(object sender, EventArgs e)
         {
             if (!IsEmpty() && IsValidGps())
             {
                 Materiel leMat = FormToMat();
                 leMat.DateInstal = DateTime.Now;
-                MaterielModele.AjouterMateriel(leMat);
+                MaterielModele.AddMateriel(leMat);
                 ReloadGridView();  
             }
             else
@@ -95,7 +95,8 @@ namespace GestMegots.Formulaires
         {
             if (!IsEmpty() && IsValidGps())
             {
-                MaterielModele.ChangerMateriel(FormToMat());
+                if (!BtnUtils.VerifyDecision()) return;
+                MaterielModele.UpdateMateriel(FormToMat());
                 ReloadGridView(); 
             }
             else
@@ -106,7 +107,8 @@ namespace GestMegots.Formulaires
 
         private void bt_dell_Click(object sender, EventArgs e)
         {
-            MaterielModele.SupprimerMateriel(FormToMat());
+            if (!BtnUtils.VerifyDecision()) return;
+            MaterielModele.RemoveMateriel(FormToMat());
             ReloadGridView();
         }
         

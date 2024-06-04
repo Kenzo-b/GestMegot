@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
+using GestMegots.Class;
+using Org.BouncyCastle.Tls;
 
 namespace GestMegots.Formulaires;
 
-partial class FmCollecte
+partial class FmCollect
 {
     /// <summary>
     ///  Required designer variable.
@@ -30,7 +32,7 @@ partial class FmCollecte
     /// </summary>
     private void InitializeComponent()
     {
-        ComponentResourceManager resources = new ComponentResourceManager(typeof(FmCollecte));
+        ComponentResourceManager resources = new ComponentResourceManager(typeof(FmCollect));
         panel1 = new Panel();
         pictureBox2 = new PictureBox();
         panel2 = new Panel();
@@ -39,14 +41,14 @@ partial class FmCollecte
         cb_mat = new ComboBox();
         bt_update = new Button();
         bt_dell = new Button();
-        button4 = new Button();
+        bt_add = new Button();
         lbMat = new Label();
         dataGridView1 = new DataGridView();
         label2 = new Label();
         bt_hotspot = new Button();
-        button1 = new Button();
-        button2 = new Button();
-        bt_User = new Button();
+        bt_materiel = new Button();
+        bt_collect = new Button();
+        bt_user = new Button();
         label1 = new Label();
         lbLogout = new Label();
         lbLogedUser = new Label();
@@ -89,7 +91,7 @@ partial class FmCollecte
         panel2.Controls.Add(cb_mat);
         panel2.Controls.Add(bt_update);
         panel2.Controls.Add(bt_dell);
-        panel2.Controls.Add(button4);
+        panel2.Controls.Add(bt_add);
         panel2.Controls.Add(lbMat);
         panel2.Location = new Point(36, 99);
         panel2.Name = "panel2";
@@ -103,6 +105,7 @@ partial class FmCollecte
         NudNbMegot.Name = "NudNbMegot";
         NudNbMegot.Size = new Size(150, 19);
         NudNbMegot.TabIndex = 30;
+        NudNbMegot.Controls[1].KeyPress += new KeyPressEventHandler((s, e) => e.Handled = true);
         // 
         // lbNbMegot
         // 
@@ -118,6 +121,7 @@ partial class FmCollecte
         // 
         cb_mat.FlatStyle = FlatStyle.Flat;
         cb_mat.FormattingEnabled = true;
+        cb_mat.DropDownStyle = ComboBoxStyle.DropDownList;
         cb_mat.Location = new Point(341, 42);
         cb_mat.Name = "cb_mat";
         cb_mat.Size = new Size(150, 23);
@@ -150,18 +154,18 @@ partial class FmCollecte
         bt_dell.UseVisualStyleBackColor = false;
         bt_dell.Click += bt_dell_Click;
         // 
-        // button4
+        // bt_add
         // 
-        button4.BackColor = Color.DarkOliveGreen;
-        button4.FlatStyle = FlatStyle.Flat;
-        button4.ForeColor = Color.LemonChiffon;
-        button4.Location = new Point(154, 150);
-        button4.Name = "button4";
-        button4.Size = new Size(75, 30);
-        button4.TabIndex = 19;
-        button4.Text = "&Ajouter";
-        button4.UseVisualStyleBackColor = false;
-        button4.Click += button4_Click;
+        bt_add.BackColor = Color.DarkOliveGreen;
+        bt_add.FlatStyle = FlatStyle.Flat;
+        bt_add.ForeColor = Color.LemonChiffon;
+        bt_add.Location = new Point(154, 150);
+        bt_add.Name = "bt_add";
+        bt_add.Size = new Size(75, 30);
+        bt_add.TabIndex = 19;
+        bt_add.Text = "&Ajouter";
+        bt_add.UseVisualStyleBackColor = false;
+        bt_add.Click += BtAddClick;
         // 
         // lbMat
         // 
@@ -218,37 +222,37 @@ partial class FmCollecte
         bt_hotspot.UseVisualStyleBackColor = false;
         bt_hotspot.Click += bt_hotspot_Click;
         // 
-        // button1
+        // bt_materiel
         // 
-        button1.BackColor = Color.LemonChiffon;
-        button1.FlatAppearance.BorderSize = 0;
-        button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
-        button1.FlatStyle = FlatStyle.Flat;
-        button1.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-        button1.ForeColor = Color.DarkOliveGreen;
-        button1.Location = new Point(44, 315);
-        button1.Name = "button1";
-        button1.Size = new Size(174, 64);
-        button1.TabIndex = 1;
-        button1.Text = "Matériels";
-        button1.UseVisualStyleBackColor = false;
-        button1.Click += btnMaterielClick;
+        bt_materiel.BackColor = Color.LemonChiffon;
+        bt_materiel.FlatAppearance.BorderSize = 0;
+        bt_materiel.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
+        bt_materiel.FlatStyle = FlatStyle.Flat;
+        bt_materiel.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+        bt_materiel.ForeColor = Color.DarkOliveGreen;
+        bt_materiel.Location = new Point(44, 315);
+        bt_materiel.Name = "bt_materiel";
+        bt_materiel.Size = new Size(174, 64);
+        bt_materiel.TabIndex = 1;
+        bt_materiel.Text = "Matériels";
+        bt_materiel.UseVisualStyleBackColor = false;
+        bt_materiel.Click += BtnMaterielClick;
         // 
-        // button2
+        // bt_collect
         // 
-        button2.BackColor = Color.LemonChiffon;
-        button2.Enabled = false;
-        button2.FlatAppearance.BorderSize = 0;
-        button2.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
-        button2.FlatStyle = FlatStyle.Flat;
-        button2.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-        button2.ForeColor = Color.DarkOliveGreen;
-        button2.Location = new Point(44, 400);
-        button2.Name = "button2";
-        button2.Size = new Size(174, 64);
-        button2.TabIndex = 2;
-        button2.Text = "Collectes";
-        button2.UseVisualStyleBackColor = false;
+        bt_collect.BackColor = Color.LemonChiffon;
+        bt_collect.Enabled = false;
+        bt_collect.FlatAppearance.BorderSize = 0;
+        bt_collect.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
+        bt_collect.FlatStyle = FlatStyle.Flat;
+        bt_collect.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+        bt_collect.ForeColor = Color.DarkOliveGreen;
+        bt_collect.Location = new Point(44, 400);
+        bt_collect.Name = "bt_collect";
+        bt_collect.Size = new Size(174, 64);
+        bt_collect.TabIndex = 2;
+        bt_collect.Text = "Collectes";
+        bt_collect.UseVisualStyleBackColor = false;
         // 
         // label1
         // 
@@ -267,21 +271,21 @@ partial class FmCollecte
         pictureBox1.TabIndex = 5;
         pictureBox1.TabStop = false;
         // 
-        // bt_User
+        // bt_user
         // 
-        bt_User.BackColor = Color.LemonChiffon;
-        bt_User.FlatAppearance.BorderSize = 0;
-        bt_User.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
-        bt_User.FlatStyle = FlatStyle.Flat;
-        bt_User.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-        bt_User.ForeColor = Color.DarkOliveGreen;
-        bt_User.Location = new Point(44, 485);
-        bt_User.Name = "bt_User";
-        bt_User.Size = new Size(174, 64);
-        bt_User.TabIndex = 8;
-        bt_User.Text = "Utilisateur";
-        bt_User.UseVisualStyleBackColor = false;
-        bt_User.Click += bt_User_Click;
+        bt_user.BackColor = Color.LemonChiffon;
+        bt_user.FlatAppearance.BorderSize = 0;
+        bt_user.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 64, 0);
+        bt_user.FlatStyle = FlatStyle.Flat;
+        bt_user.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+        bt_user.ForeColor = Color.DarkOliveGreen;
+        bt_user.Location = new Point(44, 485);
+        bt_user.Name = "bt_user";
+        bt_user.Size = new Size(174, 64);
+        bt_user.TabIndex = 8;
+        bt_user.Text = "Utilisateur";
+        bt_user.UseVisualStyleBackColor = false;
+        bt_user.Click += bt_User_Click;
         // 
         // lbLogout
         // 
@@ -314,15 +318,16 @@ partial class FmCollecte
         ClientSize = new Size(1183, 740);
         Controls.Add(pictureBox1);
         Controls.Add(label1);
-        Controls.Add(button2);
-        Controls.Add(button1);
+        Controls.Add(bt_collect);
+        Controls.Add(bt_materiel);
         Controls.Add(bt_hotspot);
-        Controls.Add(bt_User);
+        Controls.Add(bt_user);
         Controls.Add(panel1);
         Controls.Add(lbLogout);
         Controls.Add(lbLogedUser);
+        this.Load += (object DatagramSender, EventArgs e) => BtnUtils.SetButtonVisibility(this);
         FormBorderStyle = FormBorderStyle.None;
-        Name = "FmCollecte";
+        Name = "FmCollect";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Form2";
         panel1.ResumeLayout(false);
@@ -340,8 +345,8 @@ partial class FmCollecte
     #endregion
     private Panel panel1;
     private Button bt_hotspot;
-    private Button button1;
-    private Button button2;
+    private Button bt_materiel;
+    private Button bt_collect;
     private Label label1;
     private Label label2;
     private PictureBox pictureBox1;
@@ -349,8 +354,8 @@ partial class FmCollecte
     private Panel panel2;
     private Button bt_update;
     private Button bt_dell;
-    private Button button4;
-    private Button bt_User;
+    private Button bt_add;
+    private Button bt_user;
     private PictureBox pictureBox2;
     private ComboBox cb_mat;
     private Label lbLogout;

@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
-using GestMegots.Class;
+﻿using GestMegots.Class;
 using GestMegots.Entitees;
-using GestMegots.Modeles;
+using GestMegots.Models;
+using static GestMegots.Class.MoveFm;
 
 namespace GestMegots.Formulaires;
 
@@ -22,7 +22,7 @@ public partial class FmLogin : Form
         switch (Session.SessionHab)
         {
             case 1:
-                SwitchFm.To(SwitchFm.Forms.FmCollecte);
+                SwitchFm.To(SwitchFm.Forms.FmCollect);
                 break;
             case 2:
                 SwitchFm.To(SwitchFm.Forms.FmHotspot);
@@ -50,5 +50,12 @@ public partial class FmLogin : Form
     private void btLogin_Click(object sender, EventArgs e)
     {
         Login();
+    }
+
+    private void OnMouseMove(object? sender, MouseEventArgs e)
+    {
+        if (e.Button != MouseButtons.Left) return;
+        ReleaseCapture();
+        SendMessage(Handle, WmNclbuttondown, HtCaption, 0);
     }
 }

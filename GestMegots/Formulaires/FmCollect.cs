@@ -1,27 +1,27 @@
 ﻿using System.Diagnostics;
 using GestMegots.Class;
 using GestMegots.Entitees;
-using GestMegots.Modeles;
+using GestMegots.Models;
 
 namespace GestMegots.Formulaires;
 
-public partial class FmCollecte : Form
+public partial class FmCollect : Form
 {
-    public FmCollecte()
+    public FmCollect()
     {
         InitializeComponent();
-        lbLogedUser.Text = $"user: {Session.Pseudo}";
-        dataGridView1.DataSource = CollecteModele.ToutesLesCollecte();
-        this.cb_mat.DataSource = MaterielModele.TousLesMateriel();
+        lbLogedUser.Text = @$"user: {Session.Pseudo}";
+        dataGridView1.DataSource = CollectModel.AllCollect();
+        this.cb_mat.DataSource = MaterielModele.AllMateriel();
         this.cb_mat.DisplayMember = "reference";
         this.cb_mat.ValueMember = "reference";
         this.NudNbMegot.Minimum = 1;
-        this.NudNbMegot.Maximum = Convert.ToDecimal(MaterielModele.GetMatByid(int.Parse(cb_mat.SelectedValue.ToString())).LeType.Contenance);
+        this.NudNbMegot.Maximum = Convert.ToDecimal(MaterielModele.GetMatById(int.Parse(cb_mat.SelectedValue.ToString())).LeType.Contenance);
     }
 
     private void cbMat_IndexChange(object sender, EventArgs e)
     {
-        NudNbMegot.Maximum = Convert.ToDecimal(MaterielModele.GetMatByid(int.Parse(cb_mat.SelectedValue.ToString())).LeType.Contenance);
+        NudNbMegot.Maximum = Convert.ToDecimal(MaterielModele.GetMatById(int.Parse(cb_mat.SelectedValue.ToString())).LeType.Contenance);
     }
 
     private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -32,7 +32,7 @@ public partial class FmCollecte : Form
 
     private void ReloadGridView()
     {
-        dataGridView1.DataSource = CollecteModele.ToutesLesCollecte();
+        dataGridView1.DataSource = CollectModel.AllCollect();
     }
 
     private void pictureBox2_Click(object sender, EventArgs e)
@@ -45,7 +45,7 @@ public partial class FmCollecte : Form
         SwitchFm.To(SwitchFm.Forms.FmHotspot);
     }
 
-    private void btnMaterielClick(object sender, EventArgs e)
+    private void BtnMaterielClick(object sender, EventArgs e)
     {
         SwitchFm.To(SwitchFm.Forms.FmMateriel);
     }
@@ -60,27 +60,29 @@ public partial class FmCollecte : Form
         return new Collecte.Builder()
             .WithId(int.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString()))
             .WithNbMegot(int.Parse(NudNbMegot.Value.ToString()))
-            .WithMateriel(MaterielModele.GetMatByid(int.Parse(cb_mat.SelectedValue.ToString())))
+            .WithMateriel(MaterielModele.GetMatById(int.Parse(cb_mat.SelectedValue.ToString())))
             .WithDateCollecte(DateTime.Parse(dataGridView1.CurrentRow.Cells[3].Value.ToString()))
             .build();
     }
-    private void button4_Click(object sender, EventArgs e)
+    private void BtAddClick(object sender, EventArgs e)
     {
-        Collecte laCollecte = FormToCollect();
-        laCollecte.DateCollecte = DateTime.Now;
-        CollecteModele.AjouterCollect(laCollecte);
+        Collecte collect = FormToCollect();
+        collect.DateCollecte = DateTime.Now;
+        CollectModel.AddCollect(collect);
         ReloadGridView();
     }
 
     private void button6_Click(object sender, EventArgs e)
     {
-        CollecteModele.ModifierCollect(FormToCollect());
+        if (!BtnUtils.VerifyDecision()) return;
+        CollectModel.UpdateCollect(FormToCollect());
         ReloadGridView();
     }
 
     private void bt_dell_Click(object sender, EventArgs e)
     {
-        CollecteModele.SuppCollecte(FormToCollect());
+        if (!BtnUtils.VerifyDecision()) return;
+        CollectModel.RemoveCollect(FormToCollect());
         ReloadGridView();
     }
 
