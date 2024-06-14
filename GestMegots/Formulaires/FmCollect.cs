@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
-using GestMegots.Class;
+﻿using GestMegots.Class;
 using GestMegots.Entitees;
 using GestMegots.Models;
+using static GestMegots.Class.MoveFm;
 
 namespace GestMegots.Formulaires;
 
@@ -54,6 +54,11 @@ public partial class FmCollect : Form
     {
         SwitchFm.To(SwitchFm.Forms.FmUser);
     }
+    
+    private void lbLogout_Click(object sender, EventArgs e)
+    {
+        SwitchFm.ToLoginFm();
+    }
 
     private Collecte FormToCollect()
     {
@@ -85,10 +90,11 @@ public partial class FmCollect : Form
         CollectModel.RemoveCollect(FormToCollect());
         ReloadGridView();
     }
-
-    private void lbLogout_Click(object sender, EventArgs e)
+    
+    private void OnMouseMove(object? sender, MouseEventArgs e)
     {
-        Session.UnsetSession();
-        SwitchFm.To(SwitchFm.Forms.FmLogin);
+        if (e.Button != MouseButtons.Left) return;
+        ReleaseCapture();
+        SendMessage(Handle, WmNclbuttondown, HtCaption, 0);
     }
 }

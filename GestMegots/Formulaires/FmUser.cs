@@ -1,7 +1,7 @@
-﻿using GestMegots.Class;
+﻿using System.Text.RegularExpressions;
+using GestMegots.Class;
 using GestMegots.Entitees;
 using GestMegots.Models;
-using Org.BouncyCastle.Asn1.Cmp;
 using static GestMegots.Class.MoveFm;
 
 namespace GestMegots.Formulaires;
@@ -31,9 +31,20 @@ public partial class FmUser : Form
             .build();
     }
 
+    private const string WeakPasswordMsg = @"le mot de passe doit avoir une taille de 12 charactère, soit minimum:\n\n" + 
+                                           @"- 3 minuscule,\n" + 
+                                           @"- 2 Majuscules,\n" + 
+                                           @"- 2 chiffres,\n" + 
+                                           @"- 1 Charactère spécial";
+
     private bool IsEmpty()
     {
         return tb_passwd.Text == string.Empty || tb_pseudo.Text == string.Empty;
+    }
+
+    private bool IsStrengthPassword(string password)
+    {
+        return Regex.Match(password, "^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{12}$").Success;
     }
 
     private void ReloadGridView()
@@ -69,39 +80,48 @@ public partial class FmUser : Form
     {
         SwitchFm.To(SwitchFm.Forms.FmCollect);
     }
+    
+    private void lbLogout_Click(object sender, EventArgs e)
+    {
+        SwitchFm.ToLoginFm();
+    }
 
     private void button4_Click_1(object sender, EventArgs e)
     {
-        if (!IsEmpty())
+        if(IsEmpty())
         {
-            User user = FormToUser();
-            user.Passwd = Hashing.ToSha256(user.Passwd);
-            UserModel.AjouterUser(user);
-            ReloadGridView();
+            MessageBox.Show(@"Veuillez completer les champs vide");
+            return;
         }
-        else
+        if(UserModel.IsSamePassword(tb_pseudo.Text, tb_pseudo.Text))
         {
-            MessageBox.Show(@"veuillez completer les champs vide");
+            MessageBox.Show(@"ce pseudo est deja utilisé");
+            return;
         }
+        if (!IsStrengthPassword(tb_passwd.Text))
+        {
+            MessageBox.Show(WeakPasswordMsg);
+            return;
+        }
+        User user = FormToUser();
+        user.Passwd = Hashing.ToSha256(user.Passwd);
+        UserModel.AjouterUser(user);
+        ReloadGridView();
+        
     }
 
     private void button6_Click(object sender, EventArgs e)
     {
-        if (!IsEmpty())
-        {
-            User user = FormToUser();
-            if (user.Passwd != UserModel.GetUserById(user.Id).Passwd)
-            {
-                user.Passwd = Hashing.ToSha256(user.Passwd);
-            }
-            if (!BtnUtils.VerifyDecision()) return;
-            UserModel.ChangerUser(user);
-            ReloadGridView();
-        }
-        else
+        if (IsEmpty())
         {
             MessageBox.Show(@"veuillez completer les champs vide");
+            return;
         }
+        User user = FormToUser();
+        if (!UserModel.IsSamePassword(tb_pseudo.Text, tb_passwd.Text)) user.Passwd = Hashing.ToSha256(user.Passwd);
+        if (!BtnUtils.VerifyDecision()) return;
+        UserModel.ChangerUser(user);
+        ReloadGridView();
     }
 
     private void bt_dell_Click(object sender, EventArgs e)
@@ -109,12 +129,6 @@ public partial class FmUser : Form
         if(!BtnUtils.VerifyDecision()) return;
         UserModel.SupprimerUser(FormToUser());
         ReloadGridView();
-    }
-    
-    private void lbLogout_Click(object sender, EventArgs e)
-    {
-        Session.UnsetSession();
-        SwitchFm.To(SwitchFm.Forms.FmLogin);
     }
     
     private void OnMouseMove(object? sender, MouseEventArgs e)

@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using GestMegots.Class;
 using GestMegots.Models;
+using static GestMegots.Class.MoveFm;
 
 namespace GestMegots.Formulaires
 {
@@ -28,10 +29,7 @@ namespace GestMegots.Formulaires
         
         private bool IsValidGps()
         {
-            string pattern =
-                "^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$";
-            Match m = Regex.Match(tb_GPS.Text, pattern);
-            return m.Success;
+            return Regex.Match(tb_GPS.Text, "^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$").Success;
         }
 
         private bool IsEmpty()
@@ -63,6 +61,11 @@ namespace GestMegots.Formulaires
         {
             SwitchFm.To(SwitchFm.Forms.FmUser);
         }
+        
+        private void lbLogout_Click(object sender, EventArgs e)
+        {
+            SwitchFm.ToLoginFm();
+        }
 
         private Materiel FormToMat()
         {
@@ -78,31 +81,26 @@ namespace GestMegots.Formulaires
         }
         private void BtAddClick(object sender, EventArgs e)
         {
-            if (!IsEmpty() && IsValidGps())
-            {
-                Materiel leMat = FormToMat();
-                leMat.DateInstal = DateTime.Now;
-                MaterielModele.AddMateriel(leMat);
-                ReloadGridView();  
-            }
-            else
+            if (IsEmpty() || !IsValidGps())
             {
                 MessageBox.Show("champs vide ou valeur incorrecte");
             }
+            Materiel leMat = FormToMat();
+            leMat.DateInstal = DateTime.Now;
+            MaterielModele.AddMateriel(leMat);
+            ReloadGridView(); 
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (!IsEmpty() && IsValidGps())
+            if (IsEmpty() || !IsValidGps())
             {
-                if (!BtnUtils.VerifyDecision()) return;
-                MaterielModele.UpdateMateriel(FormToMat());
-                ReloadGridView(); 
+                MessageBox.Show("champs vide ou valeur incorrecte");  
+                return;
             }
-            else
-            {
-                MessageBox.Show("champs vide ou valeur incorrecte");            
-            }
+            if (!BtnUtils.VerifyDecision()) return;
+            MaterielModele.UpdateMateriel(FormToMat());
+            ReloadGridView(); 
         }
 
         private void bt_dell_Click(object sender, EventArgs e)
@@ -112,10 +110,11 @@ namespace GestMegots.Formulaires
             ReloadGridView();
         }
         
-        private void lbLogout_Click(object sender, EventArgs e)
+        private void OnMouseMove(object? sender, MouseEventArgs e)
         {
-            Session.UnsetSession();
-            SwitchFm.To(SwitchFm.Forms.FmLogin);
+            if (e.Button != MouseButtons.Left) return;
+            ReleaseCapture();
+            SendMessage(Handle, WmNclbuttondown, HtCaption, 0);
         }
     }
 }

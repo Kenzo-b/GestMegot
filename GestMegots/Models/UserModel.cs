@@ -1,4 +1,5 @@
-﻿using GestMegots.Entitees;
+﻿using GestMegots.Class;
+using GestMegots.Entitees;
 using MySql.Data.MySqlClient;
 
 namespace GestMegots.Models;
@@ -22,7 +23,7 @@ public class UserModel
             {"@pseudo", user.Pseudo},
             {"@passwd", user.Passwd},
             {"@fk_service", user.Service?.Id },
-            {"@hab_level", user.Habilitation }
+            {"@hab_level", user.Ability }
         };
     }
     
@@ -99,5 +100,10 @@ public class UserModel
         cmd.CommandText = "UPDATE User SET pseudo = @pseudo, passwd = @passwd, fk_service = @fk_service, hab_level = @hab_level WHERE id = @id";
         cmd = AddParameter(cmd, user);
         cmd.ExecuteNonQuery();
+    }
+
+    public static bool IsSamePassword(string pseudo, string password)
+    {
+        return GetUserByPseudo(pseudo).Passwd == Hashing.ToSha256(password);
     }
 }

@@ -6,13 +6,13 @@ public class User
     private string pseudo;
     private string password;
     private Service service;
-    private int habilitation;
+    private int ability;
     
     public int Id { get => id; set => id = value; }
     public string Pseudo { get => pseudo; set => pseudo = value; }
     public string Passwd { get => password; set => password = value; }
     public Service Service { get => service; set => service = value; }
-    public int Habilitation { get => habilitation; set => habilitation = value; }
+    public int Ability { get => ability; set => ability = value; }
     
     public class Builder
     {
@@ -20,13 +20,13 @@ public class User
         private string pseudo;
         private string password;
         private Service service;
-        private int habilitation;
+        private int ability;
     
         public int Id { get => id; set => id = value; }
         public string Pseudo { get => pseudo; set => pseudo = value; }
         public string Password { get => password; set => password = value; }
         public Service Service { get => service; set => service = value; }
-        public int Habilitation { get => habilitation; set => habilitation = value; }
+        public int Ability { get => ability; set => ability = value; }
         
         public Builder WithId(int id)
         {
@@ -54,7 +54,7 @@ public class User
 
         public Builder WithHabLevel(int habLevel)
         {
-            this.habilitation = habLevel;
+            this.ability = habLevel;
             return this;
         }
 
@@ -70,6 +70,6 @@ public class User
         Pseudo = builder.Pseudo;
         Passwd = builder.Password;
         service = builder.Service;
-        Habilitation = builder.Habilitation;
+        Ability = builder.Ability;
     }
 }

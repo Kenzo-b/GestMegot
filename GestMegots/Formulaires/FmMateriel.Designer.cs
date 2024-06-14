@@ -75,6 +75,7 @@ namespace GestMegots.Formulaires
             panel1.Name = "panel1";
             panel1.Size = new Size(907, 740);
             panel1.TabIndex = 0;
+            panel1.MouseMove += OnMouseMove;
             // 
             // pictureBox2
             // 
@@ -393,6 +394,7 @@ namespace GestMegots.Formulaires
             Controls.Add(lbLogedUser);
             Controls.Add(lbLogout);
             this.Load += (object DatagramSender, EventArgs e) => BtnUtils.SetButtonVisibility(this);
+            MouseMove += OnMouseMove;
             FormBorderStyle = FormBorderStyle.None;
             Name = "FmMateriel";
             StartPosition = FormStartPosition.CenterScreen;

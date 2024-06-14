@@ -17,39 +17,16 @@ public partial class FmLogin : Form
         Application.Exit();
     }
 
-    private static void LoadForm()
-    {
-        switch (Session.SessionHab)
-        {
-            case 1:
-                SwitchFm.To(SwitchFm.Forms.FmCollect);
-                break;
-            case 2:
-                SwitchFm.To(SwitchFm.Forms.FmHotspot);
-                break;
-            case 3:
-                SwitchFm.To(SwitchFm.Forms.FmUser);
-                break;
-        }
-    }
-
-    private void Login()
-    {
-        User user = UserModel.GetUserByPseudo(tb_pseudo.Text);
-        if (user.Passwd == Hashing.ToSha256(tb_Mdp.Text))
-        {
-            Session.SetSession(user.Habilitation, true, user.Pseudo);
-            LoadForm();
-        }
-        else
-        {
-            MessageBox.Show("pseudo ou mot de passe invalide");
-        }
-    }
-
     private void btLogin_Click(object sender, EventArgs e)
     {
-        Login();
+        if (!UserModel.IsSamePassword(tb_pseudo.Text, tb_Mdp.Text))
+        {
+            MessageBox.Show(@"pseudo ou mot de passe invalide");
+            return;
+        }
+        User user = UserModel.GetUserByPseudo(tb_pseudo.Text);
+        Session.SetSession(user.Ability, true, user.Pseudo);
+        SwitchFm.ToDefaultFm();
     }
 
     private void OnMouseMove(object? sender, MouseEventArgs e)

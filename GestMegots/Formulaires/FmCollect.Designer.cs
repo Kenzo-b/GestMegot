@@ -72,6 +72,7 @@ partial class FmCollect
         panel1.Name = "panel1";
         panel1.Size = new Size(907, 740);
         panel1.TabIndex = 0;
+        panel1.MouseMove += OnMouseMove;
         // 
         // pictureBox2
         // 
@@ -326,6 +327,7 @@ partial class FmCollect
         Controls.Add(lbLogout);
         Controls.Add(lbLogedUser);
         this.Load += (object DatagramSender, EventArgs e) => BtnUtils.SetButtonVisibility(this);
+        MouseMove += OnMouseMove;
         FormBorderStyle = FormBorderStyle.None;
         Name = "FmCollect";
         StartPosition = FormStartPosition.CenterScreen;
