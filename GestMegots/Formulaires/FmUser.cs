@@ -12,8 +12,8 @@ public partial class FmUser : Form
     {
         InitializeComponent();
         lbLogedUser.Text = @$"user: {Session.Pseudo}";
-        dataGridView1.DataSource = UserModel.ToutLesUsers();
-        cb_service.DataSource = ServiceModele.ToutLesServices();
+        dataGridView1.DataSource = UserModel.AllUsers();
+        cb_service.DataSource = ServiceModel.AllServices();
         cb_service.DisplayMember = "nom";
         cb_service.ValueMember = "id";
         nud_habLevel.Minimum = 1;
@@ -26,7 +26,7 @@ public partial class FmUser : Form
             .WithId(int.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString()))
             .WithPseudo(tb_pseudo.Text)
             .WithPasswd(tb_passwd.Text)
-            .WithService(ServiceModele.GetServiceById(int.Parse(cb_service.SelectedValue.ToString())))
+            .WithService(ServiceModel.GetServiceById(int.Parse(cb_service.SelectedValue.ToString())))
             .WithHabLevel(int.Parse(nud_habLevel.Value.ToString()))
             .build();
     }
@@ -49,7 +49,7 @@ public partial class FmUser : Form
 
     private void ReloadGridView()
     {
-        dataGridView1.DataSource = UserModel.ToutLesUsers();
+        dataGridView1.DataSource = UserModel.AllUsers();
     }
 
 
@@ -105,7 +105,7 @@ public partial class FmUser : Form
         }
         User user = FormToUser();
         user.Passwd = Hashing.ToSha256(user.Passwd);
-        UserModel.AjouterUser(user);
+        UserModel.AddUser(user);
         ReloadGridView();
         
     }
@@ -120,14 +120,14 @@ public partial class FmUser : Form
         User user = FormToUser();
         if (!UserModel.IsSamePassword(tb_pseudo.Text, tb_passwd.Text)) user.Passwd = Hashing.ToSha256(user.Passwd);
         if (!BtnUtils.VerifyDecision()) return;
-        UserModel.ChangerUser(user);
+        UserModel.UpdateUser(user);
         ReloadGridView();
     }
 
     private void bt_dell_Click(object sender, EventArgs e)
     { 
         if(!BtnUtils.VerifyDecision()) return;
-        UserModel.SupprimerUser(FormToUser());
+        UserModel.RemoveUser(FormToUser());
         ReloadGridView();
     }
     

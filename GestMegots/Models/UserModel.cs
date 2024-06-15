@@ -33,70 +33,70 @@ public class UserModel
             .WithId(int.Parse(lecteur[0].ToString()))
             .WithPseudo(lecteur[1].ToString())
             .WithPasswd(lecteur[2].ToString())
-            .WithService(ServiceModele.GetServiceById(int.Parse(lecteur[3].ToString())))
+            .WithService(ServiceModel.GetServiceById(int.Parse(lecteur[3].ToString())))
             .WithHabLevel(int.Parse(lecteur[4].ToString()))
             .build();
     }
     
-    public static List<User> ToutLesUsers()
+    public static List<User> AllUsers()
     {
-        List<User> lesUsers = new List<User>();
-        using MySqlConnection connex = Connection.Open();
-        MySqlCommand cmd = connex.CreateCommand();
+        List<User> users = new List<User>();
+        using MySqlConnection connect = Connection.Open();
+        MySqlCommand cmd = connect.CreateCommand();
         cmd.CommandText = "SELECT * FROM user";
-        MySqlDataReader lecteur = cmd.ExecuteReader();
-        while(lecteur.Read())
-        {
-            lesUsers.Add(ReaderToUser(lecteur));
+        MySqlDataReader reader = cmd.ExecuteReader();
+        while(reader.Read())
+        { 
+            users.Add(ReaderToUser(reader));
         }
-        return lesUsers;
+        return users;
     }
     
     public static User GetUserById(int id)
     {
-        using MySqlConnection connex = Connection.Open();
-        MySqlCommand cmd = connex.CreateCommand();
+        using MySqlConnection connect = Connection.Open();
+        MySqlCommand cmd = connect.CreateCommand();
         cmd.CommandText = "SELECT * FROM user WHERE id = @id";
         cmd = AddParameter(cmd, new User.Builder().WithId(id).build());
-        MySqlDataReader lecteur = cmd.ExecuteReader();
-        lecteur.Read();
-        return ReaderToUser(lecteur);
+        MySqlDataReader reader = cmd.ExecuteReader(); 
+        reader.Read();
+        return ReaderToUser(reader);
     }
 
     public static User GetUserByPseudo(string pseudo)
     {
-        MySqlConnection connex = Connection.Open();
-        MySqlCommand cmd = connex.CreateCommand();
+        MySqlConnection connect = Connection.Open();
+        MySqlCommand cmd = connect.CreateCommand();
         cmd.CommandText = "SELECT * FROM user WHERE pseudo = @pseudo";
         cmd.Parameters.AddWithValue("@pseudo", pseudo);
-        MySqlDataReader lecteur = cmd.ExecuteReader();
-        lecteur.Read();
-        return ReaderToUser(lecteur);
+        MySqlDataReader reader = cmd.ExecuteReader();
+        reader.Read();
+        return ReaderToUser(reader);
     }
     
-    public static void AjouterUser(User user)
+    public static void AddUser(User user)
     {
 
-        using MySqlConnection connex = Connection.Open();
-        MySqlCommand cmd = connex.CreateCommand();
+        using MySqlConnection connect = Connection.Open();
+        MySqlCommand cmd = connect.CreateCommand();
         cmd.CommandText = "INSERT INTO user(pseudo, passwd, fk_service, hab_level) VALUE (@pseudo, @passwd, @fk_service, @hab_level)";
         cmd = AddParameter(cmd, user);
         cmd.ExecuteNonQuery();
     }
     
-    public static void SupprimerUser(User user)
+    public static void RemoveUser(User user)
     {
-        using MySqlConnection connex = Connection.Open();
-        MySqlCommand cmd = connex.CreateCommand();
+        using MySqlConnection connect = Connection.Open();
+        MySqlCommand cmd = connect.CreateCommand();
         cmd.CommandText = "DELETE FROM user WHERE id = @id";
         cmd = AddParameter(cmd, user);
         cmd.ExecuteNonQuery();
     }
     
-    public static void ChangerUser(User user)
+    public static void UpdateUser(User user)
     {
-        using MySqlConnection connex = Connection.Open();
-        MySqlCommand cmd = connex.CreateCommand();
+        using MySqlConnection connect = Connection.Open();
+        MySqlCommand cmd = connect.CreateCommand();
         cmd.CommandText = "UPDATE User SET pseudo = @pseudo, passwd = @passwd, fk_service = @fk_service, hab_level = @hab_level WHERE id = @id";
         cmd = AddParameter(cmd, user);
         cmd.ExecuteNonQuery();

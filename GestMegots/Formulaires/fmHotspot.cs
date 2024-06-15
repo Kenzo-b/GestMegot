@@ -2,6 +2,7 @@ using GestMegots.Entitees;
 using System.Text.RegularExpressions;
 using GestMegots.Class;
 using GestMegots.Models;
+using static GestMegots.Class.MoveFm;
 
 namespace GestMegots.Formulaires
 {
@@ -10,20 +11,20 @@ namespace GestMegots.Formulaires
         public FmHotspot()
         {
             InitializeComponent();
-            this.lbLogedUser.Text = $"user: {Session.Pseudo}";
-            this.dataGridView1.DataSource = HotspotModele.TousLesHotspots();
+            this.lbLogedUser.Text = @$"user: {Session.Pseudo}";
+            this.dataGridView1.DataSource = HotspotModel.AllHotspots();
             this.cb_categorie.DataSource = CategoryModel.AllCategory();
             this.cb_categorie.DisplayMember = "name";
             this.cb_categorie.ValueMember = "id";
-            this.cb_secteur.DataSource = SecteurModele.TousLesSecteurs();
+            this.cb_secteur.DataSource = SectorModel.AllSectors();
             this.cb_secteur.DisplayMember = "name";
             this.cb_secteur.ValueMember = "id";
-            this.cb_materiel.DataSource = MaterielModele.AllMateriel();
+            this.cb_materiel.DataSource = MaterielModel.AllMateriel();
             this.cb_materiel.DisplayMember = "reference";
             this.cb_materiel.ValueMember = "reference";
         }
 
-        public Hotspot FormToHotspot()
+        private Hotspot FormToHotspot()
         {
             return new Hotspot.Builder()
                 .WithIdHS(int.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString()))
@@ -31,18 +32,15 @@ namespace GestMegots.Formulaires
                 .WithNom(tb_nom.Text)
                 .WithAdresse(tb_adresse.Text)
                 .WithTerrasse(cb_terrasse.Checked ? 1 : 0)
-                .WithLeSecteur(SecteurModele.GetSecteurById(int.Parse(cb_secteur.SelectedValue.ToString())))
+                .WithLeSecteur(SectorModel.GetSectorById(int.Parse(cb_secteur.SelectedValue.ToString())))
                 .WithLaCategorie(CategoryModel.GetCategoryById(int.Parse(cb_categorie.SelectedValue.ToString())))
-                .WithLeMateriel(MaterielModele.GetMatById(int.Parse(cb_materiel.SelectedValue.ToString())))
+                .WithLeMateriel(MaterielModel.GetMatById(int.Parse(cb_materiel.SelectedValue.ToString())))
                 .Build();
         }
 
         private bool IsValidGps()
         {
-            string pattern =
-                "^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$";
-            Match m = Regex.Match(tb_GPS.Text, pattern);
-            return m.Success;
+            return Regex.Match(tb_GPS.Text, "^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$").Success;
         }
 
         private bool IsEmpty()
@@ -52,7 +50,7 @@ namespace GestMegots.Formulaires
 
         private void ReloadGridView()
         {
-            dataGridView1.DataSource = HotspotModele.TousLesHotspots();
+            dataGridView1.DataSource = HotspotModel.AllHotspots();
         }
 
 
@@ -86,45 +84,47 @@ namespace GestMegots.Formulaires
         {
             SwitchFm.To(SwitchFm.Forms.FmUser);
         }
+        
+        private void lbLogout_Click(object sender, EventArgs e)
+        {
+            SwitchFm.ToLoginFm();
+        }
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            if (!IsEmpty() && IsValidGps())
+            if (IsEmpty() || !IsValidGps())
             {
-                HotspotModele.AjoutHotspot(FormToHotspot());
-                ReloadGridView();
+                MessageBox.Show(@"champs vide ou valeur incorrecte");
+                return;
             }
-            else
-            {
-                MessageBox.Show("champs vide ou valeur incorrecte");
-            }
+            HotspotModel.AddHotspot(FormToHotspot());
+            ReloadGridView();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (!IsEmpty() && IsValidGps())
-            {
-                if (!BtnUtils.VerifyDecision()) return;
-                HotspotModele.ModifierHotspot(FormToHotspot());
-                ReloadGridView();
-            }
-            else
+            if (IsEmpty() || !IsValidGps())
             {
                 MessageBox.Show(@"champs vide ou valeur incorrecte");
+                return;
             }
+            if (!BtnUtils.VerifyDecision()) return;
+            HotspotModel.UpdateHotspot(FormToHotspot());
+            ReloadGridView();
         }
 
         private void bt_dell_Click(object sender, EventArgs e)
         {
             if (!BtnUtils.VerifyDecision()) return;
-            HotspotModele.RemoveHotspot(FormToHotspot());
+            HotspotModel.RemoveHotspot(FormToHotspot());
             ReloadGridView();
         }
-
-        private void lbLogout_Click(object sender, EventArgs e)
+        
+        private void OnMouseMove(object? sender, MouseEventArgs e)
         {
-            Session.UnsetSession();
-            SwitchFm.To(SwitchFm.Forms.FmLogin);
+            if (e.Button != MouseButtons.Left) return;
+            ReleaseCapture();
+            SendMessage(Handle, WmNclbuttondown, HtCaption, 0);
         }
     }
 }

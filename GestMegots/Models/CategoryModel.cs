@@ -5,12 +5,12 @@ namespace GestMegots.Models
 {
     internal static class CategoryModel
     {
-        private static Categorie ReaderToCategory(MySqlDataReader lecteur)
+        private static Categorie ReaderToCategory(MySqlDataReader reader)
         { 
             return new Categorie.Builder()
-                .WithId(int.Parse(lecteur[0].ToString()))
-                .WithName(lecteur[1].ToString())
-                .WithRemarque(lecteur[2].ToString())
+                .WithId(int.Parse(reader[0].ToString()))
+                .WithName(reader[1].ToString())
+                .WithRemarque(reader[2].ToString())
                 .Build();
         }
         

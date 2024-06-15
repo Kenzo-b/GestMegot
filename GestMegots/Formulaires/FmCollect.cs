@@ -12,16 +12,16 @@ public partial class FmCollect : Form
         InitializeComponent();
         lbLogedUser.Text = @$"user: {Session.Pseudo}";
         dataGridView1.DataSource = CollectModel.AllCollect();
-        this.cb_mat.DataSource = MaterielModele.AllMateriel();
+        this.cb_mat.DataSource = MaterielModel.AllMateriel();
         this.cb_mat.DisplayMember = "reference";
         this.cb_mat.ValueMember = "reference";
         this.NudNbMegot.Minimum = 1;
-        this.NudNbMegot.Maximum = Convert.ToDecimal(MaterielModele.GetMatById(int.Parse(cb_mat.SelectedValue.ToString())).LeType.Contenance);
+        this.NudNbMegot.Maximum = Convert.ToDecimal(MaterielModel.GetMatById(int.Parse(cb_mat.SelectedValue.ToString())).LeType.Contenance);
     }
 
     private void cbMat_IndexChange(object sender, EventArgs e)
     {
-        NudNbMegot.Maximum = Convert.ToDecimal(MaterielModele.GetMatById(int.Parse(cb_mat.SelectedValue.ToString())).LeType.Contenance);
+        NudNbMegot.Maximum = Convert.ToDecimal(MaterielModel.GetMatById(int.Parse(cb_mat.SelectedValue.ToString())).LeType.Contenance);
     }
 
     private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -65,7 +65,7 @@ public partial class FmCollect : Form
         return new Collecte.Builder()
             .WithId(int.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString()))
             .WithNbMegot(int.Parse(NudNbMegot.Value.ToString()))
-            .WithMateriel(MaterielModele.GetMatById(int.Parse(cb_mat.SelectedValue.ToString())))
+            .WithMateriel(MaterielModel.GetMatById(int.Parse(cb_mat.SelectedValue.ToString())))
             .WithDateCollecte(DateTime.Parse(dataGridView1.CurrentRow.Cells[3].Value.ToString()))
             .build();
     }

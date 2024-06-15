@@ -26,13 +26,13 @@ namespace GestMegots.Models
             return objects;
         }
         
-        private static Collecte ReaderToCollecte(MySqlDataReader lecteur)
+        private static Collecte ReaderToCollect(MySqlDataReader reader)
         {
             return new Collecte.Builder()
-                .WithId(int.Parse(lecteur[0].ToString()))
-                .WithNbMegot(int.Parse(lecteur[1].ToString()))
-                .WithMateriel(MaterielModele.GetMatById(int.Parse(lecteur[2].ToString())))
-                .WithDateCollecte(lecteur.GetDateTime("date_collecte"))
+                .WithId(int.Parse(reader[0].ToString()))
+                .WithNbMegot(int.Parse(reader[1].ToString()))
+                .WithMateriel(MaterielModel.GetMatById(int.Parse(reader[2].ToString())))
+                .WithDateCollecte(reader.GetDateTime("date_collecte"))
                 .build();
         }
 
@@ -45,7 +45,7 @@ namespace GestMegots.Models
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                collects.Add(ReaderToCollecte(reader));
+                collects.Add(ReaderToCollect(reader));
             }
             return collects;
         }
@@ -58,7 +58,7 @@ namespace GestMegots.Models
             cmd = AddParameters(cmd, new Collecte.Builder().WithId(id).build());
             MySqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
-            return ReaderToCollecte(reader);
+            return ReaderToCollect(reader);
         }
         
         public static void AddCollect(Collecte collect)

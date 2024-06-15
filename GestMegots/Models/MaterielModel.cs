@@ -3,7 +3,7 @@ using MySql.Data.MySqlClient;
 
 namespace GestMegots.Models
 {
-    internal static class MaterielModele
+    internal static class MaterielModel
     {
         private static MySqlCommand AddParameters(MySqlCommand cmd, Materiel materiel)
         {
@@ -28,16 +28,16 @@ namespace GestMegots.Models
             };
         }
         
-        private static Materiel ReaderToMat(MySqlDataReader lecteur)
+        private static Materiel ReaderToMat(MySqlDataReader reader)
         {
             return new Materiel.Builder()
-                .WithReference(int.Parse(lecteur[0].ToString()))
-                .WithCouleur(lecteur[1].ToString())
-                .WithDateInstal(lecteur.GetDateTime("dateInstallation"))
-                .WithAdresse(lecteur[3].ToString())
-                .WithCoordoGPS(lecteur[4].ToString())
-                .WithLeType(TypeModele.GetTypeMaterielById(int.Parse(lecteur[5].ToString())))
-                .WithOp(int.Parse(lecteur[6].ToString()))
+                .WithReference(int.Parse(reader[0].ToString()))
+                .WithCouleur(reader[1].ToString())
+                .WithDateInstal(reader.GetDateTime("dateInstallation"))
+                .WithAdresse(reader[3].ToString())
+                .WithCoordoGPS(reader[4].ToString())
+                .WithLeType(TypeModel.GetTypeMaterielById(int.Parse(reader[5].ToString())))
+                .WithOp(int.Parse(reader[6].ToString()))
                 .build();
         }
 
@@ -66,30 +66,30 @@ namespace GestMegots.Models
             return ReaderToMat(reader);
         }
 
-        public static void AddMateriel(Materiel unMat)
+        public static void AddMateriel(Materiel materiel)
         {
             using MySqlConnection connect = Connection.Open();
             MySqlCommand cmd = connect.CreateCommand();
             cmd.CommandText = "INSERT INTO materiel(couleurs, dateInstallation, adresse, coordoGPS, fkType, op) VALUE (@couleurs, @dateInstallation, @adresse, @coordoGPS, @fkType, @op)";
-            cmd = AddParameters(cmd, unMat);
+            cmd = AddParameters(cmd, materiel);
             cmd.ExecuteNonQuery();
         }
         
-        public static void RemoveMateriel(Materiel unMat)
+        public static void RemoveMateriel(Materiel materiel)
         {
             using MySqlConnection connect = Connection.Open();
             MySqlCommand cmd = connect.CreateCommand();
             cmd.CommandText = "DELETE FROM materiel WHERE reference = @reference";
-            cmd = AddParameters(cmd, unMat);
+            cmd = AddParameters(cmd, materiel);
             cmd.ExecuteNonQuery();
         }
         
-        public static void UpdateMateriel(Materiel unMat)
+        public static void UpdateMateriel(Materiel materiel)
         {
             using MySqlConnection connect = Connection.Open();
             MySqlCommand cmd = connect.CreateCommand();
             cmd.CommandText = "UPDATE materiel SET couleurs = @couleurs, dateInstallation = @dateInstallation, adresse = @adresse, coordoGPS = @coordoGPS, fkType = @fkType, op = @op WHERE reference = @reference";
-            cmd = AddParameters(cmd, unMat);
+            cmd = AddParameters(cmd, materiel);
             cmd.ExecuteNonQuery();
         }
     }
