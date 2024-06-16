@@ -1,4 +1,4 @@
-﻿namespace GestMegots.Entitees;
+﻿namespace GestMegots.entities;
 
 public class User
 {

@@ -1,11 +1,11 @@
-﻿using GestMegots.Entitees;
+﻿using GestMegots.entities;
 using MySql.Data.MySqlClient;
 
 namespace GestMegots.Models
 {
     internal static class SectorModel
     {
-        private static MySqlCommand AddParameters(MySqlCommand cmd, Secteur sector)
+        private static MySqlCommand AddParameters(MySqlCommand cmd, Sector sector)
         {
             foreach (var param in SectorParameters(sector).Where(param => cmd.CommandText.Contains(param.Key)))
             {
@@ -14,7 +14,7 @@ namespace GestMegots.Models
             return cmd;
         }
         
-        private static Dictionary<string, object> SectorParameters(Secteur sector)
+        private static Dictionary<string, object> SectorParameters(Sector sector)
         {
             return new Dictionary<string, object>
             {
@@ -23,17 +23,17 @@ namespace GestMegots.Models
             };
         }
         
-        private static Secteur ReaderToSector(MySqlDataReader reader)
+        private static Sector ReaderToSector(MySqlDataReader reader)
         {
-            return new Secteur.Builder()
+            return new Sector.Builder()
                 .WithId(int.Parse(reader[0].ToString()))
                 .WithName(reader[1].ToString())
                 .Build();
         }
         
-        public static List<Secteur> AllSectors()
+        public static List<Sector> AllSectors()
         {
-            List<Secteur> sectors = new List<Secteur>();
+            List<Sector> sectors = new List<Sector>();
             using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
             cmd.CommandText = "SELECT * FROM SECTEUR order by libelle";
@@ -45,18 +45,18 @@ namespace GestMegots.Models
             return sectors;
 
         }
-        public static Secteur GetSectorById(int id)
+        public static Sector GetSectorById(int id)
         {
             using MySqlConnection connect = Connection.Open();
             MySqlCommand cmd = connect.CreateCommand();
             cmd.CommandText = "SELECT * FROM SECTEUR where idSecteur = @idSecteur";
-            cmd = AddParameters(cmd, new Secteur.Builder().WithId(id).Build());
+            cmd = AddParameters(cmd, new Sector.Builder().WithId(id).Build());
             MySqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
             return ReaderToSector(reader);
         }
 
-        public static void AddSector(Secteur sector)
+        public static void AddSector(Sector sector)
         {
             using MySqlConnection connect = Connection.Open();
             MySqlCommand cmd = connect.CreateCommand();
@@ -65,7 +65,7 @@ namespace GestMegots.Models
             cmd.ExecuteNonQuery();
         }
         
-        public static void UpdateSector(Secteur sector)
+        public static void UpdateSector(Sector sector)
         {
 
             using MySqlConnection connect = Connection.Open();
@@ -74,7 +74,7 @@ namespace GestMegots.Models
             cmd = AddParameters(cmd, sector);
             cmd.ExecuteNonQuery();
         }
-        public static void RemoveSector(Secteur sector)
+        public static void RemoveSector(Sector sector)
         {
             using MySqlConnection connect = Connection.Open();
             MySqlCommand cmd = connect.CreateCommand();

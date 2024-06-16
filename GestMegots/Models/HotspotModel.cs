@@ -1,4 +1,4 @@
-﻿using GestMegots.Entitees;
+﻿using GestMegots.entities;
 using MySql.Data.MySqlClient;
 
 namespace GestMegots.Models
@@ -22,7 +22,7 @@ namespace GestMegots.Models
                 { "@nom", hotspot.Nom },
                 { "@adresse", hotspot.Adresse },
                 { "@terrasse", hotspot.Terrasse },
-                { "@fkSecteur", hotspot.LeSecteur?.Id },
+                { "@fkSecteur", hotspot.LeSector?.Id },
                 { "@fkCategorie", hotspot.LaCategorie?.Id },
                 { "@fkMateriel", hotspot.LeMateriel?.Reference }
             };

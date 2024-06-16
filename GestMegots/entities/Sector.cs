@@ -1,6 +1,6 @@
-﻿namespace GestMegots.Entitees
+﻿namespace GestMegots.entities
 {
-    public class Secteur
+    public class Sector
     {
         private int id;
         private string name;
@@ -33,13 +33,13 @@
                 return this;
             }
 
-            public Secteur Build()
+            public Sector Build()
             {
-                return new Secteur(this);
+                return new Sector(this);
             }
         }
 
-        private Secteur(Builder builder)
+        private Sector(Builder builder)
         {
             Id = builder.Id;
             Name = builder.Name;

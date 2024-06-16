@@ -1,6 +1,6 @@
-using GestMegots.Entitees;
 using System.Text.RegularExpressions;
 using GestMegots.Class;
+using GestMegots.entities;
 using GestMegots.Models;
 using static GestMegots.Class.MoveFm;
 

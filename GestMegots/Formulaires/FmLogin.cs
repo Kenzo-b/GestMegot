@@ -1,5 +1,5 @@
 ﻿using GestMegots.Class;
-using GestMegots.Entitees;
+using GestMegots.entities;
 using GestMegots.Models;
 using static GestMegots.Class.MoveFm;
 

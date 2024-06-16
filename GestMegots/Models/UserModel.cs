@@ -1,5 +1,5 @@
 ﻿using GestMegots.Class;
-using GestMegots.Entitees;
+using GestMegots.entities;
 using MySql.Data.MySqlClient;
 
 namespace GestMegots.Models;

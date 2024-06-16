@@ -1,7 +1,4 @@
-﻿using Google.Protobuf.WellKnownTypes;
-
-
-namespace GestMegots.Entitees
+﻿namespace GestMegots.entities
 {
     public class Materiel
     {

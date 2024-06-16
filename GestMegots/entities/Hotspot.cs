@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GestMegots.Entitees
+﻿namespace GestMegots.entities
 {
     public class Hotspot
     {
@@ -13,7 +7,7 @@ namespace GestMegots.Entitees
         private string nom;
         private string adresse;
         private int terrasse;
-        private Secteur leSecteur;
+        private Sector leSector;
         private Categorie laCategorie;
         private Materiel leMateriel;
 
@@ -22,7 +16,7 @@ namespace GestMegots.Entitees
         public string Nom { get => nom; set => nom = value; }
         public string Adresse { get => adresse; set => adresse = value; }
         public int Terrasse { get => terrasse; set => terrasse = value; }
-        public Secteur LeSecteur { get => leSecteur; set => leSecteur = value; }
+        public Sector LeSector { get => leSector; set => leSector = value; }
         public Categorie LaCategorie { get => laCategorie; set => laCategorie = value; }
         public Materiel LeMateriel { get => leMateriel; set => leMateriel = value; }
 
@@ -33,7 +27,7 @@ namespace GestMegots.Entitees
             public string Nom { get; private set; }
             public string Adresse { get; private set; }
             public int Terrasse { get; private set; }
-            public Secteur LeSecteur { get; private set; }
+            public Sector LeSector { get; private set; }
             public Categorie LaCategorie { get; private set; }
             public Materiel LeMateriel { get; private set; }
 
@@ -68,9 +62,9 @@ namespace GestMegots.Entitees
                 return this;
             }
 
-            public Builder WithLeSecteur(Secteur leSecteur)
+            public Builder WithLeSecteur(Sector leSector)
             {
-                LeSecteur = leSecteur;
+                LeSector = leSector;
                 return this;
             }
 
@@ -99,7 +93,7 @@ namespace GestMegots.Entitees
             Nom = builder.Nom;
             Adresse = builder.Adresse;
             Terrasse = builder.Terrasse;
-            LeSecteur = builder.LeSecteur;
+            LeSector = builder.LeSector;
             LaCategorie = builder.LaCategorie;
             LeMateriel = builder.LeMateriel;
         }
