@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 06 mai 2024 à 12:33
--- Version du serveur :  10.4.10-MariaDB
--- Version de PHP :  5.6.40
+-- Hôte : 127.0.0.1
+-- Généré le : dim. 16 juin 2024 à 21:09
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `gest_megot`
+-- Base de données : `gest_megot_test`
 --
 
 -- --------------------------------------------------------
@@ -28,13 +27,11 @@ SET time_zone = "+00:00";
 -- Structure de la table `categorie`
 --
 
-DROP TABLE IF EXISTS `categorie`;
-CREATE TABLE IF NOT EXISTS `categorie` (
-  `idCategorie` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `categorie` (
+  `idCategorie` int(11) NOT NULL,
   `libelle` varchar(255) NOT NULL,
-  `remarque` text DEFAULT NULL,
-  PRIMARY KEY (`idCategorie`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+  `remarque` text DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `categorie`
@@ -56,21 +53,39 @@ INSERT INTO `categorie` (`idCategorie`, `libelle`, `remarque`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `collecte`
+--
+
+CREATE TABLE `collecte` (
+  `id` int(11) NOT NULL,
+  `nb_megot` int(11) NOT NULL,
+  `fk_materiel` int(11) NOT NULL,
+  `date_collecte` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `collecte`
+--
+
+INSERT INTO `collecte` (`id`, `nb_megot`, `fk_materiel`, `date_collecte`) VALUES
+(1, 1, 1, '2024-05-21');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `hotspot`
 --
 
-DROP TABLE IF EXISTS `hotspot`;
-CREATE TABLE IF NOT EXISTS `hotspot` (
-  `idHS` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `hotspot` (
+  `idHS` int(11) NOT NULL,
   `coordoGPS` varchar(255) DEFAULT NULL,
   `nom` varchar(100) DEFAULT NULL,
   `adresse` varchar(255) DEFAULT NULL,
   `terrasse` tinyint(4) DEFAULT NULL,
   `fkSecteur` int(11) NOT NULL,
   `fkCategorie` int(11) NOT NULL,
-  `fkMateriel` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idHS`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `fkMateriel` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `hotspot`
@@ -89,16 +104,14 @@ INSERT INTO `hotspot` (`idHS`, `coordoGPS`, `nom`, `adresse`, `terrasse`, `fkSec
 -- Structure de la table `materiel`
 --
 
-DROP TABLE IF EXISTS `materiel`;
-CREATE TABLE IF NOT EXISTS `materiel` (
-  `reference` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `materiel` (
+  `reference` int(11) NOT NULL,
   `couleurs` varchar(100) NOT NULL,
   `dateInstallation` date DEFAULT NULL,
   `adresse` varchar(255) NOT NULL,
   `coordoGPS` varchar(255) NOT NULL,
-  `fkType` int(11) DEFAULT NULL,
-  PRIMARY KEY (`reference`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `fkType` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `materiel`
@@ -115,12 +128,10 @@ INSERT INTO `materiel` (`reference`, `couleurs`, `dateInstallation`, `adresse`, 
 -- Structure de la table `secteur`
 --
 
-DROP TABLE IF EXISTS `secteur`;
-CREATE TABLE IF NOT EXISTS `secteur` (
-  `idSecteur` int(11) NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(255) NOT NULL,
-  PRIMARY KEY (`idSecteur`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+CREATE TABLE `secteur` (
+  `idSecteur` int(11) NOT NULL,
+  `libelle` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `secteur`
@@ -147,12 +158,10 @@ INSERT INTO `secteur` (`idSecteur`, `libelle`) VALUES
 -- Structure de la table `secteuragglo`
 --
 
-DROP TABLE IF EXISTS `secteuragglo`;
-CREATE TABLE IF NOT EXISTS `secteuragglo` (
-  `idSAgglo` int(11) NOT NULL AUTO_INCREMENT,
-  `LibelleSAgglo` varchar(255) NOT NULL,
-  PRIMARY KEY (`idSAgglo`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+CREATE TABLE `secteuragglo` (
+  `idSAgglo` int(11) NOT NULL,
+  `LibelleSAgglo` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `secteuragglo`
@@ -167,27 +176,185 @@ INSERT INTO `secteuragglo` (`idSAgglo`, `LibelleSAgglo`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `service`
+--
+
+CREATE TABLE `service` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `service`
+--
+
+INSERT INTO `service` (`id`, `nom`) VALUES
+(1, 'Centre Technique municipal'),
+(2, 'service technique'),
+(3, 'service environnement'),
+(4, 'service propreté');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `type`
 --
 
-DROP TABLE IF EXISTS `type`;
-CREATE TABLE IF NOT EXISTS `type` (
-  `idType` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `type` (
+  `idType` int(11) NOT NULL,
   `libelle` varchar(255) NOT NULL,
   `contenance` decimal(6,1) NOT NULL,
-  `sacIntegre` tinyint(4) DEFAULT NULL,
-  PRIMARY KEY (`idType`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `sacIntegre` tinyint(4) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `type`
 --
 
 INSERT INTO `type` (`idType`, `libelle`, `contenance`, `sacIntegre`) VALUES
-(1, 'cendrier sur pied', '25.0', NULL),
-(2, 'point d\'apport volontaire ', '50.0', 1),
-(3, 'cendrier sondage', '25.0', NULL),
-(4, 'cendrier mural', '10.0', NULL);
+(1, 'cendrier sur pied', 25.0, NULL),
+(2, 'point d\'apport volontaire ', 50.0, 1),
+(3, 'cendrier sondage', 25.0, NULL),
+(4, 'cendrier mural', 10.0, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `pseudo` varchar(255) NOT NULL,
+  `passwd` varchar(255) NOT NULL,
+  `fk_service` int(11) NOT NULL,
+  `hab_level` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `pseudo`, `passwd`, `fk_service`, `hab_level`) VALUES
+(5, 'root', '4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2', 2, 3);
+
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`idCategorie`);
+
+--
+-- Index pour la table `collecte`
+--
+ALTER TABLE `collecte`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `hotspot`
+--
+ALTER TABLE `hotspot`
+  ADD PRIMARY KEY (`idHS`);
+
+--
+-- Index pour la table `materiel`
+--
+ALTER TABLE `materiel`
+  ADD PRIMARY KEY (`reference`);
+
+--
+-- Index pour la table `secteur`
+--
+ALTER TABLE `secteur`
+  ADD PRIMARY KEY (`idSecteur`);
+
+--
+-- Index pour la table `secteuragglo`
+--
+ALTER TABLE `secteuragglo`
+  ADD PRIMARY KEY (`idSAgglo`);
+
+--
+-- Index pour la table `service`
+--
+ALTER TABLE `service`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `type`
+--
+ALTER TABLE `type`
+  ADD PRIMARY KEY (`idType`);
+
+--
+-- Index pour la table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `pseudo` (`pseudo`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `idCategorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT pour la table `collecte`
+--
+ALTER TABLE `collecte`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `hotspot`
+--
+ALTER TABLE `hotspot`
+  MODIFY `idHS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pour la table `materiel`
+--
+ALTER TABLE `materiel`
+  MODIFY `reference` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `secteur`
+--
+ALTER TABLE `secteur`
+  MODIFY `idSecteur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT pour la table `secteuragglo`
+--
+ALTER TABLE `secteuragglo`
+  MODIFY `idSAgglo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `service`
+--
+ALTER TABLE `service`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `type`
+--
+ALTER TABLE `type`
+  MODIFY `idType` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
