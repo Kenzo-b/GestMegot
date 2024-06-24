@@ -39,3 +39,5 @@ the default credential is :
 - password : root
 
 if you want to try different level of privilege you can make new user into the User form.
+
+the dataset used into the database is about the city Laon in France.
