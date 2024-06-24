@@ -4,7 +4,8 @@
 
 GestMegot is a CRUD app based on the management of hotspots (where a lot of cigarette end is throw on the floor) and the material that use to collect and limit pollution caused by smoker that trow their cigarette to the floor.
 
-to use this application you have to install a MySQL like database.
+to use this application you have to install a MySQL like database.  
+
 moreover you have to put your database connection into Connection.cs :
 
 ```C#
