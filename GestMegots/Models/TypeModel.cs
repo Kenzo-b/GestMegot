@@ -19,7 +19,7 @@ namespace GestMegots.Models
             return new Dictionary<string, object>
             {
                 { "@idType", unType.IdType },
-                { "@libelle", unType.Libelle },
+                { "@libelle", unType?.Libelle },
                 { "@contenance", unType.Contenance },
                 { "@sacIntegrer", unType.SacIntegre }
             };
@@ -27,6 +27,7 @@ namespace GestMegots.Models
         
         private static TypeMateriel ReaderToType(MySqlDataReader reader)
         {
+            
             return new TypeMateriel.Builder()
                 .WithIdType(int.Parse(reader[0].ToString()))
                 .WithLibelle(reader[1].ToString())
@@ -40,7 +41,7 @@ namespace GestMegots.Models
             List<TypeMateriel> types = new List<TypeMateriel>();
             using MySqlConnection connect = Connection.Open();
             MySqlCommand cmd = connect.CreateCommand();
-            cmd.CommandText = "SELECT * FROM Type";
+            cmd.CommandText = "SELECT * FROM type";
             MySqlDataReader reader = cmd.ExecuteReader();
             while(reader.Read())
             {
@@ -53,7 +54,7 @@ namespace GestMegots.Models
         {
             using MySqlConnection connect = Connection.Open();
             MySqlCommand cmd = connect.CreateCommand();
-            cmd.CommandText = "SELECT * FROM Type WHERE idType = @idType";
+            cmd.CommandText = "SELECT * FROM type WHERE idType = @idType";
             cmd = AddParameter(cmd, new TypeMateriel.Builder().WithIdType(id).build());
             MySqlDataReader reader = cmd.ExecuteReader();
             reader.Read();

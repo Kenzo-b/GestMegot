@@ -30,7 +30,7 @@ namespace GestMegots.Models
         
         private static Hotspot ReaderToHotspot(MySqlDataReader reader)
         {
-            Hotspot unHs = new Hotspot.Builder()    
+            return new Hotspot.Builder()    
                 .WithIdHS(int.Parse(reader[0].ToString()))
                 .WithCoordoGPS(reader[1].ToString())
                 .WithNom(reader[2].ToString())
@@ -40,7 +40,7 @@ namespace GestMegots.Models
                 .WithLaCategorie(CategoryModel.GetCategoryById(int.Parse(reader[6].ToString())))
                 .WithLeMateriel(MaterielModel.GetMatById(int.Parse(reader[7].ToString())))
                 .Build();
-            return unHs;
+            
         }
         
         public static List<Hotspot> AllHotspots()
@@ -48,7 +48,7 @@ namespace GestMegots.Models
             List<Hotspot> hotspots = new List<Hotspot>();
             using MySqlConnection connect = Connection.Open();
             MySqlCommand cmd = connect.CreateCommand();
-            cmd.CommandText = "SELECT * FROM HOTSPOT";
+            cmd.CommandText = "SELECT * FROM hotspot";
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -61,7 +61,7 @@ namespace GestMegots.Models
         {
             using MySqlConnection connect = Connection.Open();
             MySqlCommand cmd = connect.CreateCommand();
-            cmd.CommandText = "SELECT * FROM HOTSPOT WHERE idHS = @idHS";
+            cmd.CommandText = "SELECT * FROM hotspot WHERE idHS = @idHS";
             cmd = AddParameters(cmd, new Hotspot.Builder().WithIdHS(id).Build());
             MySqlDataReader reader = cmd.ExecuteReader();
             reader.Read();

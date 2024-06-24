@@ -36,7 +36,7 @@ namespace GestMegots.Models
             List<Sector> sectors = new List<Sector>();
             using MySqlConnection connex = Connection.Open();
             MySqlCommand cmd = connex.CreateCommand();
-            cmd.CommandText = "SELECT * FROM SECTEUR order by libelle";
+            cmd.CommandText = "SELECT * FROM secteur order by libelle";
             MySqlDataReader reader = cmd.ExecuteReader();    
             while (reader.Read())
             {
@@ -49,7 +49,7 @@ namespace GestMegots.Models
         {
             using MySqlConnection connect = Connection.Open();
             MySqlCommand cmd = connect.CreateCommand();
-            cmd.CommandText = "SELECT * FROM SECTEUR where idSecteur = @idSecteur";
+            cmd.CommandText = "SELECT * FROM secteur where idSecteur = @idSecteur";
             cmd = AddParameters(cmd, new Sector.Builder().WithId(id).Build());
             MySqlDataReader reader = cmd.ExecuteReader();
             reader.Read();

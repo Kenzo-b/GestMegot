@@ -97,7 +97,7 @@ public class UserModel
     {
         using MySqlConnection connect = Connection.Open();
         MySqlCommand cmd = connect.CreateCommand();
-        cmd.CommandText = "UPDATE User SET pseudo = @pseudo, passwd = @passwd, fk_service = @fk_service, hab_level = @hab_level WHERE id = @id";
+        cmd.CommandText = "UPDATE user SET pseudo = @pseudo, passwd = @passwd, fk_service = @fk_service, hab_level = @hab_level WHERE id = @id";
         cmd = AddParameter(cmd, user);
         cmd.ExecuteNonQuery();
     }

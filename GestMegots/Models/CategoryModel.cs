@@ -19,7 +19,7 @@ namespace GestMegots.Models
             List<Categorie> cats = new List<Categorie>();
             using MySqlConnection connect = Connection.Open();
             MySqlCommand cmd = connect.CreateCommand();
-            cmd.CommandText = "SELECT * FROM CATEGORIE order by libelle";
+            cmd.CommandText = "SELECT * FROM categorie order by libelle";
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -32,7 +32,7 @@ namespace GestMegots.Models
         {
             using MySqlConnection connect = Connection.Open();
             MySqlCommand cmd = connect.CreateCommand();
-            cmd.CommandText = "SELECT * FROM Categorie where idCategorie = @IdCategorie";
+            cmd.CommandText = "SELECT * FROM categorie where idCategorie = @IdCategorie";
             cmd.Parameters.AddWithValue("@IdCategorie", id);
             MySqlDataReader reader = cmd.ExecuteReader();
             reader.Read(); 

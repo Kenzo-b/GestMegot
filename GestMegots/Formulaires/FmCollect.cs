@@ -12,11 +12,11 @@ public partial class FmCollect : Form
         InitializeComponent();
         lbLogedUser.Text = @$"user: {Session.Pseudo}";
         dataGridView1.DataSource = CollectModel.AllCollect();
-        this.cb_mat.DataSource = MaterielModel.AllMateriel();
-        this.cb_mat.DisplayMember = "reference";
-        this.cb_mat.ValueMember = "reference";
-        this.NudNbMegot.Minimum = 1;
-        this.NudNbMegot.Maximum = Convert.ToDecimal(MaterielModel.GetMatById(int.Parse(cb_mat.SelectedValue.ToString())).LeType.Contenance);
+        cb_mat.DataSource = MaterielModel.AllMateriel();
+        cb_mat.DisplayMember = "reference";
+        cb_mat.ValueMember = "reference";
+        NudNbMegot.Minimum = 1;
+        NudNbMegot.Maximum = Convert.ToDecimal(MaterielModel.GetMatById(int.Parse(cb_mat.SelectedValue.ToString())).LeType.Contenance);
     }
 
     private void cbMat_IndexChange(object sender, EventArgs e)
